@@ -1,0 +1,9 @@
+<div class="container-fluid">
+  <div class="products-grid">
+    <div *ngFor="let product of products">
+      <div class="img-div">
+        <img class="img-product" [src]="product.image" aimg-divlt="image" />
+      </div>
+      <h2>{{ product.name }}</h2>
+    </div>
+</div>
