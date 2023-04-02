@@ -1,14 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './components/home/home.component';
-import { PerfilComponent } from './components/perfil/perfil.component';
-import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
-  {path: 'home', component: HomeComponent},
-  {path: 'perfil', component: PerfilComponent},
-  {path: '**', component: PagenotfoundComponent},
+  {
+    path: 'home', loadChildren: () => import('./welcome/welcome.module').then(m => m.WelcomeModule)
+  },
+  {
+    path: 'profile', loadChildren: () => import('./user-info/user-info.module').then(m => m.UserInfoModule)
+  },
+  {
+    path: '**', loadChildren: () => import('./notfound/notfound.module').then(m => m.NotfoundModule)
+  }
+
+
+
 ];
 
 @NgModule({
