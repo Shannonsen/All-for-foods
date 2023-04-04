@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Food } from 'src/app/shared/models/food.model';
+import { Food } from 'src/app/views/shared/models/food.model';
 
 @Component({
   selector: 'app-home',
