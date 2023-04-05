@@ -1,0 +1,27 @@
+.container-img {
+  --bs-gutter-x: none !important;
+
+  img {
+    height: 35rem;
+    width: 100%;
+  }
+}
+
+.row-sesion-ingredients {
+  text-align: center;
+  top: 0;
+  left: 10%;
+  right: 0;
+  margin: 15% auto;
+  position: absolute;
+  display:flex;
+  text-align: center;
+  border-radius: 4%;
+
+  .sesion, .search-ingredients{
+    color: white;
+    width: 70%;
+    background-color: rgba(0, 0, 0, .4);
+    padding:2rem;
+  }
+}
