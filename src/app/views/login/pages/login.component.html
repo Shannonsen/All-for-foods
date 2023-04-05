@@ -1,0 +1,27 @@
+<div class="container-fluid container-img">
+    <div class="row">
+        <div class="img-wallpaper">
+            <img src="https://www.exactchange.es/uploads/portadas_post/cual-es-comida-tipica-londres-mejores-platos-portada.png"
+                alt="" />
+        </div>
+    </div>
+    <div class="row row-sesion-ingredients">
+        <div class="col-6">
+            <div class="sesion">
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                    <p>
+                        <label for="username">Username </label>
+                        <input type="text" id="username" name="username" formControlName="username">
+                    </p>
+                    <p>
+                        <label for="password">Password </label>
+                        <input type="password" id="password" name="password" formControlName="password">
+                    </p>
+                    <p>
+                        <button type="submit" [disabled]="loginForm.invalid">Submit</button>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

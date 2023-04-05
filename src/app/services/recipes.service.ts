@@ -14,5 +14,4 @@ export class RecipesService {
   public getAllFoods(): Observable<any>{
     return this.http.get(this.LOCAL_FOODS);
   }
-
 }
