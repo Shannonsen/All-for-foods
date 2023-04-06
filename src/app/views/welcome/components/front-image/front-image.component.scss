@@ -4,6 +4,10 @@
   --bs-gutter-x: none !important;
   margin-bottom: 2rem;
 
+  .row {
+    --bs-gutter-x: none !important;
+  }
+
   img {
     height: 35rem;
     width: 100%;
@@ -28,7 +32,8 @@
     background-color: rgba(0, 0, 0, .4);
     padding: 2rem;
   }
-  .btn-front{
+
+  .btn-front {
     background-color: $gray-color;
     color: $white-color;
   }
@@ -90,6 +95,7 @@ h3 {
     .first-words {
       text-align: center;
     }
+
     .second-words {
       text-align: center;
       font-size: 2rem;
