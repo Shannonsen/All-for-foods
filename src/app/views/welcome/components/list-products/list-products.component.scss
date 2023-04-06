@@ -1,0 +1,27 @@
+@import "../../../../../assets/scss/general.scss";
+.container-list-products{
+
+  .container-products {
+    margin-top: 1rem;
+  }
+
+  .container-card {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+
+  .card {
+    width: 18rem;
+  }
+
+  .row-button {
+    margin-top: 1rem;
+    text-align: center;
+
+    button {
+      background-color: $orange-color;
+    }
+  }
+}
+
