@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { SupportRoutingModule } from './support-routing.module';
 import { MailComponent } from './pages/mail/mail.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -11,7 +12,9 @@ import { MailComponent } from './pages/mail/mail.component';
   ],
   imports: [
     CommonModule,
-    SupportRoutingModule
+    SupportRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
   ]
 })
 export class SupportModule { }

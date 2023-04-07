@@ -1,1 +1,65 @@
-<p>mail works!</p>
+<div class="container-fluid container-form">
+  <form [formGroup]="FormData" (ngSubmit)="onSubmit(FormData.value)">
+    <div class="row">
+      <div class="col-6">
+        <div class="form-group">
+          <label>Nombre</label>
+          <input
+            type="text"
+            class="form-control"
+            id="support-name"
+            placeholder="Ingresa tu nombre"
+            formControlName="name"
+          />
+          <small id="emailHelp" class="form-text text-muted">Solo letras</small>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="form-group">
+          <label>Correo electrónico</label>
+          <input
+            type="email"
+            class="form-control"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            placeholder="Ingresa tu correo"
+            formControlName="email"
+          />
+          <small id="emailHelp" class="form-text text-muted"
+            >No compartiremos tu email con nadie mas</small
+          >
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 mt-3">
+        <div class="form-group">
+          <label>Solicitud de ayuda</label>
+          <textarea
+            class="form-control"
+            id="exampleFormControlTextarea1"
+            rows="5"
+            placeholder="Describe tu problema"
+            formControlName="textarea"
+          ></textarea>
+          <small id="emailHelp" class="form-text text-muted"
+          >Min.30 caracteres</small
+        >
+        </div>
+      </div>
+    </div>
+    <div class="container-button-support">
+      <button type="submit"  [disabled]="!FormData.valid" class="btn btn-primary">Submit</button>
+    </div>
+  </form>
+  <div class="row">
+    <div class="col-12 container-img">
+      <img
+        id="img-support"
+        src="https://www.billdesk.com/web/static/media/support-img.b4f60fc4.svg"
+        alt=""
+      />
+    </div>
+  </div>
+</div>
