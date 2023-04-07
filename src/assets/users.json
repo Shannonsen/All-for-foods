@@ -2,12 +2,14 @@
     {
         "email": "noe@gmail.com",
         "user": "Noeshi",
+        "description": "Me encanta el genshin, pero tambien la comida",
         "password": "alejandro1",
         "token": "NoeshiToken"
     },
     {
         "email": "alexandra@gmail.com",
         "user": "Agaxs",
+        "description": "Asi como colecciono husbandos, tambien comida ;)",
         "password": "alexandra1",
         "token": "AgaxsToken"
     }

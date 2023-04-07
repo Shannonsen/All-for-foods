@@ -1,0 +1,38 @@
+@import "../../../../../assets/scss/general.scss";
+
+.container-profile{
+  margin-top: 5%;
+  margin-left:3%;
+
+  .container-title{
+    text-align: center;
+    font-size: $font-lg;
+  }
+
+  .container-textarea{
+    width: 70%;
+  }
+  .container-data{
+    width: 35%;
+    margin-top: 1%;
+  }
+
+  .container-img{
+    text-align: center;
+    img{
+      width: 95%;
+      border-radius: 3%;
+    }
+  }
+  .container-data-bottom{
+    width: 40%;
+  }
+  .container-button{
+    text-align: left;
+
+    button{
+      background-color: $orange-color;
+    }
+  }
+
+}
