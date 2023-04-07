@@ -1,12 +1,14 @@
 [
     {
+        "email": "noe@gmail.com",
         "user": "Noeshi",
-        "password": "Noeshi1",
+        "password": "alejandro1",
         "token": "NoeshiToken"
     },
     {
+        "email": "alexandra@gmail.com",
         "user": "Agaxs",
-        "password": "Agaxs1",
+        "password": "alexandra1",
         "token": "AgaxsToken"
     }
 ]

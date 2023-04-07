@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { LoginService } from 'src/app/services/login.service';
 import { User } from '../../shared/models/user.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
 
-  constructor(fb: FormBuilder, private loginService: LoginService) {
+  constructor(fb: FormBuilder, private router: Router, private loginService: LoginService) {
     this.loginForm = fb.group({
       title: fb.control('initial value', Validators.required)
     });
@@ -20,7 +21,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
-      username: new FormControl('', [Validators.required,Validators.minLength(4)]),
+      email: new FormControl('', [Validators.required, Validators.minLength(4)]),
       password: new FormControl('', [Validators.required, Validators.minLength(4)])
     });
   }
@@ -28,10 +29,12 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     var request = this.loginForm.value;
     this.loginService.login().subscribe(users => {
-      var user = (users as User[]).find(p => p.user == request['username'] && p.password == request['password'])
-      if(user){
+      console.log(users);
+      var user = (users as User[]).find(p => p.email == request['email'] && p.password == request['password'])
+      if (user) {
         alert("Sesión iniciada\nToken: " + user.token);
-      }else{
+        this.router.navigate(['home']);
+      } else {
         alert("Usuario o contraseña incorrecta");
       }
     });
