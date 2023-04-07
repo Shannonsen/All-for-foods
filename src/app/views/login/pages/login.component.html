@@ -1,25 +1,28 @@
 <div class="container-fluid container-img">
-    <div class="row">
-        <div class="img-wallpaper">
-            <img src="https://www.exactchange.es/uploads/portadas_post/cual-es-comida-tipica-londres-mejores-platos-portada.png"
-                alt="" />
-        </div>
-    </div>
-    <div class="row row-sesion-ingredients">
+    <div class="col-md-8 mx-auto row row-sesion-ingredients">
         <div class="col-6">
             <div class="sesion">
                 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                     <p>
-                        <label for="username">Username </label>
-                        <input type="text" id="username" name="username" formControlName="username">
+                        <label>Correo electrónico </label>
+                        <br>
+                        <input type="text" class="form-control" id="email" name="email" formControlName="email">
                     </p>
                     <p>
-                        <label for="password">Password </label>
-                        <input type="password" id="password" name="password" formControlName="password">
+                        <label>Contraseña </label>
+                        <br>
+                        <input type="password" class="form-control" id="password" name="password" formControlName="password">
                     </p>
-                    <p>
-                        <button type="submit" [disabled]="loginForm.invalid">Submit</button>
-                    </p>
+                    <div class="footer-center">
+                        <p>
+                            <button type="submit" class="btn btn-primary btn-block" [disabled]="loginForm.invalid">Iniciar sesión</button>
+                        </p>
+                        <p>
+                            <a routerLink="/register" routerLinkActive="active-link" class="nav-link">
+                                ¿No tienes una cuenta? ¡Regístrate aquí!
+                            </a>
+                        </p>
+                    </div>
                 </form>
             </div>
         </div>
