@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavmenuComponent } from './components/navmenu/navmenu.component';
+import { SearcherRecipeComponent } from './components/searcher-recipe/searcher-recipe.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
@@ -9,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     NavmenuComponent,
+    SearcherRecipeComponent
   ],
   imports: [
     CommonModule,
@@ -16,6 +18,7 @@ import { FormsModule } from '@angular/forms';
   ],
   exports: [
     NavmenuComponent,
+    SearcherRecipeComponent,
     FormsModule,
   ]
 })
