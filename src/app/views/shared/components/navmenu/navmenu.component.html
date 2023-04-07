@@ -11,13 +11,20 @@
             >Home</a
           >
         </li>
-        <li class="nav-item">
+        <li class="nav-item dropdown">
           <a
-            routerLink="/profile"
-            routerLinkActive="active-link"
-            class="nav-link"
-            >Perfil</a
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
           >
+            Perfil
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/profile">Mi cuenta</a></li>
+            <li><a class="dropdown-item" href="#">Mis recetas</a></li>
+          </ul>
         </li>
         <li class="nav-item">
           <a routerLink="/login" routerLinkActive="active-link" class="nav-link"
@@ -25,20 +32,14 @@
           >
         </li>
         <li class="nav-item">
-          <a routerLink="/support" routerLinkActive="active-link" class="nav-link"
+          <a
+            routerLink="/support"
+            routerLinkActive="active-link"
+            class="nav-link"
             >Soporte</a
           >
         </li>
       </ul>
-      <form class="d-flex" role="search">
-        <input
-          class="form-control me-2"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-        />
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
     </div>
   </div>
 </nav>
