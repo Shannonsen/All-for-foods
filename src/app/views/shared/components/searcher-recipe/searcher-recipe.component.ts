@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as $ from "jquery"
 
 @Component({
   selector: 'app-searcher-recipe',
@@ -16,4 +17,16 @@ export class SearcherRecipeComponent implements OnInit {
     console.log("Enter");
   }
 
+  changeSearch(){
+    console.log("Todo");
+  }
+
+  onClick() {
+    var title = $("#title").is(":checked");
+    if(title){
+      console.log("title is selected");
+    }else{
+      console.log("title is not selected");
+    }
+  }
 }
