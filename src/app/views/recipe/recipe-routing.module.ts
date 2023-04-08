@@ -4,7 +4,8 @@ import { EditorComponent } from './pages/editor/editor.component';
 
 
 const routes: Routes = [
-  {path: '', component: EditorComponent}
+  {path: '', component: EditorComponent},
+  {path: ':id', component: EditorComponent}
 ];
 
 @NgModule({

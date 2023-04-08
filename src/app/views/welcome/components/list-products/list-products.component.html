@@ -5,7 +5,7 @@
       *ngFor="let product of products"
     >
       <div class="card">
-        <img class="img-product" [src]="product.image" aimg-divlt="image" />
+        <a [routerLink]="['/recipe', product.id]" class="img-route"><img class="img-product" [src]="product.image" aimg-divlt="image" /></a>
         <div class="card-body">
           <h2>{{ product.name }}</h2>
         </div>
