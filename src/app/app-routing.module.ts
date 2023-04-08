@@ -16,9 +16,6 @@ const routes: Routes = [
     path: 'login', loadChildren: () => import('./views/login/login.module').then(m => m.LoginModule)
   },
   {
-    path: 'login', loadChildren: () => import('./views/login/login.module').then(m => m.LoginModule)
-  },
-  {
     path: 'recipe', loadChildren: () => import('./views/recipe/recipe.module').then(m => m.RecipeModule)
   },
   {
