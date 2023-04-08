@@ -16,6 +16,15 @@ const routes: Routes = [
     path: 'login', loadChildren: () => import('./views/login/login.module').then(m => m.LoginModule)
   },
   {
+    path: 'login', loadChildren: () => import('./views/login/login.module').then(m => m.LoginModule)
+  },
+  {
+    path: 'recipe', loadChildren: () => import('./views/recipe/recipe.module').then(m => m.RecipeModule)
+  },
+  {
+    path: 'support', loadChildren: () => import('./views/support/support.module').then(m => m.SupportModule)
+  },
+  {
     path: '**', loadChildren: () => import('./views/notfound/notfound.module').then(m => m.NotfoundModule)
   }
 ];

@@ -1,21 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { UserInfoRoutingModule } from './user-info-routing.module';
-import { ProfileComponent } from './pages/profile/profile.component';
+import { RecipeRoutingModule } from './recipe-routing.module';
+import { EditorComponent } from './pages/editor/editor.component';
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 
 
+
 @NgModule({
   declarations: [
-    ProfileComponent,
+    EditorComponent,
   ],
   imports: [
     CommonModule,
-    UserInfoRoutingModule,
+    RecipeRoutingModule,
     SharedModule,
     ReactiveFormsModule,
   ]
 })
-export class UserInfoModule { }
+export class RecipeModule { }
