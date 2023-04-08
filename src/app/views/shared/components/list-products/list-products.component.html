@@ -5,9 +5,40 @@
       *ngFor="let product of products"
     >
       <div class="card">
-        <a [routerLink]="['/recipe', product.id]" class="img-route"><img class="img-product" [src]="product.image" aimg-divlt="image" /></a>
+        <div class="card-header">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-2">
+                <img
+                  [src]="product.image"
+                  style="width: 120%"
+                  class="rounded"
+                  alt="..."
+                />
+              </div>
+              <div class="col-10">{{ product.author }}</div>
+            </div>
+          </div>
+        </div>
+        <a [routerLink]="['/recipe', product.id]" class="img-route"
+          ><img class="img-product" [src]="product.image" aimg-divlt="image"
+        /></a>
         <div class="card-body">
-          <h2>{{ product.name }}</h2>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-12">
+                <h2>{{ product.name }}</h2>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-7">
+                <small><b>creado: </b>{{product.date}} </small>
+              </div>
+              <div class="col-5">
+               <a href="">Leer más</a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
