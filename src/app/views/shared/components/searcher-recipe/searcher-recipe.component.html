@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="search-header">
+        <h1>Search</h1>
+        <div class="row justify-content-center align-items-center">
+            <div class="row col-md-6">
+                <div class="col-md-4">
+                    <label>Search by:</label>
+                </div>
+                <div class="col-md-4">
+                    <label>Título <input type="radio" id="title" name="searchByRadio" (click)="onClick()"></label>
+                </div>
+                <div class="col-md-4">
+                    <label>Ingrediente <input type="radio" id="ingredient" name="searchByRadio" (click)="onClick()"></label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center align-items-center">
+        <div class="col-md-6">
+            <div class="form">
+                <i class="fa fa-search"></i>
+                <input type="text" class="form-control form-input" (keyup.enter)="onEnter()">
+            </div>
+        </div>
+    </div>
+</div>
