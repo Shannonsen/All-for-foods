@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
       var user = (users as User[]).find(p => p.email == request['email'] && p.password == request['password'])
       if (user) {
         alert("Sesión iniciada\nToken: " + user.token);
+        localStorage.setItem('Token', user.token);
         this.router.navigate(['home']);
       } else {
         alert("Usuario o contraseña incorrecta");
