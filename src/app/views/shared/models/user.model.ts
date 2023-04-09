@@ -4,5 +4,5 @@ export interface User {
     user: string,
     password: string,
     token: string,
-    follows: Number[]
+    follows: number[]
 }
