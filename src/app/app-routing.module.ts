@@ -22,6 +22,9 @@ const routes: Routes = [
     path: 'support', loadChildren: () => import('./views/support/support.module').then(m => m.SupportModule)
   },
   {
+    path: 'recipes', loadChildren: () => import('./views/recipes/recipes.module').then(m => m.RecipesModule)
+  },
+  {
     path: '**', loadChildren: () => import('./views/notfound/notfound.module').then(m => m.NotfoundModule)
   }
 ];
