@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
+import { User } from 'src/app/views/shared/models/user.model';
 
 @Component({
   selector: 'app-list-follows',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListFollowsComponent implements OnInit {
 
-  constructor() { }
+  @Input() follows: Number[] = [];
+
+  constructor() {
+
+  }
 
   ngOnInit(): void {
   }
