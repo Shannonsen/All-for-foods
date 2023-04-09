@@ -1,5 +1,6 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { User } from 'src/app/views/shared/models/user.model';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-list-follows',
@@ -8,13 +9,20 @@ import { User } from 'src/app/views/shared/models/user.model';
 })
 export class ListFollowsComponent implements OnInit {
 
-  @Input() follows: Number[] = [];
+  @Input() follows: number[] = [];
+  users: User[] = []
 
-  constructor() {
-
+  constructor(private userService: UserService) {
   }
 
   ngOnInit(): void {
+    this.userService.getAllUsers().subscribe(users => {
+      this.users = users;
+    })
+  }
+
+  getById(id: number) {
+    return 'foodie ' + id
   }
 
 }

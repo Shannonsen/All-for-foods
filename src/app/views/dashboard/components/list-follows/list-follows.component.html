@@ -1,3 +1,12 @@
-<div *ngFor="let follow of follows">
-  {{follow}}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 mt-3">
+      <h2> Seguidores</h2>
+    </div>
+    <div class="col-12">
+      <div *ngFor="let follow of follows">
+        {{ getById(follow) }}
+      </div>
+    </div>
+  </div>
 </div>
