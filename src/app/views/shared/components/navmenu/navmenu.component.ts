@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavmenuComponent implements OnInit {
 
+  token: any = "";
+
   constructor() { }
 
   ngOnInit(): void {
+    this.token = localStorage.getItem('Token');
   }
 
 }

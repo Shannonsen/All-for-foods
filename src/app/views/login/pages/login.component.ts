@@ -34,7 +34,9 @@ export class LoginComponent implements OnInit {
       if (user) {
         alert("Sesión iniciada\nToken: " + user.token);
         localStorage.setItem('Token', user.token);
-        this.router.navigate(['home']);
+        this.router.navigate(['home']).then(() => {
+          window.location.reload();
+        });
       } else {
         alert("Usuario o contraseña incorrecta");
       }
