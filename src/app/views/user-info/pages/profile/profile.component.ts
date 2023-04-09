@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { LoginService } from 'src/app/services/login.service';
+import { Food } from 'src/app/views/shared/models/food.model';
+import { RecipesService } from 'src/app/services/recipes.service';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -13,8 +16,9 @@ export class ProfileComponent implements OnInit {
   description: string = '';
 
   profileForm: FormGroup;
+  favs: Food[] = [];
 
-  constructor(private formBuilder: FormBuilder, private loginService: LoginService, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private loginService: LoginService, private router: Router, private recipeService: RecipesService) {
     this.profileForm = this.formBuilder.group({});
   }
 
@@ -27,6 +31,9 @@ export class ProfileComponent implements OnInit {
     this.profileForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.minLength(4)]),
       password: new FormControl('', [Validators.required, Validators.minLength(4)])
+    });
+    this.recipeService.getAllFoods().subscribe(recipe => {
+      this.favs = recipe;
     });
   }
 
