@@ -32,6 +32,7 @@
         <a routerLink="/support" routerLinkActive="active-link" class="nav-link"
           >Soporte</a
         >
+        <a *ngIf="token" class="nav-link" routerLinkActive="active-link" (click)="logout()">Logout</a>
       </div>
     </div>
   </div>
