@@ -5,23 +5,26 @@ import { NavmenuComponent } from './components/navmenu/navmenu.component';
 import { SearcherRecipeComponent } from './components/searcher-recipe/searcher-recipe.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-
+import { TagInputComponent } from './components/tag-input/tag-input.component';
+import { TagInputModule } from 'ngx-chips';
 
 
 @NgModule({
   declarations: [
     NavmenuComponent,
-    SearcherRecipeComponent
+    SearcherRecipeComponent,
+    TagInputComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
-    AutocompleteLibModule
+    AutocompleteLibModule,
+    TagInputModule,
+    FormsModule
   ],
   exports: [
     NavmenuComponent,
-    SearcherRecipeComponent,
-    FormsModule,
+    SearcherRecipeComponent
   ]
 })
 export class SharedModule { }

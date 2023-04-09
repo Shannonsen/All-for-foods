@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as $ from "jquery"
 import { Ingredient } from '../../models/ingredient.model';
 import { IngredientsService } from 'src/app/services/ingredients.service';
-import { autocomplete } from "./autocomplete.js";
+import { TagInputComponent } from '../tag-input/tag-input.component';
 
 @Component({
   selector: 'app-searcher-recipe',
@@ -16,7 +16,7 @@ export class SearcherRecipeComponent implements OnInit {
   ingredients: Ingredient[] = [];
   strIngredients: string[] = [];
 
-  constructor(private ingredientService: IngredientsService) { }
+  constructor(private ingredientService: IngredientsService, private tagInput: TagInputComponent) { }
 
   ngOnInit(): void {
     this.ingredientService.getAllIngredients().subscribe(ingredients => {
@@ -32,6 +32,8 @@ export class SearcherRecipeComponent implements OnInit {
 
   selectEvent(item: any) {
     console.log(item);
+    this.tagInput.itemsAsObjects.push(item);
+    console.log(this.tagInput.itemsAsObjects);
   }
 
   onChangeSearch(val: string) {

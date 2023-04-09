@@ -1,0 +1,9 @@
+<div class="home-container">
+    <div>
+        {{itemsAsObjects|json}}
+        <tag-input [(ngModel)]="itemsAsObjects"
+                       [identifyBy]="'id'"
+                       [displayBy]="'name'">
+        </tag-input>
+    </div>
+</div>
