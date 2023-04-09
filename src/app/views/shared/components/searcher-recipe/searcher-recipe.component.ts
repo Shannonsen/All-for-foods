@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as $ from "jquery"
 import { Ingredient } from '../../models/ingredient.model';
 import { IngredientsService } from 'src/app/services/ingredients.service';
+import { autocomplete } from "./autocomplete.js";
 
 @Component({
   selector: 'app-searcher-recipe',
@@ -10,19 +11,40 @@ import { IngredientsService } from 'src/app/services/ingredients.service';
 })
 export class SearcherRecipeComponent implements OnInit {
 
-
+  titleRadioChecked = $("#title").is(":checked");
+  keyword = 'name';
   ingredients: Ingredient[] = [];
+  strIngredients: string[] = [];
 
   constructor(private ingredientService: IngredientsService) { }
 
   ngOnInit(): void {
     this.ingredientService.getAllIngredients().subscribe(ingredients => {
       this.ingredients = ingredients;
+      this.ingredients.forEach(element => {
+        this.strIngredients.push(element.name);
+      });
     });
+
+    $("#title").prop('checked', true);
+    this.titleRadioChecked = $("#title").is(":checked");
   }
 
-  onEnter() {
-    console.log("Enter");
+  selectEvent(item: any) {
+    console.log(item);
+  }
+
+  onChangeSearch(val: string) {
+    // fetch remote data from here
+    // And reassign the 'data' which is binded to 'data' property.
+  }
+  
+  onFocused(e: any){
+    // do something when input is focused
+  }
+
+  onEnter(e : any) {
+    console.log("Hola");
   }
 
   changeSearch(){
@@ -30,12 +52,6 @@ export class SearcherRecipeComponent implements OnInit {
   }
 
   onClick() {
-    var title = $("#title").is(":checked");
-    if(title){
-      console.log("title is selected");
-    }else{
-      console.log("title is not selected");
-      console.log(this.ingredients);
-    }
+    this.titleRadioChecked = $("#title").is(":checked");
   }
 }

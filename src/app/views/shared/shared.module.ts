@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { NavmenuComponent } from './components/navmenu/navmenu.component';
 import { SearcherRecipeComponent } from './components/searcher-recipe/searcher-recipe.component';
 import { RouterModule } from '@angular/router';
@@ -15,6 +16,7 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     RouterModule,
+    AutocompleteLibModule
   ],
   exports: [
     NavmenuComponent,

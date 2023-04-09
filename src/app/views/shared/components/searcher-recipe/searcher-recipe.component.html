@@ -10,16 +10,63 @@
                     <label>Título <input type="radio" id="title" name="searchByRadio" (click)="onClick()"></label>
                 </div>
                 <div class="col-md-4">
-                    <label>Ingrediente <input type="radio" id="ingredient" name="searchByRadio" (click)="onClick()"></label>
+                    <label>Ingrediente <input type="radio" id="ingredient" name="searchByRadio"
+                            (click)="onClick()"></label>
                 </div>
             </div>
         </div>
     </div>
     <div class="row justify-content-center align-items-center">
         <div class="col-md-6">
-            <div class="form">
+            <!--
+            <div class="form" *ngIf="titleRadioChecked">
                 <i class="fa fa-search"></i>
-                <input type="text" class="form-control form-input" (keyup.enter)="onEnter()">
+                <input type="text" class="form-control form-input" (keyup.enter)="onEnter()" id="searchBar">
+            </div>-->
+
+            <div class="form" *ngIf="titleRadioChecked">
+                <div class="form-control ng-autocomplete" id="autocompleteSearch1">
+                    <ng-autocomplete 
+                      [searchKeyword]="keyword"
+                      placeholder="Ingrese un ingrediente"
+                      (selected)='selectEvent($event)'
+                      (inputChanged)='onChangeSearch($event)'
+                      (inputFocused)='onFocused($event)'
+                      [itemTemplate]="itemTemplate"
+                      (keyup.enter)="onEnter($event)">                                 
+                    </ng-autocomplete>
+                
+                    <ng-template #itemTemplate let-item>
+                        <a [innerHTML]="item.name"></a>
+                    </ng-template>
+                
+                    <ng-template #notFoundTemplate let-notFound>
+                        <div [innerHTML]="notFound"></div>
+                    </ng-template>
+                </div>
+            </div>
+
+            <div class="form" *ngIf="!titleRadioChecked">
+                <div class="form-control ng-autocomplete" id="autocompleteSearch2">
+                    <ng-autocomplete 
+                      [data]="ingredients"
+                      [searchKeyword]="keyword"
+                      placeholder="Ingrese un ingrediente"
+                      (selected)='selectEvent($event)'
+                      (inputChanged)='onChangeSearch($event)'
+                      (inputFocused)='onFocused($event)'
+                      [itemTemplate]="itemTemplate"
+                      [notFoundTemplate]="notFoundTemplate">                                 
+                    </ng-autocomplete>
+                
+                    <ng-template #itemTemplate let-item>
+                        <a [innerHTML]="item.name"></a>
+                    </ng-template>
+                
+                    <ng-template #notFoundTemplate let-notFound>
+                        <div [innerHTML]="notFound"></div>
+                    </ng-template>
+                </div>
             </div>
         </div>
     </div>
