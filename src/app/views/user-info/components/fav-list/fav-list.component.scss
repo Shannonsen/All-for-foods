@@ -26,11 +26,16 @@
     }
         
     /*************pagination***********/
+
     .gallery-bottom .pagination {
       place-content: center;
       margin-top: 0px;
     }
     
+    .container-paginator{
+      text-align: center;
+    }
+
     .pagination > li > a, .pagination > li > span {
       background-color: #ccc;
       padding: 3px 9px;

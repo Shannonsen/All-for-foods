@@ -2,7 +2,7 @@
     <h3>Favorites</h3>
     <div class="container">
         <div class="row">
-            <div class="col-md-12 container-col" *ngFor="let item of paginatedFavs">
+            <div class="col-md-12 container-col" *ngFor="let item of loadPage(currentPage)">
                 <div class="card">
                     <div class="card-header">
                         <div class="container-fluid">
@@ -35,14 +35,15 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row gallery-bottom">
-            <div class="col-sm-6">
-                <ul class="pagination">
-                    <li class="page-item" [class.active]="currentPage === i" *ngFor="let i of totalPagesArray()">
-                        <a class="page-link" (click)="loadPage(i)">{{ i }}</a>
-                    </li>
-                </ul>
+            <div class="row gallery-bottom">
+                <div class="col-sm-12 container-paginator">
+                    <ul class="pagination">
+                        <li class="page-item" [class.active]="currentPage === i" *ngFor="let i of totalPagesArray()">
+                            <button (click)="changePage(i)" class="page-link">{{i}}</button>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
+</div>

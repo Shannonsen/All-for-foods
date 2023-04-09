@@ -18,12 +18,6 @@ export class FavListComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  get paginatedFavs() {
-    const startIndex = (this.currentPage - 1) * this.pageSize;
-    const endIndex = startIndex + this.pageSize;
-    return this.favs.slice(startIndex, endIndex);
-  }
-
   totalPagesArray(): number[] {
     const pageCount = Math.ceil(this.favs.length / this.pageSize); // total number of pages
     return Array.from({ length: pageCount }, (_, i) => i + 1); // create an array of page numbers
@@ -35,4 +29,7 @@ export class FavListComponent implements OnInit {
     return this.favs.slice(startIndex, endIndex);
   }
   
+  changePage(pageNumber: number){
+    this.currentPage = pageNumber;
+  }
 }
