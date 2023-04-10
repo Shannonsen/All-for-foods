@@ -1,0 +1,49 @@
+<div class="container-fluid container-list-fav">
+    <h3>Favorites</h3>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 container-col" *ngFor="let item of loadPage(currentPage)">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-2">
+                                    <img [src]="item.image" style="width: 120%" class="rounded" alt="..." />
+                                </div>
+                                <div class="col-10">{{ item.author }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a [routerLink]="['/recipe', item.id]" class="img-route"><img class="img-product" [src]="item.image"
+                            aimg-divlt="image" /></a>
+                    <div class="card-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h2>{{ item.name }}</h2>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-7">
+                                    <small><b>creado: </b>{{item.date}} </small>
+                                </div>
+                                <div class="col-5">
+                                    <a href="">Leer más</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row gallery-bottom">
+                <div class="col-sm-12 container-paginator">
+                    <ul class="pagination">
+                        <li class="page-item" [class.active]="currentPage === i" *ngFor="let i of totalPagesArray()">
+                            <button (click)="changePage(i)" class="page-link">{{i}}</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
