@@ -25,6 +25,9 @@ const routes: Routes = [
     path: 'support', loadChildren: () => import('./views/support/support.module').then(m => m.SupportModule)
   },
   {
+    path: 'search', loadChildren: () => import('./views/search/search.module').then(m => m.SearchModule)
+  },
+  {
     path: '**', loadChildren: () => import('./views/notfound/notfound.module').then(m => m.NotfoundModule)
   }
 ];
