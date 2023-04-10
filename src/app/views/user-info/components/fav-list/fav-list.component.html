@@ -10,7 +10,7 @@
                                 <div class="col-2">
                                     <img [src]="item.image" style="width: 120%" class="rounded" alt="..." />
                                 </div>
-                                <div class="col-10">{{ item.author }}</div>
+                                <div class="col-10">{{ getAuthorName(item.author) }}</div>
                             </div>
                         </div>
                     </div>
@@ -29,6 +29,11 @@
                                 </div>
                                 <div class="col-5">
                                     <a href="">Leer más</a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-7">
+                                    <button type="submit" class="btn btn-outline-danger">Unfavorite</button>
                                 </div>
                             </div>
                         </div>
