@@ -26,9 +26,9 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginService.login().subscribe(users => {
-      this.email = users[0].email;
-      this.name = users[0].user;
-      this.description = users[0].description;
+      this.email = users[1].email;
+      this.name = users[1].user;
+      this.description = users[1].description;
     });
 
     
@@ -41,12 +41,6 @@ export class ProfileComponent implements OnInit {
       email: new FormControl('', [Validators.required, Validators.minLength(4)]),
       password: new FormControl('', [Validators.required, Validators.minLength(4)])
     });
-
-    /*
-    this.recipeService.getAllFoods().subscribe(recipe => {
-      this.favs = recipe;
-    });
-    */
   }
 
   onEdit(){
