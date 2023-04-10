@@ -1,7 +1,7 @@
 export interface Food{
   id: number,
   name: string,
-  author: string,
+  author: number,
   ingredients: string[],
   image?: string,
   category?: string,

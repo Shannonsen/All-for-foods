@@ -4,5 +4,7 @@ export interface User {
     user: string,
     password: string,
     token: string,
-    follows: number[]
+    follows: number[],
+    favorites: number[],
+    myRecipes: number[]
 }
