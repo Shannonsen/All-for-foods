@@ -1,48 +1,38 @@
-<nav class="navbar fixed-top navbar-expand-xxl navbar-light">
+<nav class="navbar navbar-dark bg-dark navbar-expand-lg py-lg-3">
   <div class="container-fluid">
-    <a class="navbar-brand"> All-for-foods</a>
-    <div class="collapse navbar-collapse" id="navbarScroll">
-      <ul
-        class="navbar-nav me-auto my-2 my-lg-2 navbar-nav-scroll"
-        style="--bs-scroll-height: 100px"
-      >
-        <li class="nav-item">
-          <a routerLink="/home" routerLinkActive="active-link" class="nav-link"
-            >Home</a
-          >
-        </li>
-        <li class="nav-item">
-          <a routerLink="/profile" routerLinkActive="active-link" class="nav-link"
-            >Perfil</a
-          >
-        </li>
-        <li class="nav-item">
-          <a routerLink="/login" routerLinkActive="active-link" class="nav-link"
-            >Login</a
-          >
-        </li>
-        <li class="nav-item">
-          <a routerLink="/recipe" routerLinkActive="active-link" class="nav-link"
-            >Write a Recipe</a
-          >
-        </li>
-        <li class="nav-item">
-          <a
-            routerLink="/support"
-            routerLinkActive="active-link"
-            class="nav-link"
-            >Soporte</a
-          >
-        </li>
-        <li class="nav-item">
-          <a
-            routerLink="/search"
-            routerLinkActive="active-link"
-            class="nav-link"
-            >Buscar</a
-          >
-        </li>
-      </ul>
+    <a class="navbar-brand" href="/home"> All-for-foods</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a routerLink="/home" routerLinkActive="active-link" class="nav-link"
+          >Home</a
+        >
+        <a routerLink="/profile" routerLinkActive="active-link" class="nav-link"
+          >Perfil</a
+        >
+        <a routerLink="/dashboard" routerLinkActive="active-link" class="nav-link"
+          >Dashboard</a
+        >
+        <a routerLink="/login" routerLinkActive="active-link" class="nav-link"
+          >Login</a
+        >
+        <a routerLink="/recipe" routerLinkActive="active-link" class="nav-link"
+          >Write a Recipe</a
+        >
+        <a routerLink="/support" routerLinkActive="active-link" class="nav-link"
+          >Soporte</a
+        >
+      </div>
     </div>
   </div>
 </nav>
