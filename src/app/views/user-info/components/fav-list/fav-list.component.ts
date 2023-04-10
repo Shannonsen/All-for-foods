@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Food } from 'src/app/views/shared/models/food.model';
+import { RecipesService } from 'src/app/services/recipes.service';
 
 @Component({
   selector: 'app-fav-list',
@@ -7,19 +8,23 @@ import { Food } from 'src/app/views/shared/models/food.model';
   styleUrls: ['./fav-list.component.scss']
 })
 export class FavListComponent implements OnInit {
-  @Input() favs: Food[] = []
+  @Input() favorites: number[] = []
+  favs: Food[] = []
 
   currentPage: number = 1;
   pageSize: number = 3;
 
 
-  constructor() { }
+  constructor(private recipeService: RecipesService) { }
 
   ngOnInit(): void {
+    this.recipeService.getAllFoods().subscribe(recipes =>{
+      this.favs = (recipes as Food[]).filter(p => this.favorites.includes(p.id));
+    })
   }
 
   totalPagesArray(): number[] {
-    const pageCount = Math.ceil(this.favs.length / this.pageSize); // total number of pages
+    const pageCount = Math.ceil(this.favorites.length / this.pageSize); // total number of pages
     return Array.from({ length: pageCount }, (_, i) => i + 1); // create an array of page numbers
   }
 
