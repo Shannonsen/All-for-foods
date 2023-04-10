@@ -5,6 +5,7 @@ import { NavmenuComponent } from './components/navmenu/navmenu.component';
 import { SearcherRecipeComponent } from './components/searcher-recipe/searcher-recipe.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ListProductsComponent } from './components/list-products/list-products.component';
 import { TagInputComponent } from './components/tag-input/tag-input.component';
 import { TagInputModule } from 'ngx-chips';
 
@@ -13,6 +14,7 @@ import { TagInputModule } from 'ngx-chips';
   declarations: [
     NavmenuComponent,
     SearcherRecipeComponent,
+    ListProductsComponent,
     TagInputComponent
   ],
   imports: [
@@ -25,7 +27,9 @@ import { TagInputModule } from 'ngx-chips';
   ],
   exports: [
     NavmenuComponent,
-    SearcherRecipeComponent
+    SearcherRecipeComponent,
+    FormsModule,
+    ListProductsComponent
   ]
 })
 export class SharedModule { }
