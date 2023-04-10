@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Food } from 'src/app/views/shared/models/food.model';
 import { RecipesService } from 'src/app/services/recipes.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-editor',
@@ -22,7 +23,7 @@ export class EditorComponent implements OnInit {
 
   recipeForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private recipeService: RecipesService) {
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private recipeService: RecipesService, private userService: UserService) {
     this.recipeForm = this.formBuilder.group({});
   }
 
@@ -48,12 +49,17 @@ export class EditorComponent implements OnInit {
 
   updateRecipeInformation() {
     this.recipeService.getRecipeById(this.recipeID).subscribe(recipe => {
-      this.author = recipe?.author;
       this.description = recipe?.description;
       this.title = recipe?.name;
       this.ingredients = recipe?.ingredients;
       this.imgURL = recipe?.image;
       this.process = recipe?.process;
+
+      if (recipe?.author) {
+        this.userService.getUserById(recipe.author).subscribe(author => {
+          this.author = author?.user;
+        });
+      }
     })
   }
 
