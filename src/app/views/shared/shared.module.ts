@@ -4,7 +4,7 @@ import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { NavmenuComponent } from './components/navmenu/navmenu.component';
 import { SearcherRecipeComponent } from './components/searcher-recipe/searcher-recipe.component';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TagInputComponent } from './components/tag-input/tag-input.component';
 import { TagInputModule } from 'ngx-chips';
 
@@ -20,7 +20,8 @@ import { TagInputModule } from 'ngx-chips';
     RouterModule,
     AutocompleteLibModule,
     TagInputModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     NavmenuComponent,

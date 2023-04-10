@@ -18,17 +18,11 @@
     </div>
     <div class="row justify-content-center align-items-center">
         <div class="col-md-6">
-            <!--
-            <div class="form" *ngIf="titleRadioChecked">
-                <i class="fa fa-search"></i>
-                <input type="text" class="form-control form-input" (keyup.enter)="onEnter()" id="searchBar">
-            </div>-->
-
             <div class="form" *ngIf="titleRadioChecked">
                 <div class="form-control ng-autocomplete" id="autocompleteSearch1">
                     <ng-autocomplete 
                       [searchKeyword]="keyword"
-                      placeholder="Ingrese un ingrediente"
+                      placeholder="Ingrese un título"
                       (selected)='selectEvent($event)'
                       (inputChanged)='onChangeSearch($event)'
                       (inputFocused)='onFocused($event)'
@@ -48,16 +42,17 @@
             </div>
 
             <div class="form" *ngIf="!titleRadioChecked">
-                <div class="form-control ng-autocomplete" id="autocompleteSearch2">
+                <div class="form-control ng-autocomplete" >
                     <ng-autocomplete 
                       [data]="ingredients"
                       [searchKeyword]="keyword"
-                      placeholder="Ingrese un ingrediente"
+                      placeholder="Seleccione su ingrediente"
                       (selected)='selectEvent($event)'
                       (inputChanged)='onChangeSearch($event)'
                       (inputFocused)='onFocused($event)'
                       [itemTemplate]="itemTemplate"
-                      [notFoundTemplate]="notFoundTemplate">                                 
+                      [notFoundTemplate]="notFoundTemplate"
+                      id="autocompleteSearch2">                                 
                     </ng-autocomplete>
                 
                     <ng-template #itemTemplate let-item>
@@ -68,16 +63,9 @@
                         <div [innerHTML]="notFound"></div>
                     </ng-template>
                 </div>
-                <app-tag-input></app-tag-input>
-                <!--
-                <div class="wrapper">
-                    <div class="content">
-                      <ul><input type="text" spellcheck="false" [disabled]="true"></ul>
-                    </div>
-                    <div class="details">
-                      <button>Remove All</button>
-                    </div>
-                </div>-->
+                <app-tag-input [itemsAsObjects]="elementsSelected" 
+                                (changeItemAsObjects)="elementsSelected = $event">
+                </app-tag-input>
             </div>
         </div>
     </div>

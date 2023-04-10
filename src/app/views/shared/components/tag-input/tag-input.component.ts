@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Ingredient } from '../../models/ingredient.model';
 
 @Component({
   selector: 'app-tag-input',
@@ -18,8 +19,18 @@ export class TagInputComponent implements OnInit {
 
   disabled = true;
 
-  itemsAsObjects: any[] = [];//[{ id: 0, name: 'Angular' }, { id: 1, name: 'React' }];
+  @Input() itemsAsObjects: Ingredient[] = [];//[{ id: 0, name: 'Angular' }, { id: 1, name: 'React' }];
+  @Output() changeItemAsObjects = new EventEmitter<Ingredient[]>();
 
   ngOnInit(): void {
+  }
+
+  onRemove(event: any) {
+    this.changeItemAsObjects.emit(this.itemsAsObjects);
+  }
+
+  cleanTags(){
+    this.itemsAsObjects = [];
+    this.changeItemAsObjects.emit(this.itemsAsObjects);
   }
 }
