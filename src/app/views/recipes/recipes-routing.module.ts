@@ -3,9 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { RecipeViewComponent } from './pages/recipe-view.component';
 
 const routes: Routes = [
-  {
-    path: 'hola mundo', component: RecipeViewComponent
-  }
+  {path: '', component: RecipeViewComponent},
+  {path: ':id', component: RecipeViewComponent}
 ];
 
 @NgModule({

@@ -1,39 +1,25 @@
-<div class="container-fluid">
-    <div class="row row-sesion-ingredients">
-      <div class="col-sm-5 col-md-6">
-        <div class="sesion">
-          <h2>¡Pongámonos a Cocinar!</h2>
-          <h3>
-            Consigue recetas sin preocuparte por los ingredientes faltantes
-          </h3>
-          <button type="button" class="btn btn-front">
-            Lista tus ingredientes
-          </button>
-        </div>
+<div class="container" [formGroup]="recipeForm">
+    <div class="row">
+      <div class="col-md-6">
+        <img src="{{imgURL}}" alt="{{title}}" class="img-fluid float-left">
       </div>
-      <div class="col-sm-5 col-md-6">
-        <div class="search-ingredients">
-          <h2>¡Comparte tus recetas!</h2>
-          <h3>
-            No pierdas la oportunidad e inicia sesión para compartir tu sazón con la comunidad
-          </h3>
-          <button type="button" class="btn btn-front">
-            Inicia sesión
-          </button>
-        </div>
+      <div class="col-md-6">
+        <h2>{{title}}</h2>
+        <p>Por el autor {{author}}</p>
+        <hr>
+        <h4>Ingredientes:</h4>
+        <ul>
+          <li *ngFor="let ingredient of ingredients">{{ingredient}}</li>
+        </ul>
+        <hr>
+        <h4>Procedimiento:</h4>
+        <ol>
+          <li *ngFor="let step of process">{{step}}</li>
+        </ol>
+        <hr>
+        <h4>Descripción:</h4>
+        <p>{{description}}</p>
+        <p>Calificación: {{rating}}</p>
+        <p>Fecha de creación: {{date}}</p>
       </div>
     </div>
-  </div>
-
-
-<div class="container-fluid container-random">
-  <div class="row">
-    <div class="col-12 col-md-7 first-words">¿No sabes qué cocinar?</div>
-    <div class="col-12 col-md-5 second-words">No te preocupes, <br> dejanoslo a nosotros.</div>
-  </div>
-  <div class="row row-button">
-    <div class="col-12">
-      <button class="btn btn-lg">Muéstrame una receta aleatoria</button>
-    </div>
-  </div>
-</div>
