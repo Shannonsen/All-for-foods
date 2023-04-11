@@ -16,7 +16,7 @@ import { PaginationItemsComponent } from './components/pagination-items/paginati
     NavmenuComponent,
     SearcherRecipeComponent,
     ListProductsComponent,
-    TagInputComponent
+    TagInputComponent,
     SearcherRecipeComponent,
     TagInputComponent,
     PaginationItemsComponent
