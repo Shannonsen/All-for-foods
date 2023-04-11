@@ -5,12 +5,12 @@
                        placeholder=""
                        [secondaryPlaceholder]="''"
                        [onlyFromAutocomplete]="true"
-                       (onRemove)="onRemove($event)"
                        [displayBy]="'name'"
                        [onlyFromAutocomplete]="true">
         </tag-input>
-        <div *ngIf="itemsAsObjects.length > 0" class="row-button">
-            <button class="btn btn-primary" (click)="cleanTags()">Limpiar todo</button>
+        <div class="row-button">
+            <button class="btn btn-primary" (click)="cleanTags()" *ngIf="itemsAsObjects.length > 0">Limpiar todo</button>
+            <button class="btn btn-secondary" (click)="searchTags()">Buscar</button>
         </div>
     </div>
 </div>

@@ -22,5 +22,41 @@
     {
         "id": 6,
         "name": "Fresa"
+    },
+    {
+        "id": 7,
+        "name": "Glaseado"
+    },
+    {
+        "id": 8,
+        "name": "Cupcake"
+    },
+    {
+        "id": 9,
+        "name": "Miel"
+    },
+    {
+        "id": 10,
+        "name": "Pan"
+    },
+    {
+        "id": 11,
+        "name": "Salsa de tomate"
+    },
+    {
+        "id": 12,
+        "name": "Pasta"
+    },
+    {
+        "id": 13,
+        "name": "Masa"
+    },
+    {
+        "id": 14,
+        "name": "Colorante"
+    },
+    {
+        "id": 15,
+        "name": "Chocolate"
     }
 ]

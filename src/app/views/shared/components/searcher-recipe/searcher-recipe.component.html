@@ -25,7 +25,6 @@
                       placeholder="Ingrese un título"
                       (selected)='selectEvent($event)'
                       (inputChanged)='onChangeSearch($event)'
-                      (inputFocused)='onFocused($event)'
                       [itemTemplate]="itemTemplate"
                       (keyup.enter)="onEnter($event)">
                                                        
@@ -49,8 +48,6 @@
                       notFoundText="Sin coincidencias"
                       placeholder="Seleccione su ingrediente"
                       (selected)='selectEvent($event)'
-                      (inputChanged)='onChangeSearch($event)'
-                      (inputFocused)='onFocused($event)'
                       [itemTemplate]="itemTemplate"
                       [notFoundTemplate]="notFoundTemplate">                                 
                     </ng-autocomplete>
@@ -64,8 +61,10 @@
                     </ng-template>
                 </div>
                 <app-tag-input [itemsAsObjects]="elementsSelected" 
-                                (changeItemAsObjects)="elementsSelected = $event">
+                                (outputItems)="elementsSelected = $event"
+                                (outputTagSearch)="doSearch = $event">
                 </app-tag-input>
+                {{elementsSelected|json}}
             </div>
         </div>
     </div>

@@ -9,9 +9,9 @@ import { User } from '../../models/user.model';
   styleUrls: ['./pagination-items.component.scss']
 })
 export class PaginationItemsComponent implements OnInit {
-
+  @Input() sectionName: string = '';
   @Input() items: Food[] = []
-  currentPage: number = 1;
+  @Input() currentPage: number = 1;
   @Output() outputCurrentPage = new EventEmitter<number>();
   @Input() pageSize: number = 3;
   @Input() totalPages: number[] = [];
