@@ -28,6 +28,9 @@ const routes: Routes = [
     path: 'recipes', loadChildren: () => import('./views/recipes/recipes.module').then(m => m.RecipesModule)
   },
   {
+    path: 'search', loadChildren: () => import('./views/search/search.module').then(m => m.SearchModule)
+  },
+  {
     path: '**', loadChildren: () => import('./views/notfound/notfound.module').then(m => m.NotfoundModule)
   }
 ];

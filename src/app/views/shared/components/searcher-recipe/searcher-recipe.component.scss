@@ -1,30 +1,30 @@
-body{
+body {
 
     background: #d1d5db;
 }
 
-.height{
+.height {
 
     height: 100vh;
 }
 
-.form{
+.form {
 
     position: relative;
 }
 
-.form .fa-search{
+.form .fa-search {
 
     position: absolute;
-    top:20px;
+    top: 20px;
     left: 20px;
     color: #9ca3af;
 
 }
 
-.form span{
+.form span {
 
-        position: absolute;
+    position: absolute;
     right: 17px;
     top: 13px;
     padding: 2px;
@@ -32,24 +32,117 @@ body{
 
 }
 
-.left-pan{
+.left-pan {
     padding-left: 7px;
 }
 
-.left-pan i{
-   
-   padding-left: 10px;
+.left-pan i {
+
+    padding-left: 10px;
 }
 
-.form-input{
+.form-input {
 
     height: 55px;
     text-indent: 33px;
     border-radius: 10px;
 }
 
-.form-input:focus{
+.form-input:focus {
 
     box-shadow: none;
-    border:none;
+    border: none;
 }
+
+.autocomplete-container {
+    box-shadow: none !important;
+}
+
+.autocomplete-container .input-container input {
+    font-size: 14px;
+    padding: 0 6px;
+    height: 25px;
+    box-shadow: none
+}
+
+.wrapper{
+    width: 496px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 18px 25px 20px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.06);
+  }
+  .wrapper :where(.title, li, li i, .details){
+    display: flex;
+    align-items: center;
+  }
+  .title img{
+    max-width: 21px;
+  }
+  .title h2{
+    font-size: 21px;
+    font-weight: 600;
+    margin-left: 8px;
+  }
+  .wrapper .content{
+    margin: 10px 0;
+  }
+  .content p{
+    font-size: 15px;
+  }
+  .content ul{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 7px;
+    margin: 12px 0;
+    border-radius: 5px;
+    border: 1px solid #a6a6a6;
+  }
+  .content ul  li{
+    color: #333;
+    margin: 4px 3px;
+    list-style: none;
+    border-radius: 5px;
+    background: #F2F2F2;
+    padding: 5px 8px 5px 10px;
+    border: 1px solid #e3e1e1;
+  }
+  .content ul li i{
+    height: 20px;
+    width: 20px;
+    color: #808080;
+    margin-left: 8px;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 50%;
+    background: #dfdfdf;
+    justify-content: center;
+  }
+  .content ul input{
+    flex: 1;
+    padding: 5px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+  }
+  .wrapper .details{
+    justify-content: space-between;
+  }
+  .details button{
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 9px 15px;
+    border-radius: 5px;
+    background: #5372F0;
+    transition: background 0.3s ease;
+  }
+  .details button:hover{
+    background: #2c52ed;
+  }
+
+  ng-autocomplete div{
+    width: none !important;
+  }
