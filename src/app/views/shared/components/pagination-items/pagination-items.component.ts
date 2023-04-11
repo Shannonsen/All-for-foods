@@ -15,6 +15,7 @@ export class PaginationItemsComponent implements OnInit {
   @Output() outputCurrentPage = new EventEmitter<number>();
   @Input() pageSize: number = 3;
   @Input() totalPages: number[] = [];
+  @Input() showEditButton: boolean = false;
   users: User[] = [];
   differ: any;
 

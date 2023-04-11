@@ -14,7 +14,7 @@
                             </div>
                         </div>
                     </div>
-                    <a [routerLink]="['/recipe', item.id]" class="img-route"><img class="img-product" [src]="item.image"
+                    <a [routerLink]="['']" class="img-route"><img class="img-product" [src]="item.image"
                             aimg-divlt="image" /></a>
                     <div class="card-body">
                         <div class="container-fluid">
@@ -30,6 +30,9 @@
                                 <div class="col-5">
                                     <a href="">Leer más</a>
                                 </div>
+                            </div>
+                            <div class="row" *ngIf="showEditButton">
+                                <button class="btn btn-primary" [routerLink]="['/recipe', item.id]">Editar</button>
                             </div>
                         </div>
                     </div>
