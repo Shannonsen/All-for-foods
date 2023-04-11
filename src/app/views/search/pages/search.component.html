@@ -2,11 +2,14 @@
     <app-searcher-recipe [pageSize]="pageSize"
                         [currentPage]="currentPage"
                         (outputTotalPages)="totalPages = $event"
-                        (outputRecipes)="foods = $event">
+                        (outputRecipes)="foods = $event"
+                        (outputCurrentPage)="currentPage = $event">
     </app-searcher-recipe>
     <app-pagination-items [items]="foods" 
-                        [pageSize]="pageSize" 
+                        [pageSize]="pageSize"
+                        [sectionName]="sectionName" 
                         [totalPages]="totalPages"
+                        [currentPage]="currentPage"
                         (outputCurrentPage)="currentPage = $event">
     </app-pagination-items>
 </div>

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Ingredient } from '../../models/ingredient.model';
+import { Event } from 'jquery';
 
 @Component({
   selector: 'app-tag-input',
@@ -20,17 +21,19 @@ export class TagInputComponent implements OnInit {
   disabled = true;
 
   @Input() itemsAsObjects: Ingredient[] = [];//[{ id: 0, name: 'Angular' }, { id: 1, name: 'React' }];
-  @Output() changeItemAsObjects = new EventEmitter<Ingredient[]>();
+  @Output() outputItems = new EventEmitter<Ingredient[]>();
+  @Output() outputTagSearch = new EventEmitter<boolean>();
 
   ngOnInit(): void {
   }
 
-  onRemove(event: any) {
-    this.changeItemAsObjects.emit(this.itemsAsObjects);
-  }
-
   cleanTags(){
     this.itemsAsObjects = [];
-    this.changeItemAsObjects.emit(this.itemsAsObjects);
+    this.outputItems.emit(this.itemsAsObjects);
+    this.outputTagSearch.emit(true);
+  }
+
+  searchTags(){
+    this.outputTagSearch.emit(true);
   }
 }
