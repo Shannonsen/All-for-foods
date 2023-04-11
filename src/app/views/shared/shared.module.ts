@@ -4,11 +4,11 @@ import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { NavmenuComponent } from './components/navmenu/navmenu.component';
 import { SearcherRecipeComponent } from './components/searcher-recipe/searcher-recipe.component';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
 import { ListProductsComponent } from './components/list-products/list-products.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TagInputComponent } from './components/tag-input/tag-input.component';
 import { TagInputModule } from 'ngx-chips';
+import { PaginationItemsComponent } from './components/pagination-items/pagination-items.component';
 
 
 @NgModule({
@@ -17,7 +17,8 @@ import { TagInputModule } from 'ngx-chips';
     SearcherRecipeComponent,
     ListProductsComponent,
     SearcherRecipeComponent,
-    TagInputComponent
+    TagInputComponent,
+    PaginationItemsComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +33,8 @@ import { TagInputModule } from 'ngx-chips';
     SearcherRecipeComponent,
     FormsModule,
     ListProductsComponent,
-    SearcherRecipeComponent
+    SearcherRecipeComponent,
+    PaginationItemsComponent
   ]
 })
 export class SharedModule { }

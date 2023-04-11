@@ -45,14 +45,14 @@
                 <div class="form-control ng-autocomplete" >
                     <ng-autocomplete 
                       [data]="ingredients"
-                      [searchKeyword]="keyword"
+                      [searchKeyword]="keywordAutocomplete"
+                      notFoundText="Sin coincidencias"
                       placeholder="Seleccione su ingrediente"
                       (selected)='selectEvent($event)'
                       (inputChanged)='onChangeSearch($event)'
                       (inputFocused)='onFocused($event)'
                       [itemTemplate]="itemTemplate"
-                      [notFoundTemplate]="notFoundTemplate"
-                      id="autocompleteSearch2">                                 
+                      [notFoundTemplate]="notFoundTemplate">                                 
                     </ng-autocomplete>
                 
                     <ng-template #itemTemplate let-item>
