@@ -26,7 +26,7 @@ export class RecipesService {
     );
   }
 
-  public getRecipeByAuthor(author: string): Observable<Food | undefined> {
+  public getRecipeByAuthor(author: number): Observable<Food | undefined> {
     return this.http.get<Food[]>(this.LOCAL_FOODS).pipe(
       map(foods => foods.find(food => food.author === author)),
       catchError(error => {
