@@ -26,16 +26,19 @@
         <div class="card-body">
           <div class="container-fluid">
             <div class="row">
-              <div class="col-12">
+              <div class="col-8">
                 <h2>{{ product.name }}</h2>
+              </div>
+              <div class="col-4 container-icon-heart">
+              <i class="fa fa-heart fa-2x" (click)="changeColor(product.id) "style="color:gray" id="{{product.id}}"></i>
               </div>
             </div>
             <div class="row">
               <div class="col-12">
-                <small><b>creado: </b>{{product.date}} </small>
+                <small><b>creado: </b>{{ product.date }} </small>
               </div>
-              <div class="col-12">
-                X estrellas
+              <div class="col-1" style="color:gray"  *ngFor="let star of [].constructor(5); let i= index">
+                <i class="fa fa-star" (click)="changeRating(i,product.id)" id="star-{{i}}-{{product.id}}"></i>
               </div>
             </div>
           </div>

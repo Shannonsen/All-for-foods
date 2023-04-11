@@ -20,10 +20,34 @@ export class ListProductsComponent implements OnInit {
       this.users = users;
     });
   }
-  
+
   getAuthorName(authorId: number): string {
     const author = this.users.find(user => user.id === authorId);
     return author?.user || '';
+  }
+
+  changeColor(id: number) {
+    const heart = document.getElementById(String(id))!;
+    if (heart.style.color == "red") {
+      heart.style.color = "gray";
+      heart.style.scale = "1";
+    } else {
+      heart.style.color = "red";
+      heart.style.scale = "1.2";
+    }
+  }
+
+  changeRating(idStar: number, idProduct: number) {
+
+    const star = document.getElementById(String("star-" + idStar + "-" + idProduct))!;
+    if (star.style.color == "gold") {
+      star.style.color = "gray";
+      star.style.scale = "1";
+    } else {
+      star.style.color = "gold";
+      star.style.scale = "1.2";
+    }
+
   }
 
 }

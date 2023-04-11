@@ -48,4 +48,18 @@ export class ProfileComponent implements OnInit {
     alert("información actualizada")
   }
 
+  follow(){
+    const star = document.getElementById("btn-follow")!;
+    if (star.style.backgroundColor == "mediumaquamarine") {
+      star.style.backgroundColor = "crimson";
+      star.innerHTML = "Seguir";
+      star.style.scale = "1";
+    } else {
+      star.style.backgroundColor = "mediumaquamarine";
+      star.innerHTML = "Siguiendo";
+      star.style.scale = "1";
+    }
+
+  }
+
 }
