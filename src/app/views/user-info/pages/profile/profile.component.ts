@@ -37,6 +37,8 @@ export class ProfileComponent implements OnInit {
     })
 
     this.profileForm = new FormGroup({
+      name: new FormControl('', [Validators.required, Validators.minLength(4)]),
+      description: new FormControl('', [Validators.required, Validators.minLength(4)]),
       email: new FormControl('', [Validators.required, Validators.minLength(4)]),
       password: new FormControl('', [Validators.required, Validators.minLength(4)])
     });
