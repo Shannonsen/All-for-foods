@@ -127,6 +127,7 @@ export class SearcherRecipeComponent implements OnInit {
           this.elementsSelected.forEach(element => {
             ingredientStr.push(element.name);
           });
+          console.log(ingredientStr);
           (recipes as Food[]).forEach(recipe => {
             if(this.checkSubset(recipe.ingredients, ingredientStr)){
               recipeToSend.push(recipe);

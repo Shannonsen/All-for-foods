@@ -33,7 +33,13 @@ export class TagInputComponent implements OnInit {
     this.outputTagSearch.emit(true);
   }
 
+  onRemove(event: any){
+    this.outputItems.emit(this.itemsAsObjects);
+  }
+
   searchTags(){
+    console.log("from tag input");
+    console.log(this.itemsAsObjects);
     this.outputTagSearch.emit(true);
   }
 }
