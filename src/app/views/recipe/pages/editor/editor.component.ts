@@ -21,6 +21,7 @@ export class EditorComponent implements OnInit {
   imgURL: string | undefined = '';
   process: string[] | undefined = [];
   description: string | undefined = '';
+  modificationDate: string | undefined;
 
   recipeForm: FormGroup;
   user: User = <User>{};
@@ -30,6 +31,12 @@ export class EditorComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const today = new Date();
+    const date = today.getDate();
+    const month = today.getMonth() + 1;
+    const year = today.getFullYear();
+    this.modificationDate = date + "-" + month + "-" + year;
+
     this.route.params.subscribe(params => {
       this.recipeID = Number(params['id']);
       if (!Number.isNaN(this.recipeID)) {
@@ -59,10 +66,12 @@ export class EditorComponent implements OnInit {
     if (Number.isNaN(this.recipeID)) {
       this.recipeID = 0;
       this.recipeService.getFoodCount().subscribe(count => {
-        this.recipeID = count +1;
-        alert('receta actualizada\nid:' + this.recipeID);
+        this.recipeID = count + 1;
       });
+      //creation date == last modified == modification date
+        alert('receta actualizada\nid:' + this.recipeID);
     }else{
+      //last modified == modification date
       alert('receta actualizada\nid:' + this.recipeID);
     }
   }
@@ -74,7 +83,7 @@ export class EditorComponent implements OnInit {
       this.ingredients = recipe?.ingredients;
       this.imgURL = recipe?.image;
       this.process = recipe?.process;
-    })
+    });
   }
 
 }

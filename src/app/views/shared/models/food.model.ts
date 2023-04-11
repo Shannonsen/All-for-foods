@@ -8,5 +8,6 @@ export interface Food{
   process: string[];
   rating: number;
   description: string;
-  date: string,
+  creationDate: string,
+  lastModified: string,
 }

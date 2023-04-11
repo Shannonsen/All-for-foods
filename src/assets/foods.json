@@ -9,7 +9,8 @@
       "rating": 4,
       "process": "Aprender a hacerlo joas joas",
       "description": "besto Pancakes",
-      "date": "06-05-2023"
+      "creationDate": "06-05-2023",
+      "lastModified": "06-05-2023"
     },
     {
       "id": 2,
@@ -17,8 +18,10 @@
       "author": 0,
       "ingredients":  ["miel", "pan"],
       "image": "https://i.pinimg.com/564x/3d/a3/01/3da3013609055cc964c6e210119e57bc.jpg",
-      "rating": 3,
-      "date": "06-05-2023"
+      "rating": 3,      
+      "process": "haz el hotcake",
+      "creationDate": "06-05-2023",
+      "lastModified": "06-05-2023"
     },
     {
       "id": 3,
@@ -27,7 +30,9 @@
       "ingredients":  ["tomate", "pan"],
       "image": "https://i.pinimg.com/564x/6c/a3/ab/6ca3abed37b7e8b9bcb20a3a90c43949.jpg",
       "rating": 1,
-      "date": "06-05-2023"
+      "process": "pan + queso = exito",
+      "creationDate": "06-05-2023",
+      "lastModified": "06-05-2023"
     },
     {
       "id": 4,
@@ -36,7 +41,9 @@
       "ingredients":  ["salsa de tomate", "pasta"],
       "image": "https://i.pinimg.com/564x/81/b1/3a/81b13a1a2177247b5c0d886a3c54a580.jpg",
       "rating": 5,
-      "date": "06-05-2023"
+      "process": "awita luego pastita y de ultimo salsita",
+      "creationDate": "06-05-2023",
+      "lastModified": "06-05-2023"
     },
     {
       "id": 5,
@@ -45,7 +52,9 @@
       "ingredients": ["masa", "colorante"],
       "image": "https://i.pinimg.com/564x/32/06/51/3206517a8e24c5cef373c183ede41a98.jpg",
       "rating": 5,
-      "date": "06-05-2023"
+      "process": "Aprender a hacerlo joas joas",
+      "creationDate": "06-05-2023",
+      "lastModified": "06-05-2023"
     },
     {
       "id": 6,
@@ -54,6 +63,8 @@
       "ingredients": ["chocolate", "glaseado"],
       "image": "https://i.pinimg.com/564x/64/06/08/640608dede49b1374fa5b1ecfeacc2a9.jpg",
       "rating": 4,
-      "date": "06-05-2023"
+      "process": "Aprender a hacerlo joas joas",
+      "creationDate": "06-05-2023",
+      "lastModified": "06-05-2023"
     }
   ]
