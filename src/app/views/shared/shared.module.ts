@@ -4,8 +4,8 @@ import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { NavmenuComponent } from './components/navmenu/navmenu.component';
 import { SearcherRecipeComponent } from './components/searcher-recipe/searcher-recipe.component';
 import { RouterModule } from '@angular/router';
-import { ListProductsComponent } from './components/list-products/list-products.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ListProductsComponent } from './components/list-products/list-products.component';
 import { TagInputComponent } from './components/tag-input/tag-input.component';
 import { TagInputModule } from 'ngx-chips';
 import { PaginationItemsComponent } from './components/pagination-items/pagination-items.component';
@@ -16,6 +16,7 @@ import { PaginationItemsComponent } from './components/pagination-items/paginati
     NavmenuComponent,
     SearcherRecipeComponent,
     ListProductsComponent,
+    TagInputComponent
     SearcherRecipeComponent,
     TagInputComponent,
     PaginationItemsComponent
