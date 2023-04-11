@@ -1,4 +1,4 @@
-<div class="container" [formGroup]="recipeForm">
+<div class="container my-5" [formGroup]="recipeForm">
     <div class="row">
       <div class="col-md-6">
         <img src="{{imgURL}}" alt="{{title}}" class="img-fluid float-left">
@@ -23,3 +23,5 @@
         <p>Fecha de creación: {{date}}</p>
       </div>
     </div>
+   <app-comment-section [comments]="comments"></app-comment-section>
+

@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { Food } from 'src/app/views/shared/models/food.model';
 import { RecipesService } from 'src/app/services/recipes.service';
-
+import { CommentService } from 'src/app/services/comment.service';
+import { Comment } from 'src/app/views/shared/models/comment.model'; //Importar el modelo de comentarios
 
 @Component({
   selector: 'app-recipe-view',
@@ -24,15 +25,21 @@ export class RecipeViewComponent implements OnInit {
   date: string | undefined = '';
 
   recipeForm: FormGroup;
+  comments: Comment[] = []; //Agrega la propiedad comments
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private recipeService: RecipesService) {
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute,
+    private recipeService: RecipesService, private commentService: CommentService) {
     this.recipeForm = this.formBuilder.group({});
   }
+
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.recipeID = Number(params['id']);
       if (!Number.isNaN(this.recipeID)) {
         this.updateRecipeInformation();
+        this.commentService.getCommentsByRecipeId(this.recipeID).subscribe(comments => {
+          this.comments = comments; //Asigna los comentarios recuperados por el servicio a la propiedad comments
+        });
       }
     });
   }
@@ -49,5 +56,4 @@ export class RecipeViewComponent implements OnInit {
       this.date = recipe?.date;
     })
   }
-  
 }
