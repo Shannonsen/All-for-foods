@@ -1,0 +1,46 @@
+[
+  {
+    "id": 0,
+    "email": "default@gmail.com",
+    "user": "Dummy Author",
+    "description": "This is a test bro",
+    "password": "12345",
+    "token": "DefaultToken",
+    "follows": [],
+    "favorites": [],
+    "myRecipes": [1,2,6]
+  },
+  {
+    "id": 1,
+    "email": "noe@gmail.com",
+    "user": "Noeshi",
+    "description": "Me encanta el genshin, pero tambien la comida",
+    "password": "alejandro1",
+    "token": "NoeshiToken",
+    "follows": [2,3],
+    "favorites": [1,2,4,6],
+    "myRecipes": [3]
+  },
+  {
+    "id": 2,
+    "email": "alexandra@gmail.com",
+    "user": "Agaxs",
+    "description": "Asi como colecciono husbandos, tambien comida ;)",
+    "password": "alexandra1",
+    "token": "AgaxsToken",
+    "follows": [1,3],
+    "favorites": [3,5],
+    "myRecipes": [4]
+  },
+  {
+    "id": 3,
+    "email": "celeztes@gmail.com",
+    "user": "Celeztes",
+    "description": "Xiao Iloviu",
+    "password": "celeztes1",
+    "token": "CeleztesToken",
+    "follows": [1,2],
+    "favorites": [2,4],
+    "myRecipes": [5]
+  }
+]

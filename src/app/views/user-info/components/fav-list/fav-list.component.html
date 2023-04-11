@@ -1,0 +1,5 @@
+<app-pagination-items [items]="loadPage(currentPage)" 
+                        [pageSize]="pageSize" 
+                        [totalPages]="totalPages"
+                        (outputCurrentPage)="currentPage = $event">
+</app-pagination-items>

@@ -1,0 +1,42 @@
+<nav class="navbar navbar-dark bg-dark navbar-expand-lg py-lg-3">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/home"> All-for-foods</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a routerLink="/home" routerLinkActive="active-link" class="nav-link"
+          >Home</a
+        >
+        <a *ngIf="token" routerLink="/profile" routerLinkActive="active-link" class="nav-link"
+          >Perfil</a
+        >
+        <a *ngIf="token" routerLink="/dashboard" routerLinkActive="active-link" class="nav-link"
+          >Dashboard</a
+        >
+        <a *ngIf="!token" routerLink="/login" routerLinkActive="active-link" class="nav-link"
+          >Login</a
+        >
+        <a routerLink="/recipe" routerLinkActive="active-link" class="nav-link"
+          >Write a Recipe</a
+        >
+        <a routerLink="/support" routerLinkActive="active-link" class="nav-link"
+          >Soporte</a
+        >
+        <a *ngIf="token" class="nav-link" routerLinkActive="active-link" (click)="logout()">Logout</a>
+        <a routerLink="/search" routerLinkActive="active-link" class="nav-link"
+          >Buscar</a
+        >
+      </div>
+    </div>
+  </div>
+</nav>

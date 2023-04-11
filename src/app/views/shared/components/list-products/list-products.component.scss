@@ -1,0 +1,35 @@
+@import "../../../../../assets/scss/general.scss";
+.container-list-products{
+
+  .container-products {
+    margin-top: 1rem;
+  }
+
+  .container-card {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+
+  .img-route{
+    display: contents;
+  }
+  .card {
+    width: 18rem;
+  }
+  .card-body{
+    button{
+      background-color: pink;
+    }
+  }
+
+/* heart button */
+
+.container-icon-heart{
+  margin-top: 2%;
+  text-align: center;
+}
+
+
+}
+
