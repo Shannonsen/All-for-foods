@@ -17,13 +17,13 @@
         <a routerLink="/home" routerLinkActive="active-link" class="nav-link"
           >Home</a
         >
-        <a routerLink="/profile" routerLinkActive="active-link" class="nav-link"
+        <a *ngIf="token" routerLink="/profile" routerLinkActive="active-link" class="nav-link"
           >Perfil</a
         >
-        <a routerLink="/dashboard" routerLinkActive="active-link" class="nav-link"
+        <a *ngIf="token" routerLink="/dashboard" routerLinkActive="active-link" class="nav-link"
           >Dashboard</a
         >
-        <a routerLink="/login" routerLinkActive="active-link" class="nav-link"
+        <a *ngIf="!token" routerLink="/login" routerLinkActive="active-link" class="nav-link"
           >Login</a
         >
         <a routerLink="/recipe" routerLinkActive="active-link" class="nav-link"
@@ -32,6 +32,7 @@
         <a routerLink="/support" routerLinkActive="active-link" class="nav-link"
           >Soporte</a
         >
+        <a *ngIf="token" class="nav-link" routerLinkActive="active-link" (click)="logout()">Logout</a>
       </div>
     </div>
   </div>
