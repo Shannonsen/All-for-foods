@@ -14,6 +14,7 @@ export class FavListComponent implements OnInit {
   currentPage: number = 1;
   pageSize: number = 3;
   totalPages: number[] = [];
+  sectionName: string = 'Mis Favoritos';
 
 
   constructor(private recipeService: RecipesService) { }
