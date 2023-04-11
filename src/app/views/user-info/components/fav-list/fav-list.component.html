@@ -1,5 +1,8 @@
-<app-pagination-items [items]="loadPage(currentPage)" 
+<div class="container-fluid container-list-fav">
+    <app-pagination-items [items]="loadPage(currentPage)" 
                         [pageSize]="pageSize" 
+                        [sectionName] = "sectionName"
                         [totalPages]="totalPages"
                         (outputCurrentPage)="currentPage = $event">
-</app-pagination-items>
+    </app-pagination-items>
+</div>
