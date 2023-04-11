@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { Food } from 'src/app/views/shared/models/food.model';
 import { RecipesService } from 'src/app/services/recipes.service';
 import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/views/shared/models/user.model';
 
 @Component({
   selector: 'app-editor',
@@ -22,6 +23,7 @@ export class EditorComponent implements OnInit {
   description: string | undefined = '';
 
   recipeForm: FormGroup;
+  user: User = <User>{};
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private recipeService: RecipesService, private userService: UserService) {
     this.recipeForm = this.formBuilder.group({});
@@ -32,11 +34,21 @@ export class EditorComponent implements OnInit {
       this.recipeID = Number(params['id']);
       if (!Number.isNaN(this.recipeID)) {
         this.updateRecipeInformation();
+      } else {
+        this.imgURL = "https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png";
       }
+
+      const tkn = localStorage.getItem('Token');
+      this.userService.getAllUsers().subscribe(users => {
+        var user = (users as User[]).find(p => p.token === tkn);
+        this.user = <User>user;
+        this.author = user!.user;
+      })
 
       this.recipeForm = new FormGroup({
         title: new FormControl('', [Validators.required, Validators.minLength(4)]),
         ingredients: new FormControl('', [Validators.required, Validators.minLength(4)]),
+        imgURL: new FormControl('', [Validators.required, Validators.minLength(4)]),
         process: new FormControl('', [Validators.required, Validators.minLength(4)]),
         description: new FormControl('', [Validators.required, Validators.minLength(4)])
       });
@@ -44,7 +56,15 @@ export class EditorComponent implements OnInit {
   }
 
   onSave() {
-    alert('receta actualizada');
+    if (Number.isNaN(this.recipeID)) {
+      this.recipeID = 0;
+      this.recipeService.getFoodCount().subscribe(count => {
+        this.recipeID = count +1;
+        alert('receta actualizada\nid:' + this.recipeID);
+      });
+    }else{
+      alert('receta actualizada\nid:' + this.recipeID);
+    }
   }
 
   updateRecipeInformation() {
@@ -54,12 +74,6 @@ export class EditorComponent implements OnInit {
       this.ingredients = recipe?.ingredients;
       this.imgURL = recipe?.image;
       this.process = recipe?.process;
-
-      if (recipe?.author) {
-        this.userService.getUserById(recipe.author).subscribe(author => {
-          this.author = author?.user;
-        });
-      }
     })
   }
 
