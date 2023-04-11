@@ -14,6 +14,7 @@ export class MyRecipesListComponent implements OnInit {
   currentPage: number = 1;
   pageSize: number = 3;
   totalPages: number[] = [];
+  sectionName: string = 'Mis Recetas';
 
 
   constructor(private recipeService: RecipesService) { }
