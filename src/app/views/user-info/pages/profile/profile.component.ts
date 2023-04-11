@@ -3,7 +3,6 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { LoginService } from 'src/app/services/login.service';
 import { UserService } from 'src/app/services/user.service';
 import { RecipesService } from 'src/app/services/recipes.service';
-import { Food } from 'src/app/views/shared/models/food.model';
 import { User } from 'src/app/views/shared/models/user.model';
 
 @Component({
@@ -25,16 +24,16 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loginService.login().subscribe(users => {
-      this.email = users[1].email;
-      this.name = users[1].user;
-      this.description = users[1].description;
-    });
 
-    
+    const tkn = localStorage.getItem('Token');
+
     this.userService.getAllUsers().subscribe(users => {
-      var user = (users as User[]).find(p => p.id == 1)
+      var user = (users as User[]).find(p => p.token === tkn);
       this.user = <User>user;
+      
+      this.name = user!.user;
+      this.email = user!.email;
+      this.description = user!.description;
     })
 
     this.profileForm = new FormGroup({
@@ -43,12 +42,12 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  onEdit(){
+  onEdit() {
     /* this.router.navigate(['profile/edit']) */
     alert("información actualizada")
   }
 
-  follow(){
+  follow() {
     const star = document.getElementById("btn-follow")!;
     if (star.style.backgroundColor == "mediumaquamarine") {
       star.style.backgroundColor = "crimson";

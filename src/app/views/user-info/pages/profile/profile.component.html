@@ -1,5 +1,4 @@
 <div class="container-fluid container-profile" [formGroup]="profileForm">
-  <form>
     <div class="row">
       <div class="col-12 container-title">Datos de perfil</div>
     </div>
@@ -61,7 +60,7 @@
           <input
             type="text"
             class="form-control"
-            formControlName="description"
+            formControlName="edad"
             id="exampleInputPassword1"
           />
         </div>
@@ -73,6 +72,5 @@
         Editar
       </button>
     </div>
-  </form>
 </div>
 <app-fav-list [favorites]="user.favorites"></app-fav-list>

@@ -2,6 +2,7 @@ export interface User {
     id: number,
     email: string,
     user: string,
+    description: string,
     password: string,
     token: string,
     follows: number[],
