@@ -25,4 +25,17 @@ export class ListProductsComponent implements OnInit {
     }
   }
 
+  changeRating(idStar:number, idProduct:number){
+
+    const star = document.getElementById(String("star-"+ idStar + "-"+ idProduct))!;
+    if(star.style.color=="#F4DF21"){
+      star.style.color="gray";
+      star.style.scale="1";
+    }else{
+      star.style.color="#F4DF21";
+      star.style.scale="1.2";
+    }
+
+  }
+
 }

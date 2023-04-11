@@ -37,8 +37,8 @@
               <div class="col-12">
                 <small><b>creado: </b>{{ product.date }} </small>
               </div>
-              <div class="col-1" *ngFor="let star of [].constructor(product.rating)">
-                <i class="fa fa-star"></i>
+              <div class="col-1" style="color:gray"  *ngFor="let star of [].constructor(5); let i= index">
+                <i class="fa fa-star" (click)="changeRating(i,product.id)" id="star-{{i}}-{{product.id}}"></i>
               </div>
             </div>
           </div>
