@@ -36,7 +36,9 @@ export class SearcherRecipeComponent implements OnInit {
   constructor(private differs: KeyValueDiffers, private ingredientService: IngredientsService, private recipesService: RecipesService) {
     this.differ = this.differs.find({}).create();
   }
-
+  /**
+   * @override
+   */
   ngOnInit(): void {
     this.ingredientService.getAllIngredients().subscribe(ingredients => {
       this.ingredients = ingredients;
@@ -114,7 +116,9 @@ export class SearcherRecipeComponent implements OnInit {
       this.outputRecipes.emit(this.recipesToPagination(recipeToSend));
     });
   }
-
+  /**
+   * Método lanzado cuando se da clic en el botón de búsqueda del componente de entrada de etiquetas
+   */
   doSearchTrigger() {
     if (this.doSearch) {
       this.doSearch = false;
@@ -127,6 +131,7 @@ export class SearcherRecipeComponent implements OnInit {
           this.elementsSelected.forEach(element => {
             ingredientStr.push(element.name);
           });
+          console.log(ingredientStr);
           (recipes as Food[]).forEach(recipe => {
             if(this.checkSubset(recipe.ingredients, ingredientStr)){
               recipeToSend.push(recipe);
@@ -149,7 +154,12 @@ export class SearcherRecipeComponent implements OnInit {
       });
     }
   }
-
+  /**
+   * Método encargado de validar si un conjunto contiene un subconjunto
+   * @param parentArray : Arreglo al cual se le va a revisar si contiene un subconjunto
+   * @param subsetArray : Subarreglo el cual se utilizará para revisar si está dentro de otro arreglo
+   * @returns {boolean} Verdadero si el subsetArray se encuentra en el parentArray, de otra manera será falso
+   */
   checkSubset = (parentArray: any, subsetArray: any) => {
     return subsetArray.every((el: any) => {
       return parentArray.includes(el)

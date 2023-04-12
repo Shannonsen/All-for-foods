@@ -6,6 +6,7 @@
                        [secondaryPlaceholder]="''"
                        [onlyFromAutocomplete]="true"
                        [displayBy]="'name'"
+                       (onRemove)="onRemove($event)"
                        [onlyFromAutocomplete]="true">
         </tag-input>
         <div class="row-button">

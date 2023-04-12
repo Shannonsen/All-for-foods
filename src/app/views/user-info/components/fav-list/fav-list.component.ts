@@ -14,6 +14,7 @@ export class FavListComponent implements OnInit {
   currentPage: number = 1;
   pageSize: number = 3;
   totalPages: number[] = [];
+  sectionName: string = 'Mis Favoritos';
 
 
   constructor(private recipeService: RecipesService) { }
@@ -21,9 +22,11 @@ export class FavListComponent implements OnInit {
   ngOnInit(): void {
     this.recipeService.getAllFoods().subscribe(recipes => {
       this.favs = (recipes as Food[]).filter(p => this.favorites.includes(p.id));
-    })    
+
+      
     const pageCount = Math.ceil(this.favorites.length / this.pageSize);
     this.totalPages = Array.from({ length: pageCount }, (_, i) => i + 1);
+    })    
   }
 
   loadPage(pageNumber: number): Food[] {
