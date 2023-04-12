@@ -5,7 +5,9 @@ import { Food } from 'src/app/views/shared/models/food.model';
 import { RecipesService } from 'src/app/services/recipes.service';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/views/shared/models/user.model';
-
+/**
+ * Clase que representa el editor de recetas.
+ */
 @Component({
   selector: 'app-editor',
   templateUrl: './editor.component.html',
@@ -26,10 +28,20 @@ export class EditorComponent implements OnInit {
   recipeForm: FormGroup;
   user: User = <User>{};
 
+  /**
+   * @constructor
+   * @param formBuilder : Creador del formulario.
+   * @param route : Navegador de rutas.
+   * @param recipeService : Servicio de recetas.
+   * @param userService : Servicio de usuarios.
+   */
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private recipeService: RecipesService, private userService: UserService) {
     this.recipeForm = this.formBuilder.group({});
   }
 
+  /**
+   * @override
+   */
   ngOnInit(): void {
     const today = new Date();
     const date = today.getDate();
@@ -62,20 +74,27 @@ export class EditorComponent implements OnInit {
     });
   }
 
+  /**
+   * Método lanzado cuando se oprime el botón Save.
+   */
   onSave() {
     if (Number.isNaN(this.recipeID)) {
       this.recipeID = 0;
       this.recipeService.getFoodCount().subscribe(count => {
         this.recipeID = count + 1;
-      });
       //creation date == last modified == modification date
         alert('receta actualizada\nid:' + this.recipeID);
+      });
     }else{
       //last modified == modification date
       alert('receta actualizada\nid:' + this.recipeID);
     }
   }
 
+  /**
+   * Método lanzado en la inicialización de la página.
+   * Asigna los valores obtenidos del servicio de recetas a las áreas de texto correspondientes.
+   */
   updateRecipeInformation() {
     this.recipeService.getRecipeById(this.recipeID).subscribe(recipe => {
       this.description = recipe?.description;
