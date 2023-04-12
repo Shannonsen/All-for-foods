@@ -25,7 +25,9 @@ export class BoardComponent implements OnInit {
   constructor(private recipeService: RecipesService, private userService: UserService) {
 
   }
-
+/**
+ * @override
+ */
   ngOnInit(): void {
     const tkn = localStorage.getItem('Token');
     this.userService.getAllUsers().subscribe(users => {

@@ -21,6 +21,9 @@ export class ListProductsComponent implements OnInit {
    */
   constructor(private userService: UserService) { }
 
+  /**
+   * @override
+   */
   ngOnInit(): void {
     this.userService.getAllUsers().subscribe(users => {
       this.users = users;

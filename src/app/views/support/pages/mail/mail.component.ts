@@ -18,6 +18,9 @@ export class MailComponent implements OnInit {
   constructor(private contact: EmailService) {
   }
 
+  /**
+   * @override
+   */
   ngOnInit(): void {
     this.FormData = new FormGroup({
       name: new FormControl('', [Validators.required,Validators.minLength(4)]),

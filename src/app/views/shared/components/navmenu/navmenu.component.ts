@@ -19,6 +19,9 @@ export class NavmenuComponent implements OnInit {
    */
   constructor(private router: Router) { }
 
+  /**
+   * @override
+   */
   ngOnInit(): void {
     this.token = localStorage.getItem('Token');
   }

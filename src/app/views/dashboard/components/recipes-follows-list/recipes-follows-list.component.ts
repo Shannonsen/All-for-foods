@@ -25,6 +25,9 @@ export class RecipesFollowsListComponent implements OnInit {
    */
   constructor(private recipeService: RecipesService) { }
 
+  /**
+   * @override
+   */
   ngOnInit(): void {
     this.recipeService.getAllFoods().subscribe(recipes => {
       this.myRecipesList = (recipes as Food[]).filter(p => this.myFollowsRecipes.includes(p.id));

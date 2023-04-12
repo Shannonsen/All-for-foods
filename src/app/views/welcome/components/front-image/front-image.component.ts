@@ -12,6 +12,9 @@ export class FrontImageComponent implements OnInit {
 
   constructor() { }
 
+  /**
+   * @override
+   */
   ngOnInit(): void {
   }
 
