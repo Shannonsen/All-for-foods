@@ -22,9 +22,10 @@ export class MyRecipesListComponent implements OnInit {
   ngOnInit(): void {
     this.recipeService.getAllFoods().subscribe(recipes => {
       this.myRecipesList = (recipes as Food[]).filter(p => this.myRecipes.includes(p.id));
-    })    
+      
     const pageCount = Math.ceil(this.myRecipes.length / this.pageSize);
     this.totalPages = Array.from({ length: pageCount }, (_, i) => i + 1);
+    })    
   }
 
   loadPage(pageNumber: number): Food[] {
