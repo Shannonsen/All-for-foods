@@ -82,8 +82,8 @@ export class EditorComponent implements OnInit {
       this.recipeID = 0;
       this.recipeService.getFoodCount().subscribe(count => {
         this.recipeID = count + 1;
-        
-      //creation date == last modified == modification date
+
+        //creation date == last modified == modification date
         alert('receta actualizada\nid:' + this.recipeID);
       });
     }else{
