@@ -46,6 +46,8 @@ export class RegisterComponent implements OnInit {
       if (response.status == 201) {
         alert("Usuario creado");
         this.router.navigate(['login']);
+      }else{
+        alert("Ocurrió un problema");
       }
     });
   }
