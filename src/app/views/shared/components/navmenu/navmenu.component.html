@@ -26,16 +26,17 @@
         <a *ngIf="!token" routerLink="/login" routerLinkActive="active-link" class="nav-link"
           >Login</a
         >
-        <a routerLink="/recipe" routerLinkActive="active-link" class="nav-link"
+        <a *ngIf="token" routerLink="/recipe" routerLinkActive="active-link" class="nav-link"
           >Write a Recipe</a
         >
         <a routerLink="/support" routerLinkActive="active-link" class="nav-link"
           >Soporte</a
         >
-        <a *ngIf="token" class="nav-link" routerLinkActive="active-link" (click)="logout()">Logout</a>
         <a routerLink="/search" routerLinkActive="active-link" class="nav-link"
           >Buscar</a
         >
+        <a *ngIf="token" class="nav-link" routerLinkActive="active-link" (click)="logout()">Logout</a>
+        
       </div>
     </div>
   </div>

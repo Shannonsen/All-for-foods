@@ -1,10 +1,10 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-3">
+    <div class="col-2">
       <app-list-follows [follows]="user.follows"></app-list-follows>
     </div>
-    <div class="col-9 mt-4">
-      <app-list-products [products]="products"></app-list-products>
+    <div class="col-10">
+      <app-recipes-follows-list [myFollowsRecipes]="user.myFollowRecipes"></app-recipes-follows-list>
     </div>
   </div>
 </div>
