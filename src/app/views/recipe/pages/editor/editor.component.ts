@@ -114,7 +114,7 @@ export class EditorComponent implements OnInit {
     });
   }
 
-  changeRating(idStar: number, idProduct: number) {
+  changeRating(idStar: number, idProduct: number | undefined) {
 
     const star = document.getElementById(String("star-" + idStar + "-" + idProduct))!;
     if (star.style.color == "gold") {

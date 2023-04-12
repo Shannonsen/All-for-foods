@@ -1,7 +1,9 @@
 import { Component, OnInit, Input} from '@angular/core';
 import { RecipesService } from 'src/app/services/recipes.service';
 import { Food } from 'src/app/views/shared/models/food.model';
-
+/**
+ * Clase que representa el listado de las recetas de usuarios seguidos.
+ */
 @Component({
   selector: 'app-recipes-follows-list',
   templateUrl: './recipes-follows-list.component.html',
@@ -17,9 +19,15 @@ export class RecipesFollowsListComponent implements OnInit {
   totalPages: number[] = [];
   sectionName: string = 'Recetas de seguidores';
 
-
+  /**
+   * @constructor
+   * @param {RecipesService} recipeService : Servicio de recetas.
+   */
   constructor(private recipeService: RecipesService) { }
 
+  /**
+   * @override
+   */
   ngOnInit(): void {
     this.recipeService.getAllFoods().subscribe(recipes => {
       this.myRecipesList = (recipes as Food[]).filter(p => this.myFollowsRecipes.includes(p.id));
@@ -28,6 +36,11 @@ export class RecipesFollowsListComponent implements OnInit {
     });
   }
 
+  /**
+   * Método que se encarga de devolver un listado de recetas para mostrar en una determinada página.
+   * @param {pageNumber} pageNumber : página actual
+   * @returns {Food[]} : listado de recetas que apareceran en una pagina.
+   */
   loadPage(pageNumber: number): Food[] {
     const startIndex = (pageNumber - 1) * this.pageSize;
     const endIndex = startIndex + this.pageSize
