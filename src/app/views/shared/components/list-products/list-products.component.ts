@@ -37,17 +37,4 @@ export class ListProductsComponent implements OnInit {
     }
   }
 
-  changeRating(idStar: number, idProduct: number) {
-
-    const star = document.getElementById(String("star-" + idStar + "-" + idProduct))!;
-    if (star.style.color == "gold") {
-      star.style.color = "gray";
-      star.style.scale = "1";
-    } else {
-      star.style.color = "gold";
-      star.style.scale = "1.2";
-    }
-
-  }
-
 }

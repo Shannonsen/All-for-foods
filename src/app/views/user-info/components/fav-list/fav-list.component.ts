@@ -30,9 +30,11 @@ export class FavListComponent implements OnInit {
   ngOnInit(): void {
     this.recipeService.getAllFoods().subscribe(recipes => {
       this.favs = (recipes as Food[]).filter(p => this.favorites.includes(p.id));
-    })    
+
+      
     const pageCount = Math.ceil(this.favorites.length / this.pageSize);
     this.totalPages = Array.from({ length: pageCount }, (_, i) => i + 1);
+    })    
   }
 
   /**

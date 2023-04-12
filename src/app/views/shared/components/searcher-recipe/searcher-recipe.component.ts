@@ -36,7 +36,9 @@ export class SearcherRecipeComponent implements OnInit {
   constructor(private differs: KeyValueDiffers, private ingredientService: IngredientsService, private recipesService: RecipesService) {
     this.differ = this.differs.find({}).create();
   }
-
+  /**
+   * @override
+   */
   ngOnInit(): void {
     this.ingredientService.getAllIngredients().subscribe(ingredients => {
       this.ingredients = ingredients;
@@ -114,7 +116,9 @@ export class SearcherRecipeComponent implements OnInit {
       this.outputRecipes.emit(this.recipesToPagination(recipeToSend));
     });
   }
-
+  /**
+   * Método lanzado cuando se da clic en el botón de búsqueda del componente de entrada de etiquetas
+   */
   doSearchTrigger() {
     if (this.doSearch) {
       this.doSearch = false;
@@ -123,33 +127,42 @@ export class SearcherRecipeComponent implements OnInit {
         if (this.elementsSelected.length == 0) {
           recipeToSend = recipes;
         } else {
-          var ingredientStr: string[] = [];
-          this.elementsSelected.forEach(element => {
-            ingredientStr.push(element.name);
-          });
-          (recipes as Food[]).forEach(recipe => {
-            if(this.checkSubset(recipe.ingredients, ingredientStr)){
-              recipeToSend.push(recipe);
-            }
-          });
+          recipeToSend = this.getRecipesByIngredients(recipes as Food[])
         }
         var totalPagesToSend = this.totalPagesArray(recipeToSend);
-        this.outputTotalPages.emit(totalPagesToSend);
         if (this.currentPage > totalPagesToSend.length) {
           this.currentPage = 1;
-          this.outputCurrentPage.emit(this.currentPage);
-        } else {
-          if (this.keyword != this.keywordBefore) {
-            this.keywordBefore = this.keyword
-            this.currentPage = 1;
-            this.outputCurrentPage.emit(this.currentPage);
-          }
         }
+        this.outputTotalPages.emit(totalPagesToSend);
+        this.outputCurrentPage.emit(this.currentPage);
         this.outputRecipes.emit(this.recipesToPagination(recipeToSend));
       });
     }
   }
-
+  /**
+   * Método que obtiene las recetas de acuerdo a los ingredientes de this.elementsSelected
+   * @param {Food[]} recipes : Lista de recetas obtenidas del servico 
+   * @returns {Food[]} Recetas que coincidieron con los ingredietes
+   */
+  getRecipesByIngredients(recipes: Food[]) : Food[]{
+    var ingredientStr: string[] = [];
+    var recipeResponse: Food[] = [];
+    this.elementsSelected.forEach(element => {
+      ingredientStr.push(element.name);
+    });
+    recipes.forEach(recipe => {
+      if (this.checkSubset(recipe.ingredients, ingredientStr)) {
+        recipeResponse.push(recipe);
+      }
+    });
+    return recipeResponse;
+  }
+  /**
+   * Método encargado de validar si un conjunto contiene un subconjunto
+   * @param parentArray : Arreglo al cual se le va a revisar si contiene un subconjunto
+   * @param subsetArray : Subarreglo el cual se utilizará para revisar si está dentro de otro arreglo
+   * @returns {boolean} Verdadero si el subsetArray se encuentra en el parentArray, de otra manera será falso
+   */
   checkSubset = (parentArray: any, subsetArray: any) => {
     return subsetArray.every((el: any) => {
       return parentArray.includes(el)

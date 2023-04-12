@@ -2,7 +2,9 @@ import { Component, Input, OnInit, DoCheck, KeyValueDiffers, Output, EventEmitte
 import { UserService } from 'src/app/services/user.service';
 import { Food } from '../../models/food.model';
 import { User } from '../../models/user.model';
-
+/**
+ * Clase encargada de realizar la paginación
+ */
 @Component({
   selector: 'app-pagination-items',
   templateUrl: './pagination-items.component.html',
@@ -18,19 +20,25 @@ export class PaginationItemsComponent implements OnInit {
   @Input() showEditButton: boolean = false;
   users: User[] = [];
   differ: any;
-
+  /**
+   * @constructor
+   * @param {KeyValueDiffers} differsm : Detecta cambios en los objetos
+   * @param {UserService} userService : Servicio de usuarios
+   */
   constructor(private differs: KeyValueDiffers, private userService: UserService) {
     this.differ = this.differs.find({}).create();
   }
-
-  async ngOnInit(): Promise<void> {
-
+  /**
+   * @override
+   */
+  ngOnInit() {
     this.userService.getAllUsers().subscribe(users => {
       this.users = users as User[];
     });
-    //await new Promise(f => setTimeout(f, 1 * 1000));
   }
-
+  /**
+   * Método lanzado cuando un objeto cambia de valor
+   */
   ngDoCheck() {
     const change = this.differ.diff(this);
     if (change) {
@@ -39,12 +47,19 @@ export class PaginationItemsComponent implements OnInit {
       });
     }
   }
-
+  /**
+   * Método encargado de obtener el nombre de un autor por medio de su id
+   * @param {number} authorId : Id del autor 
+   * @returns {string} Nombre del autor
+   */
   getAuthorName(authorId: number): string {
     const author = this.users.find(user => user.id === authorId);
     return author?.user || '';
   }
-
+  /**
+   * Método que se encarga de manejar la lógica de la clase al realizar un cambio de página
+   * @param {number} pageNumber : Número de la página
+   */
   changePage(pageNumber: number) {
     this.currentPage = pageNumber;
     this.outputCurrentPage.emit(this.currentPage);

@@ -16,7 +16,7 @@ import { User } from 'src/app/views/shared/models/user.model';
 export class EditorComponent implements OnInit {
   @Input() recipes: Food[] = [];
 
-  recipeID: number = 0;
+  recipeID: number | undefined;
   title: string | undefined = '';
   author: string | undefined = '';
   ingredients: string[] | undefined = [];
@@ -97,13 +97,34 @@ export class EditorComponent implements OnInit {
    * Asigna los valores obtenidos del servicio de recetas a las áreas de texto correspondientes.
    */
   updateRecipeInformation() {
-    this.recipeService.getRecipeById(this.recipeID).subscribe(recipe => {
+    this.recipeService.getRecipeById(this.recipeID!).subscribe(recipe => {
       this.description = recipe?.description;
       this.title = recipe?.name;
       this.ingredients = recipe?.ingredients;
       this.imgURL = recipe?.image;
       this.process = recipe?.process;
+      if(recipe?.rating!= undefined){
+        for(let i =0; i<5; i++){
+          if(i<recipe?.rating){
+            const star = document.getElementById(String("star-" + i + "-" + this.recipeID))!;
+            star.style.color = "gold";
+          }
+        }
+      }
     });
+  }
+
+  changeRating(idStar: number, idProduct: number) {
+
+    const star = document.getElementById(String("star-" + idStar + "-" + idProduct))!;
+    if (star.style.color == "gold") {
+      star.style.color = "gray";
+      star.style.scale = "1";
+    } else {
+      star.style.color = "gold";
+      star.style.scale = "1.2";
+    }
+
   }
 
 }
