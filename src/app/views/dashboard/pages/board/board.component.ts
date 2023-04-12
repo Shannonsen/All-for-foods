@@ -19,8 +19,9 @@ export class BoardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const tkn = localStorage.getItem('Token');
     this.userService.getAllUsers().subscribe(users => {
-      var user = (users as User[]).find(p => p.id == 1)
+      var user = (users as User[]).find(p => p.token == tkn)
       this.user = <User>user;
     })
 

@@ -7,5 +7,6 @@ export interface User {
     token: string,
     follows: number[],
     favorites: number[],
-    myRecipes: number[]
+    myRecipes: number[],
+    myFollowRecipes: number[],
 }
