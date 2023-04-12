@@ -14,6 +14,7 @@ export class ListProductsComponent implements OnInit {
 
   @Input() products: Food[] = [];
   users: User[] = [];
+  token: any = "";
 
   /**
    * @constructor
@@ -25,6 +26,7 @@ export class ListProductsComponent implements OnInit {
    * @override
    */
   ngOnInit(): void {
+    this.token = localStorage.getItem('Token');
     this.userService.getAllUsers().subscribe(users => {
       this.users = users;
     });

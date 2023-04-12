@@ -29,7 +29,7 @@
               <div class="col-8">
                 <h2>{{ product.name }}</h2>
               </div>
-              <div class="col-4 container-icon-heart">
+              <div *ngIf="token" class="col-4 container-icon-heart">
               <i class="fa fa-heart fa-2x" (click)="changeColor(product.id) "style="color:gray" id="{{product.id}}"></i>
               </div>
             </div>
