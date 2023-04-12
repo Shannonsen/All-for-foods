@@ -1,7 +1,7 @@
 <div class="container-fluid container-recipeWriter" [formGroup]="recipeForm">
   <!-- header: recipe img, title & author-->
   <div class="row container-img">
-    <img src="{{ imgURL }}" class="recipe-img" alt="image" />
+    <img src="{{ imgURL }}" class="recipe-img" alt="imagen" />
   </div>
   <div class="row container-header">
     <div class="row container-stars">
@@ -13,7 +13,7 @@
       >
         <i
           class="fa fa-star"
-          (click)="changeRating(i, recipeID)"
+          (click)="changeRating(i, recipeID!)"
           id="star-{{ i }}-{{ recipeID }}"
         ></i>
       </div>
@@ -23,7 +23,7 @@
       <textarea
         class="form-control header-item"
         rows="1"
-        placeholder="Recipe front URL"
+        placeholder="URL de la imagen de portada de la receta"
         formControlName="imgURL"
       ></textarea>
     </div>
@@ -31,7 +31,7 @@
       <textarea
         class="form-control header-item"
         rows="1"
-        placeholder="Recipe Title"
+        placeholder="Titulo de la receta"
         formControlName="title"
         value="{{ title }}"
       ></textarea>
@@ -40,9 +40,9 @@
       <textarea
         class="form-control header-item"
         rows="1"
-        placeholder="Author"
-        value="{{ author }}"
-      ></textarea>
+        placeholder="Autor"
+        readonly="true"
+      >{{ author }}</textarea>
     </div>
   </div>
   <!-- Recipe info: ingredients & process
@@ -50,32 +50,32 @@
   <div class="row container-info">
     <div class="col-4 mb-3">
       <div class="row">
-        <label for="exampleRecipeWriter" class="form-label">Description</label>
+        <label for="exampleRecipeWriter" class="form-label">Descripción</label>
         <textarea
           class="form-control ingredients-container"
           rows="2"
-          placeholder="Add ingredients"
+          placeholder="Agrega una descripción"
           formControlName="description"
           value="{{ description }}"
         ></textarea>
       </div>
       <div class="row">
-        <label for="exampleRecipeWriter" class="form-label">Ingredients</label>
+        <label for="exampleRecipeWriter" class="form-label">Ingredientes</label>
         <textarea
           class="form-control ingredients-container"
           rows="2"
-          placeholder="Add ingredients"
+          placeholder="Agrega ingredientes (sepáralos con comas)"
           formControlName="ingredients"
           value="{{ ingredients }}"
         ></textarea>
       </div>
     </div>
     <div class="col-6 mb-3">
-      <label for="exampleRecipeWriter" class="form-label">Process</label>
+      <label for="exampleRecipeWriter" class="form-label">Proceso</label>
       <textarea
         class="form-control process-container"
         rows="7"
-        placeholder="Add process' steps"
+        placeholder="Agrega los pasos de preparación"
         formControlName="process"
         value="{{ process }}"
       ></textarea>
@@ -88,7 +88,7 @@
       class="btn btn-md"
       (click)="onSave()"
     >
-      Save
+      Guardar
     </button>
   </div>
 </div>
