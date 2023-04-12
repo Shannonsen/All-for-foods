@@ -2,7 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Food } from 'src/app/views/shared/models/food.model';
 import { User } from '../../models/user.model';
 import { UserService } from 'src/app/services/user.service';
-
+/**
+ * Clase que representa el listado de recetas.
+ */
 @Component({
   selector: 'app-list-products',
   templateUrl: './list-products.component.html',

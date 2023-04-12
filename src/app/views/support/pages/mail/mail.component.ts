@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
 import { EmailService } from 'src/app/services/email.service';
-
+/**
+ * Clase que representa la página de soporte.
+ */
 @Component({
   selector: 'app-mail',
   templateUrl: './mail.component.html',

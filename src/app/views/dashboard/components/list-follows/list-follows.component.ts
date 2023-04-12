@@ -1,7 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { User } from 'src/app/views/shared/models/user.model';
 import { UserService } from 'src/app/services/user.service';
-
+/**
+ * Clase que representa el listado de los usuarios seguidos.
+ */
 @Component({
   selector: 'app-list-follows',
   templateUrl: './list-follows.component.html',

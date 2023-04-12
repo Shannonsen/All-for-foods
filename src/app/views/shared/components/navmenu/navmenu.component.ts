@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+/**
+ * Clase que representa el navbar.
+ */
 
 @Component({
   selector: 'app-navmenu',
