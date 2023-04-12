@@ -86,7 +86,7 @@ export class EditorComponent implements OnInit {
         //creation date == last modified == modification date
         alert('receta actualizada\nid:' + this.recipeID);
       });
-    }else{
+    } else {
       //last modified == modification date
       alert('receta actualizada\nid:' + this.recipeID);
     }
