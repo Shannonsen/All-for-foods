@@ -14,7 +14,7 @@ import { User } from 'src/app/views/shared/models/user.model';
 export class EditorComponent implements OnInit {
   @Input() recipes: Food[] = [];
 
-  recipeID: number = 0;
+  recipeID: number | undefined;
   title: string | undefined = '';
   author: string | undefined = '';
   ingredients: string[] | undefined = [];
@@ -67,17 +67,18 @@ export class EditorComponent implements OnInit {
       this.recipeID = 0;
       this.recipeService.getFoodCount().subscribe(count => {
         this.recipeID = count + 1;
-      });
-      //creation date == last modified == modification date
+
+        //creation date == last modified == modification date
         alert('receta actualizada\nid:' + this.recipeID);
-    }else{
+      });
+    } else {
       //last modified == modification date
       alert('receta actualizada\nid:' + this.recipeID);
     }
   }
 
   updateRecipeInformation() {
-    this.recipeService.getRecipeById(this.recipeID).subscribe(recipe => {
+    this.recipeService.getRecipeById(this.recipeID!).subscribe(recipe => {
       this.description = recipe?.description;
       this.title = recipe?.name;
       this.ingredients = recipe?.ingredients;
