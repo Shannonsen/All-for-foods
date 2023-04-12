@@ -14,6 +14,11 @@ export class BoardComponent implements OnInit {
   products: Food[] = []
   user: User = <User>{};
 
+  /**
+   *@constructor
+   * @param {RecipesService} recipeService : Servicio de recetas
+   * @param {UserService} userService : Servicio de usuarios
+   */
   constructor(private recipeService: RecipesService, private userService: UserService) {
 
   }

@@ -17,7 +17,10 @@ export class RecipesFollowsListComponent implements OnInit {
   totalPages: number[] = [];
   sectionName: string = 'Recetas de seguidores';
 
-
+  /**
+   * @constructor
+   * @param {RecipesService} recipeService : Servicio de recetas.
+   */
   constructor(private recipeService: RecipesService) { }
 
   ngOnInit(): void {
@@ -28,6 +31,11 @@ export class RecipesFollowsListComponent implements OnInit {
     });
   }
 
+  /**
+   * Método que se encarga de devolver un listado de recetas para mostrar en una determinada página.
+   * @param {pageNumber} pageNumber : página actual
+   * @returns {Food[]} : listado de recetas que apareceran en una pagina.
+   */
   loadPage(pageNumber: number): Food[] {
     const startIndex = (pageNumber - 1) * this.pageSize;
     const endIndex = startIndex + this.pageSize

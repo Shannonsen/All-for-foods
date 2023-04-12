@@ -9,6 +9,10 @@ import { EmailService } from 'src/app/services/email.service';
 })
 export class MailComponent implements OnInit {
   FormData: FormGroup = new FormGroup('');
+  /**
+   *
+   * @param {EmailService} contact: Servicio de email
+   */
   constructor(private contact: EmailService) {
   }
 
@@ -20,6 +24,10 @@ export class MailComponent implements OnInit {
     });
   }
 
+  /**
+   * Método encargado de llamar la funcion SendEmail para mandar el correo electronico
+   * @param {FormGroup} FormData: Formato de email con sus inputs.
+   */
   onSubmit(FormData: FormGroup) {
     this.contact.SendEmail(FormData)
   }

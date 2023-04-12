@@ -11,6 +11,10 @@ export class HomeComponent implements OnInit {
 
   products: Food[] = []
 
+  /**
+   *@constructor
+   * @param {RecipesService} recipeService : Servicio de recetas
+   */
   constructor(private recipeService: RecipesService) { }
 
   ngOnInit(): void {

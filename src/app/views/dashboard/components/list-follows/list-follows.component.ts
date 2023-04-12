@@ -12,6 +12,10 @@ export class ListFollowsComponent implements OnInit {
   @Input() follows: number[] = [];
   users: User[] = []
 
+  /**
+   *@constructor
+   * @param {UserService} userService : Servicio de usuarios.
+   */
   constructor(private userService: UserService) {
   }
 
@@ -21,8 +25,14 @@ export class ListFollowsComponent implements OnInit {
     })
   }
 
-  getById(id: number) {
-    return 'foodie ' + id
+  /**
+   *Método que se encarga de encontrar el username de un usuario a través de un id.
+   * @param {number} id : id de usuario.
+   * @returns {string} : nombre del usuario.
+   */
+  getUserById(id: number): string {
+    const author = this.users.find(user => user.id === id);
+    return author?.user || '';
   }
 
 }
