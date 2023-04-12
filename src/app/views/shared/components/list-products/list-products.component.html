@@ -35,10 +35,13 @@
             </div>
             <div class="row">
               <div class="col-12">
-                <small><b>creado: </b>{{ product.date }} </small>
+                <small><b>creado: </b>{{ product.creationDate }} </small>
               </div>
-              <div class="col-1" style="color:gray"  *ngFor="let star of [].constructor(5); let i= index">
-                <i class="fa fa-star" (click)="changeRating(i,product.id)" id="star-{{i}}-{{product.id}}"></i>
+              <div class="col-1" style="color:gold"  *ngFor="let star of [].constructor(product.rating); let i= index">
+                <i class="fa fa-star" id="star-{{i}}-{{product.id}}"></i>
+              </div>
+              <div class="col-1" style="color:gray"  *ngFor="let star of [].constructor((5-product.rating)); let i= index">
+                <i class="fa fa-star" id="star-{{i}}-{{product.id}}"></i>
               </div>
             </div>
           </div>

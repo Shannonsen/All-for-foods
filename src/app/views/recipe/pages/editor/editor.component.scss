@@ -32,8 +32,13 @@
 .container-title{
     width: 50%;
     text-align: center;
-    font-size: $font-lg;
-    
+    font-size: $font-lg;    
+}
+
+.container-url{
+    width: 72%;
+    text-align: center;
+    font-size: $font-lg;    
 }
 
 .container-info{
@@ -47,6 +52,7 @@
 
 .container-button{
     text-align: center;
+    margin-bottom: 1rem;
 
     button{
       background-color: $orange-color;
