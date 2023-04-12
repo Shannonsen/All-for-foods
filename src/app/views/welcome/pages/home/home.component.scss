@@ -1,4 +1,8 @@
 @import "../../../../../assets/scss/general.scss";
+
+.row{
+  --bs-gutter-x: none !important;
+}
 .row-button {
   margin-top: 1rem;
   text-align: center;
