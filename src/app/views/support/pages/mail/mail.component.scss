@@ -2,14 +2,19 @@
 
 .container-form {
   margin-top: 2%;
+  font-family: $font-montserrat;
   form {
     margin-left: 15%;
     width: 70%;
+    input{
+      font-size: $font-sm;
+    }
     label {
       font-size: $font-sm;
       font-weight: bold;
     }
     small{
+      font-size: $font-smm;
       font-weight: bold;
     }
   }
