@@ -2,12 +2,16 @@
 
 .row-sesion-ingredients {
     font-family: $font-montserrat;
+    font-family: $font-sm;
     margin: 5% auto;
     display: flex;
     border-radius: 4%;
     align-items: center;
     justify-content: center;
 
+    label{
+      font-weight: bold;
+    }
     .sesion,
     .search-ingredients {
         color: black;
