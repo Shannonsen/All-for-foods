@@ -1,10 +1,10 @@
-<div class="container-fluid container-recipeWriter" [formGroup]="recipeForm">
+<div class="container-fluid container-recipeWriter mt-3" [formGroup]="recipeForm">
   <!-- header: recipe img, title & author-->
   <div class="row container-img">
     <img src="{{ imgURL }}" class="recipe-img" alt="imagen" />
   </div>
   <div class="row container-header">
-    <div class="row container-stars">
+    <div class="row container-stars mt-3 mb-3">
       <div class="col-3" style="margin-left: 4%"></div>
       <div
         class="col-1"
@@ -19,15 +19,16 @@
       </div>
       <div class="col-3"></div>
     </div>
-    <div class="row container-url">
+    <div class="row container-url mb-3">
       <textarea
         class="form-control header-item"
         rows="1"
         placeholder="URL de la imagen de portada de la receta"
         formControlName="imgURL"
+        value="{{imgURL}}"
       ></textarea>
     </div>
-    <div class="row container-title">
+    <div class="row container-title mb-3">
       <textarea
         class="form-control header-item"
         rows="1"
@@ -42,6 +43,7 @@
         rows="1"
         placeholder="Autor"
         readonly="true"
+        [disabled]="true"
       >{{ author }}</textarea>
     </div>
   </div>
@@ -49,7 +51,7 @@
             TODO: make each step & ingredient individual-->
   <div class="row container-info">
     <div class="col-4 mb-3">
-      <div class="row">
+      <div class="row mb-3">
         <label for="exampleRecipeWriter" class="form-label">Descripción</label>
         <textarea
           class="form-control ingredients-container"
