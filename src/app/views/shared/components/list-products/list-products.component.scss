@@ -1,5 +1,6 @@
 @import "../../../../../assets/scss/general.scss";
 .container-list-products{
+  font-family: $font-montserrat;
 
   .container-products {
     margin-top: 1rem;
@@ -9,18 +10,25 @@
     display: flex;
     justify-content: center;
     margin-bottom: 2rem;
+
+    h2{
+      font-size: $font-md;
+    }
   }
 
   .img-route{
     display: contents;
   }
+
   .card {
     width: 18rem;
   }
+
   .card-body{
     button{
       background-color: pink;
     }
+
   }
 
 /* heart button */

@@ -18,7 +18,7 @@
       "author": 0,
       "ingredients":  ["Miel", "Pan"],
       "image": "https://i.pinimg.com/564x/3d/a3/01/3da3013609055cc964c6e210119e57bc.jpg",
-      "rating": 3,      
+      "rating": 3,
       "process": "haz el hotcake",
       "creationDate": "06-05-2023",
       "lastModified": "06-05-2023"
@@ -58,7 +58,7 @@
     },
     {
       "id": 6,
-      "name": "Pastel de cumpleaños",
+      "name": "Pastel de leche",
       "author": 0,
       "ingredients": ["Chocolate", "Glaseado"],
       "image": "https://i.pinimg.com/564x/64/06/08/640608dede49b1374fa5b1ecfeacc2a9.jpg",
