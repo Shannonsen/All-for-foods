@@ -1,10 +1,10 @@
+<div class="container-page-home">
+  <app-front-image></app-front-image>
+  <app-list-products [products]="products"></app-list-products>
 
-<app-front-image></app-front-image>
-<app-list-products [products]="products"></app-list-products>
-
-<div class="row row-button">
-  <div class="col-12">
-    <button class="btn btn-lg">Ver más recetas</button>
+  <div class="row row-button">
+    <div class="col-12">
+      <button routerLink="/search" routerLinkActive="active-link" class="btn btn-lg mb-3">Ver más recetas</button>
+    </div>
   </div>
 </div>
-
