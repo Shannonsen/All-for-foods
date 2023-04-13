@@ -3,6 +3,7 @@
 .container-img {
   --bs-gutter-x: none !important;
   margin-bottom: 2rem;
+  font-family: $font-montserrat;
 
   .row {
     --bs-gutter-x: none !important;
@@ -40,11 +41,11 @@
 }
 
 h2 {
-  font-size: 2.5rem;
+  font-size: $font-lg;
 }
 
 h3 {
-  font: 1rem;
+  font: $font-sm;
 }
 
 .container-random {
@@ -52,13 +53,13 @@ h3 {
 
   .first-words {
     text-align: right;
-    font-size: 3.5rem;
+    font-size: $font-xl;
   }
 
   .second-words {
     align-items: center;
     display: flex;
-    font-size: 2rem;
+    font-size: $font-md-2;
   }
 
   .row-button {
@@ -74,11 +75,11 @@ h3 {
 /* Dispositivo small - pequeño */
 @media (min-width: 300px) and (max-width: 768px) {
   h2 {
-    font-size: 1rem;
+    font-size: $font-sm;
   }
 
   h3 {
-    font-size: 0.5rem;
+    font-size: $font-smm;
   }
 
   .row-sesion-ingredients {
@@ -98,7 +99,7 @@ h3 {
 
     .second-words {
       text-align: center;
-      font-size: 2rem;
+      font-size: $font-md-2;
       display: block;
     }
   }
@@ -108,21 +109,21 @@ h3 {
 /* Dispositivo medium - mediano */
 @media (min-width: 768px) and (max-width: 992px) {
   h2 {
-    font-size: 1.5rem;
+    font-size: $font-md;
   }
 
   h3 {
-    font-size: 1rem;
+    font-size: $font-sm;
   }
 }
 
 /* Dispositivo large - largo*/
 @media (min-width: 992px) and (max-width: 1200px) {
   h2 {
-    font-size: 2rem;
+    font-size: $font-md-2;
   }
 
   h3 {
-    font-size: 1.5rem;
+    font-size: $font-md;
   }
 }
