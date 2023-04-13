@@ -1,7 +1,11 @@
-<div class="container-fluid container-img">
-    <div class="col-md-8 mx-auto row row-sesion-ingredients">
+<div class="container-fluid">
+    <div class="col-md-8 row row-sesion-ingredients">
+      <div class="col-3"></div>
         <div class="col-6">
             <div class="sesion">
+              <div class="container-img">
+                <img src="https://cdn-icons-png.flaticon.com/512/186/186313.png" id="img-sesion" alt="">
+              </div>
                 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                     <p>
                         <label>Correo electrónico </label>
@@ -15,7 +19,7 @@
                     </p>
                     <div class="footer-center">
                         <p>
-                            <button type="submit" class="btn btn-primary btn-block" [disabled]="loginForm.invalid">Iniciar sesión</button>
+                            <button type="submit" class="btn btn-block" [disabled]="loginForm.invalid">Iniciar sesión</button>
                         </p>
                         <p>
                             <a routerLink="/register" routerLinkActive="active-link" class="nav-link">
@@ -26,5 +30,6 @@
                 </form>
             </div>
         </div>
+        <div class="col-3"></div>
     </div>
 </div>
