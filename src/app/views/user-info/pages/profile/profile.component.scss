@@ -1,8 +1,10 @@
 @import "../../../../../assets/scss/general.scss";
 
 .container-profile{
-  margin-left:3%;
-
+  font-family: $font-montserrat;
+  .row{
+    margin-left:3%;
+  }
   .container-title{
     text-align: center;
     font-size: $font-lg;
@@ -27,7 +29,8 @@
     width: 40%;
   }
   .container-button{
-    text-align: left;
+    margin-right: 15%;
+    text-align: right;
 
     button{
       background-color: $orange-color;

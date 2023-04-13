@@ -14,6 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
   name: string = '';
+  icon: string = '';
   email: string = '';
   description: string = '';
   profileID: number | undefined;
@@ -54,6 +55,7 @@ export class ProfileComponent implements OnInit {
           this.name = user!.user;
           this.email = user!.email;
           this.description = user!.description;
+          this.icon = user!.icon;
         }else{
           var foodie = (users as User[]).find(p => p.id === this.profileID);
           this.user = <User>foodie;
@@ -62,6 +64,7 @@ export class ProfileComponent implements OnInit {
           this.name = foodie!.user;
           this.email = foodie!.email;
           this.description = foodie!.description;
+          this.icon = user!.icon;
 
         }
 

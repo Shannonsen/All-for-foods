@@ -2,11 +2,12 @@
 
 .container-list-fav{
     padding: 3rem;
+    font-family: $font-montserrat;
 
     .container-products {
       margin-top: 1rem;
     }
-  
+
     .container-col{
       width: fit-content;
     }
@@ -16,7 +17,7 @@
       justify-content: center;
       margin-bottom: 2rem;
     }
-  
+
     .img-route{
       display: contents;
     }
@@ -24,14 +25,14 @@
       width: 18rem;
       margin: 1rem;
     }
-        
+
     /*************pagination***********/
 
     .gallery-bottom .pagination {
       place-content: center;
       margin-top: 0px;
     }
-    
+
     .container-paginator{
       text-align: center;
     }
@@ -42,13 +43,13 @@
       color: #fff;
       border: 0px;
     }
-    
+
     .pagination > li > a {
       margin-right: 5px;
     }
-    
+
     .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
       background-color: #32c5d2;
     }
-    
+
 }
