@@ -28,6 +28,7 @@ export class ProfileComponent implements OnInit {
    * @param {LoginService} loginService : Servicio de inicio de sesión.
    * @param {UserService} userService : Servicio de usuarios.
    * @param {RecipesService} recipeService : Servicio de recetas.
+   * @param {ActivatedRoute} route : Navegador de rutas.
    */
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private userService: UserService, private recipeService: RecipesService) {
     this.profileForm = this.formBuilder.group({});
