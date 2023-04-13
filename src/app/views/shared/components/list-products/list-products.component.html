@@ -16,7 +16,10 @@
                   alt="..."
                 />
               </div>
-              <div class="col-10">{{ getAuthorName(product.author) }}</div>
+              <div class="col-10">
+                <a [routerLink]="['/profile', product.author]">
+                  {{ getAuthorName(product.author) }}
+                </a></div>
             </div>
           </div>
         </div>
