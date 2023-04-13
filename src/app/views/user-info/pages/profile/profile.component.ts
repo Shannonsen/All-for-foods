@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { LoginService } from 'src/app/services/login.service';
 import { UserService } from 'src/app/services/user.service';
 import { RecipesService } from 'src/app/services/recipes.service';
 import { User } from 'src/app/views/shared/models/user.model';
+import { ActivatedRoute } from '@angular/router';
 /**
  * Clase que representa la información del usuario junto con la lista de sus recetas y sus recetas favoritas.
  */
@@ -16,6 +16,7 @@ export class ProfileComponent implements OnInit {
   name: string = '';
   email: string = '';
   description: string = '';
+  profileID: number | undefined;
 
   profileForm: FormGroup;
   //favs: Food[] = []
@@ -28,7 +29,7 @@ export class ProfileComponent implements OnInit {
    * @param {UserService} userService : Servicio de usuarios.
    * @param {RecipesService} recipeService : Servicio de recetas.
    */
-  constructor(private formBuilder: FormBuilder, private loginService: LoginService, private userService: UserService, private recipeService: RecipesService) {
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private userService: UserService, private recipeService: RecipesService) {
     this.profileForm = this.formBuilder.group({});
   }
 
@@ -39,14 +40,34 @@ export class ProfileComponent implements OnInit {
 
     const tkn = localStorage.getItem('Token');
 
-    this.userService.getAllUsers().subscribe(users => {
-      var user = (users as User[]).find(p => p.token === tkn);
-      this.user = <User>user;
-      
-      this.name = user!.user;
-      this.email = user!.email;
-      this.description = user!.description;
-    })
+    this.route.params.subscribe(params => {
+      this.profileID = Number(params['id']);
+
+      this.userService.getAllUsers().subscribe(users => {
+        var user = (users as User[]).find(p => p.token === tkn);
+        this.user = <User>user;
+
+        if (this.user.id === this.profileID || Number.isNaN(this.profileID)) {
+
+          console.log('this u bro');
+          this.name = user!.user;
+          this.email = user!.email;
+          this.description = user!.description;
+        }else{
+          var foodie = (users as User[]).find(p => p.id === this.profileID);
+          this.user = <User>foodie;
+
+          console.log('this not u bro');
+          this.name = foodie!.user;
+          this.email = foodie!.email;
+          this.description = foodie!.description;
+
+        }
+
+
+      })
+
+    });
 
     this.profileForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(4)]),
