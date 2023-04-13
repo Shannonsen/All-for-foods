@@ -77,6 +77,7 @@ h3 {
 @media (min-width: 300px) and (max-width: 768px) {
   h2 {
     font-size: $font-sm;
+    color: pink;
   }
 
   h3 {
@@ -84,7 +85,7 @@ h3 {
   }
 
   .row-sesion-ingredients {
-    margin: 30% auto;
+    margin: 50% auto;
     left: 12%;
 
     .sesion,
@@ -111,10 +112,16 @@ h3 {
 @media (min-width: 768px) and (max-width: 992px) {
   h2 {
     font-size: $font-md;
+    color:red;
   }
 
   h3 {
     font-size: $font-sm;
+  }
+
+  .row-sesion-ingredients {
+    margin: 30% auto;
+    left: 12%;
   }
 }
 
