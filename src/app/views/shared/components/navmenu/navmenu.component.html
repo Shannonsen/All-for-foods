@@ -24,10 +24,10 @@
           >Dashboard</a
         >
         <a *ngIf="!token" routerLink="/login" routerLinkActive="active-link" class="nav-link"
-          >Login</a
+          >Iniciar sesión</a
         >
         <a *ngIf="token" routerLink="/recipe" routerLinkActive="active-link" class="nav-link"
-          >Escribe tu receta</a
+          >Escribir receta</a
         >
         <a routerLink="/support" routerLinkActive="active-link" class="nav-link"
           >Soporte</a
@@ -35,8 +35,8 @@
         <a routerLink="/search" routerLinkActive="active-link" class="nav-link"
           >Buscar</a
         >
-        <a *ngIf="token" class="nav-link" routerLinkActive="active-link" (click)="logout()">Logout</a>
-        
+        <a *ngIf="token" class="nav-link" routerLinkActive="active-link" (click)="logout()">Cerrar sesión</a>
+
       </div>
     </div>
   </div>
