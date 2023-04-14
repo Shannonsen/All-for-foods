@@ -1,6 +1,6 @@
 <div class="container">
     <div class="search-header">
-        <h1>Buscar</h1>
+        <h1 class="mb-3">Buscar <i class="fa fa-search" aria-hidden="true"></i></h1>
         <div class="row justify-content-center align-items-center">
             <div class="row col-md-6">
                 <div class="col-md-4">
@@ -20,20 +20,20 @@
         <div class="col-md-6">
             <div class="form" *ngIf="titleRadioChecked">
                 <div class="form-control ng-autocomplete" id="autocompleteSearch1">
-                    <ng-autocomplete 
+                    <ng-autocomplete
                       [searchKeyword]="keyword"
                       placeholder="Ingrese un título"
                       (selected)='selectEvent($event)'
                       (inputChanged)='onChangeSearch($event)'
                       [itemTemplate]="itemTemplate"
                       (keyup.enter)="onEnter($event)">
-                                                       
+
                     </ng-autocomplete>
-                
+
                     <ng-template #itemTemplate let-item>
                         <a [innerHTML]="item.name"></a>
                     </ng-template>
-                
+
                     <ng-template #notFoundTemplate let-notFound>
                         <div [innerHTML]="notFound"></div>
                     </ng-template>
@@ -42,25 +42,25 @@
 
             <div class="form" *ngIf="!titleRadioChecked">
                 <div class="form-control ng-autocomplete" >
-                    <ng-autocomplete 
+                    <ng-autocomplete
                       [data]="ingredients"
                       [searchKeyword]="keywordAutocomplete"
                       notFoundText="Sin coincidencias"
                       placeholder="Seleccione su ingrediente"
                       (selected)='selectEvent($event)'
                       [itemTemplate]="itemTemplate"
-                      [notFoundTemplate]="notFoundTemplate">                                 
+                      [notFoundTemplate]="notFoundTemplate">
                     </ng-autocomplete>
-                
+
                     <ng-template #itemTemplate let-item>
                         <a [innerHTML]="item.name"></a>
                     </ng-template>
-                
+
                     <ng-template #notFoundTemplate let-notFound>
                         <div [innerHTML]="notFound"></div>
                     </ng-template>
                 </div>
-                <app-tag-input [itemsAsObjects]="elementsSelected" 
+                <app-tag-input [itemsAsObjects]="elementsSelected"
                                 (outputItems)="elementsSelected = $event"
                                 (outputTagSearch)="doSearch = $event">
                 </app-tag-input>

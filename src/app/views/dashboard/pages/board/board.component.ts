@@ -14,7 +14,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class BoardComponent implements OnInit {
 
-  products: Food[] = []
+  products: number[] = []
   user: User = <User>{};
 
   /**
@@ -36,7 +36,12 @@ export class BoardComponent implements OnInit {
     })
 
     this.recipeService.getAllFoods().subscribe(recipe => {
-      this.products = recipe;
+      var recipes = (recipe as Food[]).filter(p => this.user.follows.includes(p.author));
+
+      recipes.forEach(element => {
+        this.products.push(element.id);
+      });
+
     });
   }
 

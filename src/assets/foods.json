@@ -15,7 +15,7 @@
     {
       "id": 2,
       "name": "Hotcakes",
-      "author": 0,
+      "author": 2,
       "ingredients":  ["Miel", "Pan"],
       "image": "https://i.pinimg.com/564x/3d/a3/01/3da3013609055cc964c6e210119e57bc.jpg",
       "rating": 3,
