@@ -62,9 +62,13 @@
       "author": 0,
       "ingredients": ["Chocolate", "Glaseado"],
       "image": "https://i.pinimg.com/564x/64/06/08/640608dede49b1374fa5b1ecfeacc2a9.jpg",
+<<<<<<< HEAD
+      "date": "06-05-2023"
+=======
       "rating": 4,
       "process": "Aprender a hacerlo joas joas",
       "creationDate": "06-05-2023",
       "lastModified": "06-05-2023"
+>>>>>>> develop
     }
   ]
