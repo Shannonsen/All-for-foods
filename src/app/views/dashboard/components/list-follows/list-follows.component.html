@@ -1,11 +1,16 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-12 mt-3">
-      <h2> Seguidores</h2>
+      <h2>Seguidores</h2>
     </div>
-    <div class="col-12">
-      <div *ngFor="let follow of follows">
-        {{ getUserById(follow) }}
+    <div *ngFor="let follow of follows">
+      <div class="row mt-3">
+        <div class="col-2">
+          <img src="{{getUserIcon(follow)}}" alt="">
+        </div>
+        <div class="col-10">
+          {{ getUserById(follow) }}
+        </div>
       </div>
     </div>
   </div>
