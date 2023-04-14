@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router } from '@angular/router';
 /**
  * Clase que representa la imagen del home.
  */
@@ -10,12 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FrontImageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private Router: Router ) { }
 
   /**
    * @override
    */
   ngOnInit(): void {
+  }
+
+  getRandomRecipeId(): number {
+    return Math.floor(Math.random() * 6) + 1;
+  }
+
+  goToRandomRecipe(): void {
+    const randomId = this.getRandomRecipeId();
+    this.Router.navigate(['/recipes', randomId]);
   }
 
 }
