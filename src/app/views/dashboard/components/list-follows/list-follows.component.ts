@@ -40,6 +40,11 @@ export class ListFollowsComponent implements OnInit {
     return author?.user || '';
   }
 
+  /**
+   *
+   * @param {number} id: id del usuario
+   * @returns {string}: link del url de la imagen del usuario
+   */
   getUserIcon(id: number): string{
     const user = this.users.find(user => user.id === id);
     return user?.icon || '';

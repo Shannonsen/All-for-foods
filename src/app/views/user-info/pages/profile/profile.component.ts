@@ -20,7 +20,6 @@ export class ProfileComponent implements OnInit {
   profileID: number | undefined;
 
   profileForm: FormGroup;
-  //favs: Food[] = []
   user: User = <User>{};
 
   /**
@@ -28,10 +27,9 @@ export class ProfileComponent implements OnInit {
    * @param {FormBuilder} formBuilder : Creador del formulario.
    * @param {LoginService} loginService : Servicio de inicio de sesión.
    * @param {UserService} userService : Servicio de usuarios.
-   * @param {RecipesService} recipeService : Servicio de recetas.
    * @param {ActivatedRoute} route : Navegador de rutas.
    */
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private userService: UserService, private recipeService: RecipesService) {
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private userService: UserService) {
     this.profileForm = this.formBuilder.group({});
   }
 
@@ -50,8 +48,6 @@ export class ProfileComponent implements OnInit {
         this.user = <User>user;
 
         if (this.user.id === this.profileID || Number.isNaN(this.profileID)) {
-
-          console.log('this u bro');
           this.name = user!.user;
           this.email = user!.email;
           this.description = user!.description;
@@ -59,8 +55,6 @@ export class ProfileComponent implements OnInit {
         }else{
           var foodie = (users as User[]).find(p => p.id === this.profileID);
           this.user = <User>foodie;
-
-          console.log('this not u bro');
           this.name = foodie!.user;
           this.email = foodie!.email;
           this.description = foodie!.description;
@@ -72,12 +66,10 @@ export class ProfileComponent implements OnInit {
       })
 
     });
-
     this.profileForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(4)]),
       description: new FormControl('', [Validators.required, Validators.minLength(4)]),
       email: new FormControl('', [Validators.required, Validators.minLength(4)]),
-      password: new FormControl('', [Validators.required, Validators.minLength(4)])
     });
   }
 
