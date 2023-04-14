@@ -14,7 +14,7 @@
         <hr>
         <h4>Procedimiento:</h4>
         <ol>
-          <li *ngFor="let step of process">{{step}}</li>
+          {{process}}
         </ol>
         <hr>
         <h4>Descripción:</h4>
@@ -23,5 +23,7 @@
         <p>Fecha de creación: {{date}}</p>
       </div>
     </div>
-   <app-comment-section [comments]="comments"></app-comment-section>
+
+   <app-comment-section [recipeID]="recipeID"></app-comment-section>
+
 

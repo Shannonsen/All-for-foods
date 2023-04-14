@@ -3,50 +3,40 @@ import { Comment } from 'src/app/views/shared/models/comment.model';
 import { CommentService } from 'src/app/services/comment.service';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
+
 @Component({
   selector: 'app-comment-section',
   templateUrl: './comment-section.component.html',
   styleUrls: ['./comment-section.component.scss']
 })
-export class CommentSectionComponent implements OnInit, OnChanges {
-  @Input() comments: Comment[] = [];
+export class CommentSectionComponent implements OnInit {
 
-  commentForm: FormGroup = new FormGroup({
-    author: new FormControl('', Validators.required),
-    commentText: new FormControl('', Validators.required),
-  });
+  comments: Comment[] = [];
+  commentForm: FormGroup;
 
-  constructor(private commentService: CommentService, private formBuilder: FormBuilder) {
-    this.commentForm = this.formBuilder.group({
-      author: ['', Validators.required],
-      commentText: ['', Validators.required],
+  @Input() recipeID: number = 0;
+
+
+  constructor(private fb: FormBuilder, private commentService: CommentService) {
+    this.commentForm = this.fb.group({
+      author: [''],
+      comment: ['']
     });
   }
 
   ngOnInit(): void {
+    console.log("ID" +  this.recipeID);
+    this.commentService.getAllComments().subscribe((comments) => {
+      this.comments = (comments as Comment[]).filter(x => x.recipeId === this.recipeID); 
+    })
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['comments']) {
-      this.comments = changes['comments'].currentValue;
-    }
+  addComment() {
+    const comment = this.commentForm.value;
+    this.commentService.addComment(comment).subscribe(() => {
+      this.comments.push(comment);
+      this.commentForm.reset();
+    });
   }
-
-  addComment(): void {
-    const { author, commentText } = this.commentForm.value;
-
-    if (!commentText) { return; }
-
-    const newComment: Comment = {
-      id: 0,
-      recipeId: 0,
-      author: author,
-      commentText: commentText
-    };
-    
-    this.commentService.addComment(newComment);
-    this.comments.push(newComment);
-
-    this.commentForm.reset();
-  }
+  
 }

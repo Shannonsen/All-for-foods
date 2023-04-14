@@ -14,12 +14,12 @@ import { User } from 'src/app/views/shared/models/user.model';
 export class EditorComponent implements OnInit {
   @Input() recipes: Food[] = [];
 
-  recipeID: number | undefined;
+  recipeID: number = 0 ;
   title: string | undefined = '';
   author: string | undefined = '';
   ingredients: string[] | undefined = [];
   imgURL: string | undefined = '';
-  process: string[] | undefined = [];
+  process: string | undefined = "";
   description: string | undefined = '';
   modificationDate: string | undefined;
 

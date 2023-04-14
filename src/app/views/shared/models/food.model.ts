@@ -6,7 +6,7 @@
  * @property {string[]} ingredients : Arreglo con los nombres de los ingredientes de la receta
  * @property {string} image : Url de la imagen de la receta
  * @property {string} category : Nombre de la categoría a la cual pertenece la receta
- * @property {string[]} process : Arreglo de pasos para realizar la receta
+ * @property {string} process : Pasos para realizar la receta
  * @property {number} rating : Calificación de la receta
  * @property {string} description : Descripción de la receta
  * @property {string} date: Fecha de creación de la receta en forma dd-MM-yyyy
@@ -18,7 +18,7 @@ export interface Food{
   ingredients: string[],
   image?: string,
   category?: string,
-  process: string[];
+  process: string;
   rating: number;
   description: string;
   creationDate: string,

@@ -1,13 +1,17 @@
 <div class="comment-section my-5">
     <h3>Comentarios</h3>
-  
-    <div class="card mb-3" *ngFor="let comment of comments " [formGroup]="commentForm">
+    <div class="card mb-3" *ngFor="let comment of comments" >
       <div class="card-header comment-header">{{ comment.author }} dijo:</div>
       <div class="card-body">
         <p class="card-text">{{ comment.commentText }}</p>
       </div>
     </div>
-  
+   <!--  <div *ngFor="let comment of comments2">
+        <h3>{{ comment.author }}</h3>
+        <p>{{ comment.commentText }}</p>
+        <p>{{ author }}</p>
+        <p>{{ commentText }}</p>
+    </div> -->
     <form [formGroup]="commentForm" (ngSubmit)="addComment()">
       <div class="form-group">
         <label for="author">Autor</label>
