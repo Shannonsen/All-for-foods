@@ -64,7 +64,7 @@ export class ProfileComponent implements OnInit {
           this.name = foodie!.user;
           this.email = foodie!.email;
           this.description = foodie!.description;
-          this.icon = user!.icon;
+          this.icon = foodie!.icon;
 
         }
 

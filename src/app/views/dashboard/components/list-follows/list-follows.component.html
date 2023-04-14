@@ -6,10 +6,14 @@
     <div *ngFor="let follow of follows">
       <div class="row mt-3">
         <div class="col-2">
-          <img src="{{getUserIcon(follow)}}" alt="">
+          <a [routerLink]="['/profile', follow]">
+            <img src="{{getUserIcon(follow)}}" alt="">
+          </a>
         </div>
         <div class="col-10">
+          <a [routerLink]="['/profile', follow]">
           {{ getUserById(follow) }}
+        </a>
         </div>
       </div>
     </div>
