@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { Comment } from 'src/app/views/shared/models/comment.model';
 import { CommentService } from 'src/app/services/comment.service';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 
 @Component({
@@ -16,6 +16,11 @@ export class CommentSectionComponent implements OnInit {
 
   @Input() recipeID: number = 0;
 
+   /**
+   * @constructor
+   * @param formBuilder : Creador del formulario.
+   * @param commentService : Servicio de comentarios.
+   */
 
   constructor(private fb: FormBuilder, private commentService: CommentService) {
     this.commentForm = this.fb.group({
@@ -24,12 +29,20 @@ export class CommentSectionComponent implements OnInit {
     });
   }
 
+  /**
+   * @override
+   */
+
   ngOnInit(): void {
     console.log("ID" +  this.recipeID);
     this.commentService.getAllComments().subscribe((comments) => {
       this.comments = (comments as Comment[]).filter(x => x.recipeId === this.recipeID); 
     })
   }
+
+  /**
+   * Metodo para añadir comentatios con el servicio de comentarios
+   */
 
   addComment() {
     const comment = this.commentForm.value;
