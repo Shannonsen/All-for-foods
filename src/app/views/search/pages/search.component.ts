@@ -15,9 +15,9 @@ import { Food } from '../../shared/models/food.model';
 export class SearchComponent implements OnInit {
 
   foods: Food[] = [];
-  sectionName: string = 'Recetas';
+  sectionName: string = 'Recetas filtradas';
   currentPage: number = 1;
-  pageSize: number = 3;
+  pageSize: number = 4;
   totalPages: number[] = [];
   /**
    * @constructor
