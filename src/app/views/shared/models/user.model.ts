@@ -14,6 +14,7 @@ export interface User {
     id: number,
     email: string,
     user: string,
+    icon: string,
     description: string,
     password: string,
     token: string,

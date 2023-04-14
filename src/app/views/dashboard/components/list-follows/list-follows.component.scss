@@ -1,0 +1,10 @@
+@import "../../../../../assets/scss/general.scss";
+
+.container-fluid{
+  font-family: $font-montserrat;
+
+  img{
+    width: 200%;
+    border-radius: 50%;
+  }
+}

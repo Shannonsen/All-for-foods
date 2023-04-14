@@ -1,11 +1,11 @@
 <div class="container-fluid container-profile" [formGroup]="profileForm">
-    <div class="row">
-      <div class="col-12 container-title">Datos de perfil</div>
+    <div class="row mt-3">
+      <div class="col-10 container-title">Datos de perfil</div>
     </div>
     <div class="row">
       <div class="col-2 container-img">
         <img
-          src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+          src="{{icon}}"
           alt=""
         />
         <button (click)="follow()" id="btn-follow" class="btn mt-3" style="background-color: crimson; color:white">Seguir</button>
@@ -53,12 +53,29 @@
         </div>
       </div>
     </div>
+    <div class="row">
+      <div class="col-9 mt-3 mb-3">
+        <label for="exampleInputEmail1" class="form-label">Icon</label>
+        <input
+                type="text"
+                formControlName="icon"
+                class="form-control"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+                value="{{ icon }}"
+              />
+      </div>
+    </div>
     <div class="container-button">
-
       <button type="submit" class="btn btn-md" (click)="onEdit()">
         Editar
       </button>
     </div>
 </div>
-<app-my-recipes-list [myRecipes]="user.myRecipes"></app-my-recipes-list>
+
+<div class="container-fluid">
+  <app-my-recipes-list [myRecipes]="user.myRecipes"></app-my-recipes-list>
 <app-fav-list [favorites]="user.favorites"></app-fav-list>
+</div>
+
+

@@ -1,11 +1,13 @@
 @import "../../../../../assets/scss/general.scss";
 
-.row{
+.row {
   --bs-gutter-x: none !important;
 }
+
 .row-button {
   margin-top: 1rem;
   text-align: center;
+  font-family: $font-montserrat;
 
   button {
     background-color: $orange-color;

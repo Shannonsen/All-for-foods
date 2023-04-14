@@ -1,5 +1,9 @@
 @import "../../../../../assets/scss/general.scss";
 
+.container-recipeWriter{
+  font-family: $font-montserrat;
+}
+
 .container-img{
     width: 100%;
     display: inline-flex;
@@ -26,19 +30,19 @@
     width: fit-content;
     text-align: center;
     font-size: $font-lg;
-    
+
 }
 
 .container-title{
     width: 50%;
     text-align: center;
-    font-size: $font-lg;    
+    font-size: $font-lg;
 }
 
 .container-url{
     width: 72%;
     text-align: center;
-    font-size: $font-lg;    
+    font-size: $font-lg;
 }
 
 .container-info{

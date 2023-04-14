@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
    */
   ngOnInit(): void {
     this.recipeService.getAllFoods().subscribe(recipe => {
-      this.products = recipe;
+      this.products = (recipe as Food[]).filter(p => p.id <= 4);
     });
   }
 }
