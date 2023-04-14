@@ -19,13 +19,15 @@ export class RecipeViewComponent implements OnInit {
   author: number | undefined = 0;
   ingredients: string[] | undefined = [];
   imgURL: string | undefined = '';
-  process: string[] | undefined = [];
+  process: string| undefined = "";
   description: string | undefined = '';
   rating: number | undefined = 0;;
   date: string | undefined = '';
 
   recipeForm: FormGroup;
-  comments: Comment[] = []; //Agrega la propiedad comments
+
+  commentsPerRecipe: Comment[] = [];
+  comments : Comment[] = [];
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute,
     private recipeService: RecipesService, private commentService: CommentService) {
@@ -37,9 +39,7 @@ export class RecipeViewComponent implements OnInit {
       this.recipeID = Number(params['id']);
       if (!Number.isNaN(this.recipeID)) {
         this.updateRecipeInformation();
-        this.commentService.getCommentsByRecipeId(this.recipeID).subscribe(comments => {
-          this.comments = comments; //Asigna los comentarios recuperados por el servicio a la propiedad comments
-        });
+        this.chargeComments();
       }
     });
   }
@@ -53,7 +53,17 @@ export class RecipeViewComponent implements OnInit {
       this.imgURL = recipe?.image;
       this.process = recipe?.process;
       this.rating = recipe?.rating;
-      this.date = recipe?.date;
+      this.date = recipe?.creationDate;
     })
+  }
+
+  chargeComments() {
+    var request = this.recipeForm.value;
+    this.commentService.getAllComments().subscribe(comments => {
+      var comment = (comments as Comment[]).find(p => p.author === request['id'])
+      if (comment) {
+       this.commentsPerRecipe.push(comment);
+      } 
+    });
   }
 }
