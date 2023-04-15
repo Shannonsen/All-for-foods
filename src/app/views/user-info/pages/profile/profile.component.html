@@ -54,7 +54,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-9 mt-3 mb-3">
+      <div class="col-9 mt-3 mb-3" *ngIf="isUser">
         <label for="exampleInputEmail1" class="form-label">Icon</label>
         <input
                 type="text"
@@ -66,7 +66,7 @@
               />
       </div>
     </div>
-    <div class="container-button">
+    <div class="container-button" *ngIf="isUser">
       <button type="submit" [disabled]="!profileForm.touched" class="btn btn-md" (click)="onEdit()">
         Editar
       </button>
@@ -75,7 +75,7 @@
 
 <div class="container-fluid">
   <app-my-recipes-list [myRecipes]="user.myRecipes"></app-my-recipes-list>
-<app-fav-list [favorites]="user.favorites"></app-fav-list>
+<app-fav-list *ngIf="isUser" [favorites]="user.favorites"></app-fav-list>
 </div>
 
 

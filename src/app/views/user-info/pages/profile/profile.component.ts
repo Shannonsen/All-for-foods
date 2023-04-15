@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
-import { RecipesService } from 'src/app/services/recipes.service';
 import { User } from 'src/app/views/shared/models/user.model';
 import { ActivatedRoute } from '@angular/router';
 /**
@@ -18,6 +17,7 @@ export class ProfileComponent implements OnInit {
   email: string = '';
   description: string = '';
   profileID: number | undefined;
+  isUser: boolean = true;
 
   profileForm: FormGroup;
   user: User = <User>{};
@@ -54,6 +54,7 @@ export class ProfileComponent implements OnInit {
           this.icon = user!.icon;
         }else{
           var foodie = (users as User[]).find(p => p.id === this.profileID);
+          this.isUser = false;
           this.user = <User>foodie;
           this.name = foodie!.user;
           this.email = foodie!.email;
