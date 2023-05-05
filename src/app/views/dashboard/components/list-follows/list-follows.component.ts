@@ -37,7 +37,7 @@ export class ListFollowsComponent implements OnInit {
    */
   getUserById(id: number): string {
     const author = this.users.find(user => user.id === id);
-    return author?.user || '';
+    return author?.username || '';
   }
 
   /**

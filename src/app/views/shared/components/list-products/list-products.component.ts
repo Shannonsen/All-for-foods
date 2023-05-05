@@ -39,7 +39,7 @@ export class ListProductsComponent implements OnInit {
    */
   getAuthorName(authorId: number): string {
     const author = this.users.find(user => user.id === authorId);
-    return author?.user || '';
+    return author?.username || '';
   }
 
   /**

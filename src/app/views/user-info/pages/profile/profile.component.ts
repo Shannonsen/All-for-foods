@@ -48,7 +48,7 @@ export class ProfileComponent implements OnInit {
         this.user = <User>user;
 
         if (this.user.id === this.profileID || Number.isNaN(this.profileID)) {
-          this.name = user!.user;
+          this.name = user!.username;
           this.email = user!.email;
           this.description = user!.description;
           this.icon = user!.icon;
@@ -56,7 +56,7 @@ export class ProfileComponent implements OnInit {
           var foodie = (users as User[]).find(p => p.id === this.profileID);
           this.isUser = false;
           this.user = <User>foodie;
-          this.name = foodie!.user;
+          this.name = foodie!.username;
           this.email = foodie!.email;
           this.description = foodie!.description;
           this.icon = foodie!.icon;

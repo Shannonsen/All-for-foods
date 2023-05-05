@@ -14,13 +14,12 @@
  */
 export interface Food{
   id: number,
-  name: string,
-  author: number,
+  title: string,
+  userId: number,
   ingredients: string[],
   image?: string,
-  category?: string,
-  process: string;
-  rating: number;
+  steps: string;
+  rate: number;
   description: string;
   creationDate: string,
   lastModified: string,

@@ -31,7 +31,7 @@ export class SearcherRecipeComponent implements OnInit {
    * @constructor
    * @param {KeyValueDiffers} differs : Detecta cambios en los objetos
    * @param {IngredientsService} ingredientService : Servicio de ingredientes
-   * @param {RecipesService} recipesService : Servicio de recetas 
+   * @param {RecipesService} recipesService : Servicio de recetas
    */
   constructor(private differs: KeyValueDiffers, private ingredientService: IngredientsService, private recipesService: RecipesService) {
     this.differ = this.differs.find({}).create();
@@ -99,7 +99,7 @@ export class SearcherRecipeComponent implements OnInit {
       if (this.keyword == '') {
         recipeToSend = recipes;
       } else {
-        recipeToSend = (recipes as Food[]).filter(x => x.name.toLocaleLowerCase().includes(this.keyword.toLocaleLowerCase()));
+        recipeToSend = (recipes as Food[]).filter(x => x.title.toLocaleLowerCase().includes(this.keyword.toLocaleLowerCase()));
       }
       var totalPagesToSend = this.totalPagesArray(recipeToSend);
       this.outputTotalPages.emit(totalPagesToSend);
@@ -141,7 +141,7 @@ export class SearcherRecipeComponent implements OnInit {
   }
   /**
    * Método que obtiene las recetas de acuerdo a los ingredientes de this.elementsSelected
-   * @param {Food[]} recipes : Lista de recetas obtenidas del servico 
+   * @param {Food[]} recipes : Lista de recetas obtenidas del servico
    * @returns {Food[]} Recetas que coincidieron con los ingredietes
    */
   getRecipesByIngredients(recipes: Food[]) : Food[]{
@@ -170,7 +170,7 @@ export class SearcherRecipeComponent implements OnInit {
   }
   /**
    * Método que se encarga de tranformar el resultado completo de las recetas a la página correspondiente
-   * @param {Food[]} recipes : Lista de recetas de la solcitud original antes de convertirla a paginación 
+   * @param {Food[]} recipes : Lista de recetas de la solcitud original antes de convertirla a paginación
    * @returns {Food[]} Receta paginada
    */
   recipesToPagination(recipes: Food[]): Food[] {

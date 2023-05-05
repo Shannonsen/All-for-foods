@@ -23,8 +23,8 @@ export class HomeComponent implements OnInit {
    * @override
    */
   ngOnInit(): void {
-    this.recipeService.getAllFoods().subscribe(recipe => {
-      this.products = (recipe as Food[]).filter(p => p.id <= 4);
+    this.recipeService.getAllFoods().subscribe((recipe) => {
+      this.products = (recipe.results as Food[]).filter(p => p.id <= 4);
     });
   }
 }

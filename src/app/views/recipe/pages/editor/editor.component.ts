@@ -61,7 +61,7 @@ export class EditorComponent implements OnInit {
       this.userService.getAllUsers().subscribe(users => {
         var user = (users as User[]).find(p => p.token === tkn);
         this.user = <User>user;
-        this.author = user!.user;
+        this.author = user!.username;
       })
 
       this.recipeForm = new FormGroup({
@@ -99,13 +99,13 @@ export class EditorComponent implements OnInit {
   updateRecipeInformation() {
     this.recipeService.getRecipeById(this.recipeID!).subscribe(recipe => {
       this.description = recipe?.description;
-      this.title = recipe?.name;
+      this.title = recipe?.title;
       this.ingredients = recipe?.ingredients;
       this.imgURL = recipe?.image;
-      this.process = recipe?.process;
-      if(recipe?.rating!= undefined){
+      this.process = recipe?.steps;
+      if(recipe?.rate!= undefined){
         for(let i =0; i<5; i++){
-          if(i<recipe?.rating){
+          if(i<recipe?.rate){
             const star = document.getElementById(String("star-" + i + "-" + this.recipeID))!;
             star.style.color = "gold";
           }

@@ -23,7 +23,7 @@ export class RecipesService {
    * @returns {Observable<any>} La lista de todas las recetas.
    */
   public getAllFoods(): Observable<any> {
-    return this.http.get(this.LOCAL_FOODS);
+    return this.http.get("http://localhost:3001/api/v1/recipe/");
   }
 
   /**
@@ -32,13 +32,7 @@ export class RecipesService {
    * @returns {Observable <Food | undefined>} : Regresa la receta encontrada que corresponde al id.
    */
   public getRecipeById(id: number): Observable<Food | undefined> {
-    return this.http.get<Food[]>(this.LOCAL_FOODS).pipe(
-      map(foods => foods.find(food => food.id === id)),
-      catchError(error => {
-        console.error(error);
-        return throwError('no recipe by that id found');
-      })
-    );
+    return this.http.get<Food>("http://localhost:3001/api/v1/recipe/"+ id);
   }
 
   /**
@@ -48,7 +42,7 @@ export class RecipesService {
    */
   public getRecipeByAuthor(author: number): Observable<Food | undefined> {
     return this.http.get<Food[]>(this.LOCAL_FOODS).pipe(
-      map(foods => foods.find(food => food.author === author)),
+      map(foods => foods.find(food => food.userId === author)),
       catchError(error => {
         console.error(error);
         return throwError('no recipe by that id found');
@@ -66,7 +60,7 @@ export class RecipesService {
         map(recipes => recipes.length)
       );
   }
-  
+
   /**
    * Método que recibe una receta nueva y la guarda en la base de datos.
    * @param {Food} recipe : La nueva receta a crearse y almacenarse.
