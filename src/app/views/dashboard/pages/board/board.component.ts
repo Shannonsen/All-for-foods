@@ -36,7 +36,7 @@ export class BoardComponent implements OnInit {
     })
 
     this.recipeService.getAllFoods().subscribe(recipe => {
-      var recipes = (recipe as Food[]).filter(p => this.user.follows.includes(p.userId));
+      var recipes = (recipe as Food[]).filter(p => this.user.follows.includes(p.user.id));
 
       recipes.forEach(element => {
         this.products.push(element.id);

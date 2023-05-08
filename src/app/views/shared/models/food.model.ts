@@ -15,7 +15,10 @@
 export interface Food{
   id: number,
   title: string,
-  userId: number,
+  user: {
+    id: number
+    username: string,
+  },
   ingredients: string[],
   image?: string,
   steps: string;

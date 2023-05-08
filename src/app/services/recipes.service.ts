@@ -31,7 +31,7 @@ export class RecipesService {
    * @param {number} id : Identificador único de la receta.
    * @returns {Observable <Food | undefined>} : Regresa la receta encontrada que corresponde al id.
    */
-  public getRecipeById(id: number): Observable<Food | undefined> {
+  public getRecipeById(id: number): Observable<any> {
     return this.http.get<Food>("http://localhost:3001/api/v1/recipe/"+ id);
   }
 
@@ -42,7 +42,7 @@ export class RecipesService {
    */
   public getRecipeByAuthor(author: number): Observable<Food | undefined> {
     return this.http.get<Food[]>(this.LOCAL_FOODS).pipe(
-      map(foods => foods.find(food => food.userId === author)),
+      map(foods => foods.find(food => food.user.id === author)),
       catchError(error => {
         console.error(error);
         return throwError('no recipe by that id found');

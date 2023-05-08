@@ -44,14 +44,17 @@ export class RecipeViewComponent implements OnInit {
   }
 
   updateRecipeInformation() {
-    this.recipeService.getRecipeById(this.recipeID).subscribe(recipe => {
-      this.author = recipe?.userId;
-      this.description = recipe?.description;
-      this.title = recipe?.title;
+    this.recipeService.getRecipeById(this.recipeID).subscribe((recipe) => {
+      console.log(recipe);
+      var recipeResult = recipe?.results as Food
+
+      this.author = recipeResult.user.id;
+      this.description = recipeResult.description
+      this.title = recipeResult.title;
       this.ingredients = recipe?.ingredients;
-      this.imgURL = recipe?.image;
-      this.process = recipe?.steps;
-      this.rating = recipe?.rate;
+      this.imgURL = recipeResult.image;
+      this.process = recipeResult.steps;
+      this.rating = recipeResult.rate;
       this.date = recipe?.creationDate;
     })
   }
