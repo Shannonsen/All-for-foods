@@ -8,6 +8,7 @@ import { SharedModule } from './views/shared/shared.module';
 
 import { HttpClientModule } from '@angular/common/http';
 import { TagInputComponent } from './views/shared/components/tag-input/tag-input.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { TagInputComponent } from './views/shared/components/tag-input/tag-input
     HttpClientModule,
     BrowserAnimationsModule
   ],
-  providers: [TagInputComponent],
+  providers: [TagInputComponent,
+  CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

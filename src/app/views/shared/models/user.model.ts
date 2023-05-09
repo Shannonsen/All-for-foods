@@ -13,10 +13,11 @@
 export interface User {
     id: number,
     email: string,
-    user: string,
+    username: string,
     icon: string,
     description: string,
     password: string,
+    status: number,
     token: string,
     follows: number[],
     favorites: number[],

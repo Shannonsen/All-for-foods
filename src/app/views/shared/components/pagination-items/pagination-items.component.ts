@@ -47,15 +47,7 @@ export class PaginationItemsComponent implements OnInit {
       });
     }
   }
-  /**
-   * Método encargado de obtener el nombre de un autor por medio de su id
-   * @param {number} authorId : Id del autor 
-   * @returns {string} Nombre del autor
-   */
-  getAuthorName(authorId: number): string {
-    const author = this.users.find(user => user.id === authorId);
-    return author?.user || '';
-  }
+
   /**
    * Método que se encarga de manejar la lógica de la clase al realizar un cambio de página
    * @param {number} pageNumber : Número de la página

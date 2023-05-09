@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import {CookieService} from 'ngx-cookie-service';
+import { LoginService } from 'src/app/services/login.service';
 /**
  * Clase que representa el navbar.
  */
@@ -12,18 +14,24 @@ import { Router } from '@angular/router';
 export class NavmenuComponent implements OnInit {
 
   token: any = "";
+  tokenType: any = "";
 
   /**
    * @constructor
    * @param {Router} router : Servicio de navegación entre rutas
    */
-  constructor(private router: Router) { }
+  constructor(private router: Router, private cookieService: CookieService, private loginService: LoginService) { }
 
   /**
    * @override
    */
   ngOnInit(): void {
-    this.token = localStorage.getItem('Token');
+    this.token = this.cookieService.get('Token');
+    this.loginService.type_auth(this.token).subscribe(typetoken =>{
+      if(typetoken.results.permission == "Admin"){
+        this.tokenType = typetoken
+      }
+    })
   }
 
   /**
@@ -31,7 +39,7 @@ export class NavmenuComponent implements OnInit {
    */
   logout(){
     this.router.navigate(['home']).then(() => {
-      localStorage.removeItem("Token");
+      this.cookieService.delete('Token');
       window.location.reload();
     });
   }

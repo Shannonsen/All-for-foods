@@ -17,8 +17,8 @@
                 />
               </div>
               <div class="col-10">
-                <a [routerLink]="['/profile', product.author]">
-                  {{ getAuthorName(product.author) }}
+                <a [routerLink]="['/profile', product.user.id]">
+                  {{product.user.username}}
                 </a></div>
             </div>
           </div>
@@ -31,7 +31,7 @@
           <div class="container-fluid">
             <div class="row">
               <div class="col-8">
-                <h2>{{ product.name }}</h2>
+                <h2>{{ product.title }}</h2>
               </div>
               <div *ngIf="token" class="col-4 container-icon-heart">
               <i class="fa fa-heart fa-2x" (click)="changeColor(product.id) "style="color:gray" id="{{product.id}}"></i>
@@ -41,10 +41,10 @@
               <div class="col-12">
                 <small><b>creado: </b>{{ product.creationDate }} </small>
               </div>
-              <div class="col-1" style="color:gold"  *ngFor="let star of [].constructor(product.rating); let i= index">
+              <div class="col-1" style="color:gold"  *ngFor="let star of [].constructor(product.rate); let i= index">
                 <i class="fa fa-star" id="star-{{i}}-{{product.id}}"></i>
               </div>
-              <div class="col-1" style="color:gray"  *ngFor="let star of [].constructor((5-product.rating)); let i= index">
+              <div class="col-1" style="color:gray"  *ngFor="let star of [].constructor((5-product.rate)); let i= index">
                 <i class="fa fa-star" id="star-{{i}}-{{product.id}}"></i>
               </div>
             </div>

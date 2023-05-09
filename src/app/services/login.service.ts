@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 /**
@@ -12,7 +12,7 @@ export class LoginService {
   private LOCAL_USERS = "http://localhost:4200/assets/users.json"
   /**
    * @constructor
-   * @param {HttpClient} http : Cliente http 
+   * @param {HttpClient} http : Cliente http
    */
   constructor(private http: HttpClient) { }
   /**
@@ -21,5 +21,14 @@ export class LoginService {
    */
   public login(): Observable<any>{
     return this.http.get(this.LOCAL_USERS);
+  }
+
+  public login_auth(email: string, password: string): Observable<any>{
+    return this.http.post('http://localhost:3001/api/v1/auth', {email: email, password: password})
+  }
+
+  public type_auth(token: string): Observable<any>{
+    const headers = new HttpHeaders({'authorization': token});
+    return this.http.post('http://localhost:3001/api/v1/auth/getInfo', null, { 'headers': headers });
   }
 }

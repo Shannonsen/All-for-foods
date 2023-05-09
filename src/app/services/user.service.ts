@@ -13,19 +13,19 @@ export class UserService {
   private LOCAL_USERS = "http://localhost:4200/assets/users.json"
   /**
    * @constructor
-   * @param {HttpClient} http : Cliente http 
+   * @param {HttpClient} http : Cliente http
    */
   constructor(private http: HttpClient) { }
   /**
    * Método para la obtención de todos los clientes
-   * @returns 
+   * @returns
    */
   public getAllUsers(): Observable<any> {
     return this.http.get(this.LOCAL_USERS);
   }
   /**
    * Método para obtener la información de un usuario por su id
-   * @param {number} id : Identificador único del usuario 
+   * @param {number} id : Identificador único del usuario
    * @returns {Observable<User>} Regrese el usuario encontrado
    */
   public getUserById(id: number): Observable<User | undefined>{
@@ -37,5 +37,9 @@ export class UserService {
       })
     );
   }
-} 
+
+  public getUserId(id: number): Observable<any>{
+    return this.http.get<User>("http://localhost:3001/api/v1/user/"+ id);
+  }
+}
 

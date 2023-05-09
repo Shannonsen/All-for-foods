@@ -28,7 +28,7 @@ export class SearchComponent implements OnInit {
    * @override
    */
   ngOnInit(): void {
-    this.recipeService.getAllFoods().subscribe(recipes => {
+    this.recipeService.getAllFoods().subscribe((recipes) => {
       this.foods = recipes as Food[];
     })
   }
