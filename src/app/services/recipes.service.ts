@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { Food } from '../views/shared/models/food.model';
@@ -22,9 +22,14 @@ export class RecipesService {
    * Método que obtiene todas las recetas.
    * @returns {Observable<any>} La lista de todas las recetas.
    */
-  public getAllFoods(): Observable<any> {
-    return this.http.get("http://localhost:3001/api/v1/recipe/");
+  public getAllFoods(page: number = 1 , size:number = 4): Observable<any> {
+    const params = new HttpParams()
+  .set('page', page)
+  .set('size', size);
+    return this.http.get("http://localhost:3001/api/v1/recipe/",{params});
   }
+
+
 
   /**
    * Método que devuelve la información de una receta por su id.

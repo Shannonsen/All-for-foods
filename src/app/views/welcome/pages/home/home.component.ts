@@ -33,7 +33,6 @@ export class HomeComponent implements OnInit {
       }
 
       for (let i = 1; i <= lenght; i++) {
-        console.log(recipe.data.length - i)
         allFoods.push(recipe.data[recipe.data.length - i])
        }
       this.products = allFoods;

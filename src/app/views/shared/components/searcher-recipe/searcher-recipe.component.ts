@@ -22,6 +22,7 @@ export class SearcherRecipeComponent implements OnInit {
   elementsSelected: Ingredient[] = [];
   differ: any;
   doSearch: boolean = false;
+  recipeActual: Food[] = []
   @Input() currentPage: number = 1;
   @Input() pageSize: number = 3;
   @Output() outputRecipes = new EventEmitter<Food[]>();
@@ -95,13 +96,9 @@ export class SearcherRecipeComponent implements OnInit {
    */
   onEnter(e: any) {
     this.recipesService.getAllFoods().subscribe(recipes => {
-      var recipeToSend = [];
-      if (this.keyword == '') {
-        recipeToSend = recipes;
-      } else {
-        recipeToSend = (recipes as Food[]).filter(x => x.title.toLocaleLowerCase().includes(this.keyword.toLocaleLowerCase()));
-      }
-      var totalPagesToSend = this.totalPagesArray(recipeToSend);
+      var recipeToSend = recipes.data
+      var totalPage = recipes.totalPage
+      var totalPagesToSend = this.totalPagesArray(recipeToSend, totalPage);
       this.outputTotalPages.emit(totalPagesToSend);
       if (this.currentPage > totalPagesToSend.length) {
         this.currentPage = 1;
@@ -113,7 +110,9 @@ export class SearcherRecipeComponent implements OnInit {
           this.outputCurrentPage.emit(this.currentPage);
         }
       }
-      this.outputRecipes.emit(this.recipesToPagination(recipeToSend));
+      this.recipesService.getAllFoods(this.currentPage,4).subscribe(recipes => {
+        this.outputRecipes.emit(recipes.data);
+      });
     });
   }
   /**
@@ -125,17 +124,20 @@ export class SearcherRecipeComponent implements OnInit {
       this.recipesService.getAllFoods().subscribe(recipes => {
         var recipeToSend = [];
         if (this.elementsSelected.length == 0) {
-          recipeToSend = recipes;
+          recipeToSend = recipes.data;
         } else {
           recipeToSend = this.getRecipesByIngredients(recipes as Food[])
         }
-        var totalPagesToSend = this.totalPagesArray(recipeToSend);
+        var totalPage = recipes.totalPage
+        var totalPagesToSend = this.totalPagesArray(recipeToSend, totalPage);
         if (this.currentPage > totalPagesToSend.length) {
           this.currentPage = 1;
         }
         this.outputTotalPages.emit(totalPagesToSend);
         this.outputCurrentPage.emit(this.currentPage);
-        this.outputRecipes.emit(this.recipesToPagination(recipeToSend));
+        this.recipesService.getAllFoods(this.currentPage,4).subscribe(recipes => {
+          this.outputRecipes.emit(recipes.data);
+        });
       });
     }
   }
@@ -168,23 +170,14 @@ export class SearcherRecipeComponent implements OnInit {
       return parentArray.includes(el)
     })
   }
-  /**
-   * Método que se encarga de tranformar el resultado completo de las recetas a la página correspondiente
-   * @param {Food[]} recipes : Lista de recetas de la solcitud original antes de convertirla a paginación
-   * @returns {Food[]} Receta paginada
-   */
-  recipesToPagination(recipes: Food[]): Food[] {
-    const startIndex = (this.currentPage - 1) * this.pageSize;
-    const endIndex = startIndex + this.pageSize;
-    return recipes.slice(startIndex, endIndex);
-  }
+
   /**
    * Método que se encarga de crear una lista numérica para la paginación
    * @param {Food[]} recipes : Lista de recetas de la solicitud original antes de convertirla a paginación
    * @returns {number} Arreglo de números de tal forma [1, 2, ..., n]
    */
-  totalPagesArray(recipes: Food[]): number[] {
-    const pageCount = Math.ceil(recipes.length / this.pageSize); // total number of pages
+  totalPagesArray(recipes: Food[], totalPage: number): number[] {
+    const pageCount = Math.ceil(totalPage); // total number of pages
     return Array.from({ length: pageCount }, (_, i) => i + 1); // create an array of page numbers
   }
 }
