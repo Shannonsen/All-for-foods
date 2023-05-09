@@ -1,4 +1,4 @@
-import { HttpClient,HttpParams } from '@angular/common/http';
+import { HttpClient,HttpParams,HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { Food } from '../views/shared/models/food.model';
@@ -29,6 +29,12 @@ export class RecipesService {
     return this.http.get("http://localhost:3001/api/v1/recipe/",{params});
   }
 
+  public getAllRecipesActivated(token: string, page:number = 2): Observable<any> {
+    const params = new HttpParams()
+    .set('page', page)
+    const headers = new HttpHeaders({'authorization': token});
+    return this.http.get('http://localhost:3001/api/v1/recipe/admin/getAll/1', {'headers': headers, 'params': params});
+  }
 
 
   /**

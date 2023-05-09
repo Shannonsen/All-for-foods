@@ -23,6 +23,7 @@ export class SearcherRecipeComponent implements OnInit {
   differ: any;
   doSearch: boolean = false;
   recipeActual: Food[] = []
+  @Input() barSearch:string = "";
   @Input() currentPage: number = 1;
   @Input() pageSize: number = 3;
   @Output() outputRecipes = new EventEmitter<Food[]>();
