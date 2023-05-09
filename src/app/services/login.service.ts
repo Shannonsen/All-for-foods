@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 /**
@@ -27,4 +27,8 @@ export class LoginService {
     return this.http.post('http://localhost:3001/api/v1/auth', {email: email, password: password})
   }
 
+  public type_auth(token: string): Observable<any>{
+    const headers = new HttpHeaders({'authorization': token});
+    return this.http.post('http://localhost:3001/api/v1/auth/getInfo', null, { 'headers': headers });
+  }
 }
