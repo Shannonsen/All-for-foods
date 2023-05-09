@@ -12,7 +12,7 @@ export class LoginService {
   private LOCAL_USERS = "http://localhost:4200/assets/users.json"
   /**
    * @constructor
-   * @param {HttpClient} http : Cliente http 
+   * @param {HttpClient} http : Cliente http
    */
   constructor(private http: HttpClient) { }
   /**
@@ -22,4 +22,9 @@ export class LoginService {
   public login(): Observable<any>{
     return this.http.get(this.LOCAL_USERS);
   }
+
+  public login_auth(email: string, password: string): Observable<any>{
+    return this.http.post('http://localhost:3001/api/v1/auth', {email: email, password: password})
+  }
+
 }
