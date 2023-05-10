@@ -36,6 +36,10 @@ export class RecipesService {
     return this.http.get('http://localhost:3001/api/v1/recipe/admin/getAll/1', {'headers': headers, 'params': params});
   }
 
+  public deleteRecipe(idRecipe: number, token: string): Observable<any>{
+    const headers = new HttpHeaders({'authorization': token});
+    return this.http.put("http://localhost:3001/api/v1/recipe/delete/" + idRecipe, null,  {'headers': headers});
+  }
 
   /**
    * Método que devuelve la información de una receta por su id.

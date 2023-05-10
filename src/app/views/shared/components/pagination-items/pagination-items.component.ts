@@ -18,6 +18,7 @@ export class PaginationItemsComponent implements OnInit {
   @Input() pageSize: number = 3;
   @Input() totalPages: number[] = [];
   @Input() showEditButton: boolean = false;
+  @Input() isPanel: string = "";
   users: User[] = [];
   differ: any;
   /**

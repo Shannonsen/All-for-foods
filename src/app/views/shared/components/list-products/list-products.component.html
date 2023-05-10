@@ -23,7 +23,6 @@
             </div>
           </div>
         </div>
-        <!-- copiadera -->
         <a [routerLink]="['/recipes', product.id]" class="img-route"
           ><img class="img-product" [src]="product.image" aimg-divlt="image"
         /></a>
@@ -46,6 +45,11 @@
               </div>
               <div class="col-1" style="color:gray"  *ngFor="let star of [].constructor((5-product.rate)); let i= index">
                 <i class="fa fa-star" id="star-{{i}}-{{product.id}}"></i>
+              </div>
+            </div>
+            <div *ngIf="isPanel" class="row">
+              <div class="col-12" style="text-align: right;">
+                <button (click)="deleteRecipe(product.id)">Desactivar</button>
               </div>
             </div>
           </div>

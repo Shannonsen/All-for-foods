@@ -2,6 +2,11 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Food } from 'src/app/views/shared/models/food.model';
 import { User } from '../../models/user.model';
 import { UserService } from 'src/app/services/user.service';
+import { CookieService } from 'ngx-cookie-service';
+import { RecipesService } from 'src/app/services/recipes.service';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+import { LoginService } from 'src/app/services/login.service';
 /**
  * Clase que representa el listado de recetas.
  */
@@ -15,18 +20,24 @@ export class ListProductsComponent implements OnInit {
   @Input() products: Food[] = [];
   users: User[] = [];
   token: any = "";
-
+  @Input() isPanel:string = ""
   /**
    * @constructor
    * @param {UserService} userService : Servicio de usuarios
    */
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private cookieService: CookieService, private recipeService: RecipesService, private router: Router, private loginService: LoginService) { }
 
   /**
    * @override
    */
   ngOnInit(): void {
-    this.token = localStorage.getItem('Token');
+    this.token = this.cookieService.get('Token');
+/*     this.loginService.type_auth(this.token).subscribe(authType =>{
+      console.log(authType)
+      if(authType.results.permission == "Admin"){
+        this.isPanel = true
+      }
+    }) */
     this.userService.getAllUsers().subscribe(users => {
       this.users = users;
     });
@@ -56,6 +67,25 @@ export class ListProductsComponent implements OnInit {
       heart.style.color = "red";
       heart.style.scale = "1.2";
     }
+  }
+
+  deleteRecipe(id: number){
+    this.recipeService.deleteRecipe(id, this.token).subscribe(response => {
+      if(response.message == "OK"){
+        Swal.fire("CORRECTO", 'Receta eliminada', 'success').then(()=>{
+          this.router.navigate(['panel']).then(() => {
+            window.location.reload();
+          });
+        })
+      }else{
+        Swal.fire("ERROR", response.message, 'error').then(()=>{
+          this.router.navigate(['panel']).then(() => {
+            window.location.reload();
+          });
+        })
+      }
+    })
+
   }
 
 }
