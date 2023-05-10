@@ -41,6 +41,22 @@ export class RecipesService {
     return this.http.put("http://localhost:3001/api/v1/recipe/delete/" + idRecipe, null,  {'headers': headers});
   }
 
+
+  public getServiceRecipes(typeSearch:string ="", page:number, size:number = 4, token:string = ""): Observable<any>{
+    console.log("TypeSearch: " + typeSearch);
+    switch(typeSearch){
+      case 'delete':
+        let paramsDelete = new HttpParams()
+        .set('page', page)
+        const headers = new HttpHeaders({'authorization': token});
+        return this.http.get('http://localhost:3001/api/v1/recipe/admin/getAll/1', {'headers': headers, 'params': paramsDelete});
+      default:
+        let paramsDefault = new HttpParams()
+      .set('page', page)
+      .set('size', size);
+        return this.http.get("http://localhost:3001/api/v1/recipe/",{'params': paramsDefault});
+    }
+  }
   /**
    * Método que devuelve la información de una receta por su id.
    * @param {number} id : Identificador único de la receta.

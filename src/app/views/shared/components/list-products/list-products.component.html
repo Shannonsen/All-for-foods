@@ -47,9 +47,9 @@
                 <i class="fa fa-star" id="star-{{i}}-{{product.id}}"></i>
               </div>
             </div>
-            <div *ngIf="isPanel" class="row">
+            <div *ngIf="isPanel == 'btn-delete'" class="row">
               <div class="col-12" style="text-align: right;">
-                <button (click)="deleteRecipe(product.id)">Desactivar</button>
+                <button (click)="deleteRecipe(product.id)" class="btn btn-danger">Desactivar</button>
               </div>
             </div>
           </div>

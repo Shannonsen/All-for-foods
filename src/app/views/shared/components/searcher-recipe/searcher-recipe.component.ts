@@ -4,6 +4,7 @@ import { Ingredient } from '../../models/ingredient.model';
 import { IngredientsService } from 'src/app/services/ingredients.service';
 import { Food } from '../../models/food.model';
 import { RecipesService } from 'src/app/services/recipes.service';
+import { CookieService } from 'ngx-cookie-service';
 /**
  * Clase que representa el buscador de recetas
  */
@@ -29,13 +30,14 @@ export class SearcherRecipeComponent implements OnInit {
   @Output() outputRecipes = new EventEmitter<Food[]>();
   @Output() outputTotalPages = new EventEmitter<number[]>();
   @Output() outputCurrentPage = new EventEmitter<number>();
+  @Input() typeSearch: string = "";
   /**
    * @constructor
    * @param {KeyValueDiffers} differs : Detecta cambios en los objetos
    * @param {IngredientsService} ingredientService : Servicio de ingredientes
    * @param {RecipesService} recipesService : Servicio de recetas
    */
-  constructor(private differs: KeyValueDiffers, private ingredientService: IngredientsService, private recipesService: RecipesService) {
+  constructor(private differs: KeyValueDiffers, private ingredientService: IngredientsService, private recipesService: RecipesService, private cookieService: CookieService) {
     this.differ = this.differs.find({}).create();
   }
   /**
@@ -96,26 +98,29 @@ export class SearcherRecipeComponent implements OnInit {
    * @param {any} e : Elemento html al cual que se le dio Enter
    */
   onEnter(e: any) {
-    this.recipesService.getAllFoods().subscribe(recipes => {
-      var recipeToSend = recipes.data
-      var totalPage = recipes.totalPage
-      var totalPagesToSend = this.totalPagesArray(recipeToSend, totalPage);
-      this.outputTotalPages.emit(totalPagesToSend);
-      if (this.currentPage > totalPagesToSend.length) {
-        this.currentPage = 1;
-        this.outputCurrentPage.emit(this.currentPage);
-      } else {
-        if (this.keyword != this.keywordBefore) {
-          this.keywordBefore = this.keyword
+    var token = this.cookieService.get('Token');
+      this.recipesService.getServiceRecipes(this.typeSearch,this.currentPage,4,token).subscribe(recipes => {
+        var recipeToSend = recipes.data
+        var totalPage = recipes.totalPage
+        var totalPagesToSend = this.totalPagesArray(recipeToSend, totalPage);
+        this.outputTotalPages.emit(totalPagesToSend);
+        if (this.currentPage > totalPagesToSend.length) {
           this.currentPage = 1;
           this.outputCurrentPage.emit(this.currentPage);
+        } else {
+          if (this.keyword != this.keywordBefore) {
+            this.keywordBefore = this.keyword
+            this.currentPage = 1;
+            this.outputCurrentPage.emit(this.currentPage);
+          }
         }
-      }
-      this.recipesService.getAllFoods(this.currentPage,4).subscribe(recipes => {
-        this.outputRecipes.emit(recipes.data);
+        this.recipesService.getServiceRecipes(this.typeSearch,this.currentPage,4,token).subscribe(recipes => {
+          console.log(recipes.data)
+          this.outputRecipes.emit(recipes.data);
+        });
       });
-    });
-  }
+    }
+
   /**
    * Método lanzado cuando se da clic en el botón de búsqueda del componente de entrada de etiquetas
    */

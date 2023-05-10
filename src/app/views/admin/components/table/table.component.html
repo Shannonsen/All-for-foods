@@ -2,7 +2,8 @@
 [currentPage]="currentPage"
 (outputTotalPages)="totalPages = $event"
 (outputRecipes)="foods = $event"
-(outputCurrentPage)="currentPage = $event">
+(outputCurrentPage)="currentPage = $event"
+[typeSearch]="'delete'">
 </app-searcher-recipe>
 <app-pagination-items
   [items]="foods"
@@ -11,6 +12,6 @@
   [totalPages]="totalPages"
   [currentPage]="currentPage"
   (outputCurrentPage)="currentPage = $event"
-  [isPanel]="'True'"
+  [isPanel]="'btn-delete'"
 >
 </app-pagination-items>
