@@ -24,14 +24,12 @@ export class UserService {
     return this.http.get('http://localhost:3001/api/v1/user/admin/getAll/1', {'headers': headers, 'params': params});
   }
 
-
   public getAllUsersDesactivated(token: string, page:number = 2): Observable<any> {
     const params = new HttpParams()
     .set('page', page)
     const headers = new HttpHeaders({'authorization': token});
     return this.http.get('http://localhost:3001/api/v1/user/admin/getAll/0', {'headers': headers, 'params': params});
   }
-
 
   public deleteUser(idRecipe: number, token: string): Observable<any>{
     const headers = new HttpHeaders({'authorization': token});
@@ -58,6 +56,11 @@ export class UserService {
    */
   public getUserById(id: number | undefined): Observable<any>{
     return this.http.get("http://localhost:3001/api/v1/user/" + id)
+  }
+
+  public putUserById(id: number, token:string, body: any): Observable<any>{
+    const headers = new HttpHeaders({'authorization': token});
+    return this.http.put('http://localhost:3001/api/v1/user/' + id, body, { 'headers': headers})
   }
 
   public getUserId(id: number): Observable<any>{
