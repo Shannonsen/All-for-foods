@@ -19,7 +19,7 @@ export class PaginationItemsComponent implements OnInit {
   @Input() totalPages: number[] = [];
   @Input() showEditButton: boolean = false;
   @Input() isPanel: string = "";
-  @Input() typeList: string = "";
+  @Input() typeList: string = "products";
   users: User[] = [];
   differ: any;
   /**
@@ -34,7 +34,7 @@ export class PaginationItemsComponent implements OnInit {
    * @override
    */
   ngOnInit() {
-    this.userService.getAllUsers().subscribe(users => {
+      this.userService.getAllUsers().subscribe(users => {
       this.users = users as User[];
     });
   }

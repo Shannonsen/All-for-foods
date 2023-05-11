@@ -10,6 +10,7 @@ import { TagInputComponent } from './components/tag-input/tag-input.component';
 import { TagInputModule } from 'ngx-chips';
 import { PaginationItemsComponent } from './components/pagination-items/pagination-items.component';
 import { ListUsersComponent } from './components/list-users/list-users.component';
+import { ListIngredientsComponent } from './components/list-ingredients/list-ingredients.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { ListUsersComponent } from './components/list-users/list-users.component
     TagInputComponent,
     PaginationItemsComponent,
     ListUsersComponent,
+    ListIngredientsComponent,
   ],
   imports: [
     CommonModule,
@@ -39,6 +41,7 @@ import { ListUsersComponent } from './components/list-users/list-users.component
     SearcherRecipeComponent,
     PaginationItemsComponent,
     ListUsersComponent,
+    ListIngredientsComponent,
   ]
 })
 export class SharedModule { }
