@@ -1,4 +1,4 @@
-import { HttpClient,HttpParams } from '@angular/common/http';
+import { HttpClient,HttpParams,HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { Food } from '../views/shared/models/food.model';
@@ -29,8 +29,42 @@ export class RecipesService {
     return this.http.get("http://localhost:3001/api/v1/recipe/",{params});
   }
 
+  public getAllRecipesActivated(token: string, page:number = 2): Observable<any> {
+    const params = new HttpParams()
+    .set('page', page)
+    const headers = new HttpHeaders({'authorization': token});
+    return this.http.get('http://localhost:3001/api/v1/recipe/admin/getAll/1', {'headers': headers, 'params': params});
+  }
+
+  public getAllRecipesDesactivated(token: string, page:number = 2): Observable<any> {
+    const params = new HttpParams()
+    .set('page', page)
+    const headers = new HttpHeaders({'authorization': token});
+    return this.http.get('http://localhost:3001/api/v1/recipe/admin/getAll/0', {'headers': headers, 'params': params});
+  }
+
+  public deleteRecipe(idRecipe: number, token: string): Observable<any>{
+    const headers = new HttpHeaders({'authorization': token});
+    return this.http.put("http://localhost:3001/api/v1/recipe/delete/" + idRecipe, null,  {'headers': headers});
+  }
+
+  public activeRecipe(idRecipe: number, token: string): Observable<any>{
+    const headers = new HttpHeaders({'authorization': token});
+    return this.http.put("http://localhost:3001/api/v1/recipe/reactivate/" + idRecipe, null,  {'headers': headers});
+  }
 
 
+  public getServiceRecipes(typeSearch:string ="", page:number, size:number = 4, token:string = ""): Observable<any>{
+    console.log("TypeSearch: " + typeSearch);
+    switch(typeSearch){
+      case 'delete':
+        return this.getAllRecipesActivated(token, page)
+      case 'active':
+        return this.getAllRecipesDesactivated(token,page)
+      default:
+        return this.getAllFoods(page)
+    }
+  }
   /**
    * Método que devuelve la información de una receta por su id.
    * @param {number} id : Identificador único de la receta.

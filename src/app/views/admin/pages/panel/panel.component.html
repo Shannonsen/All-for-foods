@@ -1,1 +1,38 @@
-<p>panel works!</p>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="m-3 col-12" style="text-align: center;">
+      <h2> Panel de administración</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 m-3">
+        <app-add-ingredient></app-add-ingredient>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 m-3">
+        <app-table [currentPage]="currentPage" [totalPages]="totalPages" [pageSize]="pageSize" [typeSearch]="'delete-ingredients'" [isPanel]="'btn-delete'" [sectionName]="'Ingredientes activos'" [typeList]="'ingredients'"></app-table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 m-3">
+        <app-table [currentPage]="currentPage" [totalPages]="totalPages" [pageSize]="pageSize" [typeSearch]="'delete'" [isPanel]="'btn-delete'" [sectionName]="'Recetas activadas'" [typeList]="'products'"></app-table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 m-3">
+        <app-table [currentPage]="currentPage" [totalPages]="totalPages" [pageSize]="pageSize" [typeSearch]="'active'" [isPanel]="'btn-active'" [sectionName]="'Recetas desactivadas'" [typeList]="'products'"></app-table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 m-3">
+        <app-table [currentPage]="currentPage" [totalPages]="totalPages" [pageSize]="pageSize" [typeSearch]="'delete-users'" [isPanel]="'btn-delete'" [sectionName]="'Usuarios activados'" [typeList]="'users'"></app-table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 m-3">
+        <app-table [currentPage]="currentPage" [totalPages]="totalPages" [pageSize]="pageSize" [typeSearch]="'active-users'" [isPanel]="'btn-active'" [sectionName]="'Usuarios desactivados'" [typeList]="'users'"></app-table>
+    </div>
+  </div>
+</div>

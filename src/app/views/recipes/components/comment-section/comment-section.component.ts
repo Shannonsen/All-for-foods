@@ -34,9 +34,8 @@ export class CommentSectionComponent implements OnInit {
    */
 
   ngOnInit(): void {
-    console.log("ID" +  this.recipeID);
     this.commentService.getAllComments().subscribe((comments) => {
-      this.comments = (comments as Comment[]).filter(x => x.recipeId === this.recipeID); 
+      this.comments = (comments as Comment[]).filter(x => x.recipeId === this.recipeID);
     })
   }
 
@@ -51,5 +50,5 @@ export class CommentSectionComponent implements OnInit {
       this.commentForm.reset();
     });
   }
-  
+
 }

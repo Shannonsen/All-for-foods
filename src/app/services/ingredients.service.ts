@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 /**
@@ -23,5 +23,23 @@ export class IngredientsService {
    */
   public getAllIngredients(): Observable<any>{
     return this.http.get(this.LOCAL_INGREDIENTS);
+  }
+
+
+  public getAllIngredientsActivated(token:string, page: number): Observable<any>{
+    const params = new HttpParams()
+    .set('page', page)
+    const headers = new HttpHeaders({'authorization': token});
+    return this.http.get('http://localhost:3001/api/v1/ingredient/', {'headers': headers, 'params': params});
+  }
+
+  public addIngredient(token: string, name: string): Observable<any>{
+    const headers = new HttpHeaders({'authorization': token});
+    return this.http.post("http://localhost:3001/api/v1/ingredient/", {'name': name},  {'headers': headers});
+  }
+
+  public deleteIngredient(token: string, id: number): Observable<any>{
+    const headers = new HttpHeaders({'Authorization': token});
+    return this.http.delete("http://localhost:3001/api/v1/ingredient/" + id, {headers: headers});
   }
 }

@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/views/shared/models/user.model';
 import { ActivatedRoute } from '@angular/router';
+import { LoginService } from 'src/app/services/login.service';
+import { CookieService } from 'ngx-cookie-service';
 /**
  * Clase que representa la información del usuario junto con la lista de sus recetas y sus recetas favoritas.
  */
@@ -29,7 +31,7 @@ export class ProfileComponent implements OnInit {
    * @param {UserService} userService : Servicio de usuarios.
    * @param {ActivatedRoute} route : Navegador de rutas.
    */
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private userService: UserService) {
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private userService: UserService, private loginService: LoginService, private cookieService: CookieService) {
     this.profileForm = this.formBuilder.group({});
   }
 
@@ -37,36 +39,29 @@ export class ProfileComponent implements OnInit {
    * @override
    */
   ngOnInit(): void {
-
-    const tkn = localStorage.getItem('Token');
-
     this.route.params.subscribe(params => {
       this.profileID = Number(params['id']);
-
-      this.userService.getAllUsers().subscribe(users => {
-        var user = (users as User[]).find(p => p.token === tkn);
-        this.user = <User>user;
-
-        if (this.user.id === this.profileID || Number.isNaN(this.profileID)) {
-          this.name = user!.username;
-          this.email = user!.email;
-          this.description = user!.description;
-          this.icon = user!.icon;
-        }else{
-          var foodie = (users as User[]).find(p => p.id === this.profileID);
-          this.isUser = false;
-          this.user = <User>foodie;
-          this.name = foodie!.username;
-          this.email = foodie!.email;
-          this.description = foodie!.description;
-          this.icon = foodie!.icon;
-
-        }
-
-
+      var token = this.cookieService.get('Token');
+      this.loginService.type_auth(token).subscribe(data => {
+        this.userService.getUserById(data.results.id).subscribe(user => {
+          if (data.results.id === this.profileID || Number.isNaN(this.profileID)) {
+            this.name = user.results.username;
+            this.email = user.results.email;
+            this.icon = user.results.icon;
+            this.description = user.results.description;
+          }else{
+            this.userService.getUserById(this.profileID).subscribe(user => {
+              this.isUser = false;
+              this.name = user.results.username;
+              this.email = user.results.email;
+              this.icon = user.results.icon;
+              this.description = user.results.description;
+            });
+          }
+        })
       })
-
     });
+
     this.profileForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(4)]),
       description: new FormControl('', [Validators.required, Validators.minLength(4)]),

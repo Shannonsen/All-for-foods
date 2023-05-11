@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="search-header">
+    <div *ngIf="barSearch" class="search-header">
         <h1 class="mb-3">Buscar <i class="fa fa-search" aria-hidden="true"></i></h1>
         <div class="row justify-content-center align-items-center">
             <div class="row col-md-6">
@@ -16,7 +16,7 @@
             </div>
         </div>
     </div>
-    <div class="row justify-content-center align-items-center">
+    <div *ngIf="barSearch" class="row justify-content-center align-items-center">
         <div class="col-md-6">
             <div class="form" *ngIf="titleRadioChecked">
                 <div class="form-control ng-autocomplete" id="autocompleteSearch1">

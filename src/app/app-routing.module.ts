@@ -7,6 +7,9 @@ const routes: Routes = [
     path: 'home', loadChildren: () => import('./views/welcome/welcome.module').then(m => m.WelcomeModule)
   },
   {
+    path: 'panel', loadChildren: () => import('./views/admin/admin.module').then(m => m.AdminModule)
+  },
+  {
     path: 'profile', loadChildren: () => import('./views/user-info/user-info.module').then(m => m.UserInfoModule)
   },
   {
