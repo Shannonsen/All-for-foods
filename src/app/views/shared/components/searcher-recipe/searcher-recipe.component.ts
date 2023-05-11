@@ -5,6 +5,7 @@ import { IngredientsService } from 'src/app/services/ingredients.service';
 import { Food } from '../../models/food.model';
 import { RecipesService } from 'src/app/services/recipes.service';
 import { CookieService } from 'ngx-cookie-service';
+import { GetAllPaginationService } from 'src/app/services/get-all-pagination.service';
 /**
  * Clase que representa el buscador de recetas
  */
@@ -37,7 +38,7 @@ export class SearcherRecipeComponent implements OnInit {
    * @param {IngredientsService} ingredientService : Servicio de ingredientes
    * @param {RecipesService} recipesService : Servicio de recetas
    */
-  constructor(private differs: KeyValueDiffers, private ingredientService: IngredientsService, private recipesService: RecipesService, private cookieService: CookieService) {
+  constructor(private differs: KeyValueDiffers, private ingredientService: IngredientsService, private recipesService: RecipesService, private cookieService: CookieService, private getAllService: GetAllPaginationService) {
     this.differ = this.differs.find({}).create();
   }
   /**
@@ -99,7 +100,7 @@ export class SearcherRecipeComponent implements OnInit {
    */
   onEnter(e: any) {
     var token = this.cookieService.get('Token');
-      this.recipesService.getServiceRecipes(this.typeSearch,this.currentPage,4,token).subscribe(recipes => {
+      this.getAllService.getServiceRecipes(this.typeSearch,this.currentPage,4,token).subscribe(recipes => {
         var recipeToSend = recipes.data
         var totalPage = recipes.totalPage
         var totalPagesToSend = this.totalPagesArray(recipeToSend, totalPage);
@@ -114,7 +115,7 @@ export class SearcherRecipeComponent implements OnInit {
             this.outputCurrentPage.emit(this.currentPage);
           }
         }
-        this.recipesService.getServiceRecipes(this.typeSearch,this.currentPage,4,token).subscribe(recipes => {
+        this.getAllService.getServiceRecipes(this.typeSearch,this.currentPage,4,token).subscribe(recipes => {
           console.log(recipes.data)
           this.outputRecipes.emit(recipes.data);
         });
