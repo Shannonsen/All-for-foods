@@ -12,13 +12,14 @@ import { User } from '../../models/user.model';
 })
 export class PaginationItemsComponent implements OnInit {
   @Input() sectionName: string = '';
-  @Input() items: Food[] = []
+  @Input() items: any[]= []
   @Input() currentPage: number = 1;
   @Output() outputCurrentPage = new EventEmitter<number>();
   @Input() pageSize: number = 3;
   @Input() totalPages: number[] = [];
   @Input() showEditButton: boolean = false;
   @Input() isPanel: string = "";
+  @Input() typeList: string = "";
   users: User[] = [];
   differ: any;
   /**

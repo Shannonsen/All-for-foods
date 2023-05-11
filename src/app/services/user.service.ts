@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { User } from '../views/shared/models/user.model';
 /**
@@ -16,6 +16,26 @@ export class UserService {
    * @param {HttpClient} http : Cliente http
    */
   constructor(private http: HttpClient) { }
+
+  public getAllUsersActivated(token: string, page:number = 2): Observable<any> {
+    const params = new HttpParams()
+    .set('page', page)
+    const headers = new HttpHeaders({'authorization': token});
+    return this.http.get('http://localhost:3001/api/v1/user/admin/getAll/1', {'headers': headers, 'params': params});
+  }
+
+
+  public deleteUser(idRecipe: number, token: string): Observable<any>{
+    const headers = new HttpHeaders({'authorization': token});
+    return this.http.put("http://localhost:3001/api/v1/user/delete/" + idRecipe, null,  {'headers': headers});
+  }
+
+  public activeUser(idRecipe: number, token: string): Observable<any>{
+    const headers = new HttpHeaders({'authorization': token});
+    return this.http.put("http://localhost:3001/api/v1/user/reactivate/" + idRecipe, null,  {'headers': headers});
+  }
+
+
   /**
    * Método para la obtención de todos los clientes
    * @returns

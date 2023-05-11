@@ -2,12 +2,17 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-12 m-3">
-        <app-table [foods]="recipesActivated" [currentPage]="currentPage" [totalPages]="totalPages" [pageSize]="pageSize" [typeSearch]="'delete'" [isPanel]="'btn-delete'" [sectionName]="'Recetas activadas'"></app-table>
+        <app-table [currentPage]="currentPage" [totalPages]="totalPages" [pageSize]="pageSize" [typeSearch]="'delete'" [isPanel]="'btn-delete'" [sectionName]="'Recetas activadas'" [typeList]="'products'"></app-table>
     </div>
   </div>
   <div class="row">
     <div class="col-12 m-3">
-        <app-table [foods]="recipesDesactivated" [currentPage]="currentPage" [totalPages]="totalPages" [pageSize]="pageSize" [typeSearch]="'active'" [isPanel]="'btn-active'" [sectionName]="'Recetas desactivadas'"></app-table>
+        <app-table [currentPage]="currentPage" [totalPages]="totalPages" [pageSize]="pageSize" [typeSearch]="'active'" [isPanel]="'btn-active'" [sectionName]="'Recetas desactivadas'" [typeList]="'products'"></app-table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 m-3">
+        <app-table [currentPage]="currentPage" [totalPages]="totalPages" [pageSize]="pageSize" [typeSearch]="'delete-users'" [isPanel]="'btn-delete'" [sectionName]="'Usuarios activados'" [typeList]="'users'"></app-table>
     </div>
   </div>
 </div>

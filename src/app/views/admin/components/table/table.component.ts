@@ -15,6 +15,7 @@ export class TableComponent implements OnInit {
   @Input() totalPages: number[] = [];
   @Input() typeSearch:string = ""
   @Input() isPanel:string = ""
+  @Input() typeList: string = "";
   constructor() { }
 
   ngOnInit(): void {

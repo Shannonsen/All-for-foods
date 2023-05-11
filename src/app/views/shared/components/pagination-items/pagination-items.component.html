@@ -2,7 +2,8 @@
   <h3>{{ sectionName }}</h3>
   <div class="container mt-4">
     <div class="row" *ngIf="items.length > 0">
-      <app-list-products [products]="items" [isPanel]="isPanel"></app-list-products>
+      <app-list-products *ngIf="typeList == 'products'"  [products]="items" [isPanel]="isPanel"></app-list-products>
+      <app-list-users *ngIf="typeList == 'users'"  [users]="items" [isPanel]="isPanel"></app-list-users>
       <div class="row gallery-bottom">
         <div class="col-sm-12 container-paginator">
           <ul class="pagination">

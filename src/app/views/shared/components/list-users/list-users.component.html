@@ -1,0 +1,60 @@
+<div class="container-fluid container-list-products">
+  <div class="row">
+    <div
+      class="col-xs-12 col-sm-6 col-md-3 col-12 container-card"
+      *ngFor="let user of users"
+    >
+      <div class="card">
+        <div class="card-header">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-2">
+                <img
+                  [src]="user.icon"
+                  style="width: 120%"
+                  class="rounded"
+                  alt="..."
+                />
+              </div>
+              <div class="col-10">
+                <a>
+                  {{user.username}}
+                </a></div>
+            </div>
+          </div>
+        </div>
+        <a class="img-route"
+          ><img class="img-product" [src]="user.icon"  style="width: 100%" aimg-divlt="image"
+        /></a>
+        <div class="card-body">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-8">
+                <h4>{{ user.username }}</h4>
+                <h6>{{user.description}}</h6>
+              </div>
+              <div *ngIf="token" class="col-4 container-icon-heart">
+              <i class="fa fa-heart fa-2x" (click)="changeColor(user.id) "style="color:gray" id="{{user.id}}"></i>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <small><b>Registrado: </b> </small>
+              </div>
+            </div>
+            <div *ngIf="isPanel == 'btn-delete'" class="row">
+              <div class="col-12" style="text-align: right;">
+                <button (click)="deleteUser(user.id)" class="btn btn-danger">Desactivar</button>
+              </div>
+            </div>
+            <div *ngIf="isPanel == 'btn-active'" class="row">
+              <div class="col-12" style="text-align: right;">
+                <button (click)="activateUser(user.id)" class="btn btn-success">Activar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
