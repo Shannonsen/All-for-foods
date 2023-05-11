@@ -25,6 +25,14 @@ export class UserService {
   }
 
 
+  public getAllUsersDesactivated(token: string, page:number = 2): Observable<any> {
+    const params = new HttpParams()
+    .set('page', page)
+    const headers = new HttpHeaders({'authorization': token});
+    return this.http.get('http://localhost:3001/api/v1/user/admin/getAll/0', {'headers': headers, 'params': params});
+  }
+
+
   public deleteUser(idRecipe: number, token: string): Observable<any>{
     const headers = new HttpHeaders({'authorization': token});
     return this.http.put("http://localhost:3001/api/v1/user/delete/" + idRecipe, null,  {'headers': headers});
@@ -32,7 +40,7 @@ export class UserService {
 
   public activeUser(idRecipe: number, token: string): Observable<any>{
     const headers = new HttpHeaders({'authorization': token});
-    return this.http.put("http://localhost:3001/api/v1/user/reactivate/" + idRecipe, null,  {'headers': headers});
+    return this.http.put("http://localhost:3001/api/v1/user/reactive/" + idRecipe, null,  {'headers': headers});
   }
 
 

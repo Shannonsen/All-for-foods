@@ -20,6 +20,8 @@ export class GetAllPaginationService {
         return this.recipeService.getAllRecipesDesactivated(token,page)
       case 'delete-users':
         return this.userService.getAllUsersActivated(token,page)
+      case 'active-users':
+        return this.userService.getAllUsersDesactivated(token,page)
       default:
         return this.recipeService.getAllFoods(page)
     }
