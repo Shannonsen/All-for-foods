@@ -12,6 +12,11 @@
   </div>
   <div class="row">
     <div class="col-12 m-3">
+        <app-table [currentPage]="currentPage" [totalPages]="totalPages" [pageSize]="pageSize" [typeSearch]="'delete-ingredients'" [isPanel]="'btn-delete'" [sectionName]="'Ingredientes activos'" [typeList]="'ingredients'"></app-table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 m-3">
         <app-table [currentPage]="currentPage" [totalPages]="totalPages" [pageSize]="pageSize" [typeSearch]="'delete'" [isPanel]="'btn-delete'" [sectionName]="'Recetas activadas'" [typeList]="'products'"></app-table>
     </div>
   </div>

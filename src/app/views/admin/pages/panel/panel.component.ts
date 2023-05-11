@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import { IngredientsService } from 'src/app/services/ingredients.service';
 import { RecipesService } from 'src/app/services/recipes.service';
 import { Food } from 'src/app/views/shared/models/food.model';
 
@@ -28,7 +29,6 @@ export class PanelComponent implements OnInit {
     this.recipeService.getAllRecipesDesactivated(token, 1).subscribe(data =>{
       this.recipesDesactivated = data.data
     })
-
   }
 
 }

@@ -116,7 +116,6 @@ export class SearcherRecipeComponent implements OnInit {
           }
         }
         this.getAllService.getServiceRecipes(this.typeSearch,this.currentPage,4,token).subscribe(recipes => {
-          console.log(recipes.data)
           this.outputRecipes.emit(recipes.data);
         });
       });

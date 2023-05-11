@@ -3,16 +3,16 @@ import { HttpClient } from '@angular/common/http';
 import { RecipesService } from './recipes.service';
 import { Observable } from 'rxjs';
 import { UserService } from './user.service';
+import { IngredientsService } from './ingredients.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GetAllPaginationService {
 
-  constructor(private http: HttpClient, private recipeService: RecipesService, private userService: UserService) { }
+  constructor(private http: HttpClient, private recipeService: RecipesService, private userService: UserService, private ingredientService: IngredientsService) { }
 
   public getServiceRecipes(typeSearch:string ="", page:number, size:number = 4, token:string = ""): Observable<any>{
-    console.log("typeSearch: " + typeSearch)
     switch(typeSearch){
       case 'delete':
         return this.recipeService.getAllRecipesActivated(token, page)
@@ -22,6 +22,8 @@ export class GetAllPaginationService {
         return this.userService.getAllUsersActivated(token,page)
       case 'active-users':
         return this.userService.getAllUsersDesactivated(token,page)
+      case 'delete-ingredients':
+        return this.ingredientService.getAllIngredientsActivated(token, page)
       default:
         return this.recipeService.getAllFoods(page)
     }
