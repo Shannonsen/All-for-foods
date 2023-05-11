@@ -52,6 +52,11 @@
                 <button (click)="deleteRecipe(product.id)" class="btn btn-danger">Desactivar</button>
               </div>
             </div>
+            <div *ngIf="isPanel == 'btn-active'" class="row">
+              <div class="col-12" style="text-align: right;">
+                <button (click)="activateRecipe(product.id)" class="btn btn-success">Activar</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

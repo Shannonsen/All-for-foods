@@ -2,7 +2,12 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-12 m-3">
-        <app-table [foods]="products" [currentPage]="currentPage" [totalPages]="totalPages" [pageSize]="pageSize" [typeSearch]="'delete'" [isPanel]="'btn-delete'"></app-table>
+        <app-table [foods]="recipesActivated" [currentPage]="currentPage" [totalPages]="totalPages" [pageSize]="pageSize" [typeSearch]="'delete'" [isPanel]="'btn-delete'"></app-table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 m-3">
+        <app-table [foods]="recipesDesactivated" [currentPage]="currentPage" [totalPages]="totalPages" [pageSize]="pageSize" [typeSearch]="'active'" [isPanel]="'btn-active'"></app-table>
     </div>
   </div>
 </div>

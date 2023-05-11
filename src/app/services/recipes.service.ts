@@ -36,9 +36,21 @@ export class RecipesService {
     return this.http.get('http://localhost:3001/api/v1/recipe/admin/getAll/1', {'headers': headers, 'params': params});
   }
 
+  public getAllRecipesDesactivated(token: string, page:number = 2): Observable<any> {
+    const params = new HttpParams()
+    .set('page', page)
+    const headers = new HttpHeaders({'authorization': token});
+    return this.http.get('http://localhost:3001/api/v1/recipe/admin/getAll/0', {'headers': headers, 'params': params});
+  }
+
   public deleteRecipe(idRecipe: number, token: string): Observable<any>{
     const headers = new HttpHeaders({'authorization': token});
     return this.http.put("http://localhost:3001/api/v1/recipe/delete/" + idRecipe, null,  {'headers': headers});
+  }
+
+  public activeRecipe(idRecipe: number, token: string): Observable<any>{
+    const headers = new HttpHeaders({'authorization': token});
+    return this.http.put("http://localhost:3001/api/v1/recipe/reactivate/" + idRecipe, null,  {'headers': headers});
   }
 
 
@@ -46,15 +58,11 @@ export class RecipesService {
     console.log("TypeSearch: " + typeSearch);
     switch(typeSearch){
       case 'delete':
-        let paramsDelete = new HttpParams()
-        .set('page', page)
-        const headers = new HttpHeaders({'authorization': token});
-        return this.http.get('http://localhost:3001/api/v1/recipe/admin/getAll/1', {'headers': headers, 'params': paramsDelete});
+        return this.getAllRecipesActivated(token, page)
+      case 'active':
+        return this.getAllRecipesDesactivated(token,page)
       default:
-        let paramsDefault = new HttpParams()
-      .set('page', page)
-      .set('size', size);
-        return this.http.get("http://localhost:3001/api/v1/recipe/",{'params': paramsDefault});
+        return this.getAllFoods(page)
     }
   }
   /**

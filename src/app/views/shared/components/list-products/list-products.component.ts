@@ -85,7 +85,24 @@ export class ListProductsComponent implements OnInit {
         })
       }
     })
+  }
 
+  activateRecipe(id: number){
+    this.recipeService.activeRecipe(id, this.token).subscribe(response => {
+      if(response.message == "OK"){
+        Swal.fire("CORRECTO", 'Receta activada', 'success').then(()=>{
+          this.router.navigate(['panel']).then(() => {
+            window.location.reload();
+          });
+        })
+      }else{
+        Swal.fire("ERROR", response.message, 'error').then(()=>{
+          this.router.navigate(['panel']).then(() => {
+            window.location.reload();
+          });
+        })
+      }
+    })
   }
 
 }

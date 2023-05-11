@@ -10,7 +10,8 @@ import { Food } from 'src/app/views/shared/models/food.model';
 })
 export class PanelComponent implements OnInit {
 
-  products: Food[] = []
+  recipesActivated: Food[] = []
+  recipesDesactivated: Food[] = []
   currentPage: number = 1;
   pageSize: number = 4;
   totalPages: number[] = [];
@@ -20,11 +21,14 @@ export class PanelComponent implements OnInit {
 
   ngOnInit(): void {
     var token = this.cookieService.get('Token');
-    console.log(token);
     this.recipeService.getAllRecipesActivated(token, 1).subscribe(data =>{
-      console.log(data)
-      this.products = data.data
+      this.recipesActivated = data.data
     })
+
+    this.recipeService.getAllRecipesDesactivated(token, 1).subscribe(data =>{
+      this.recipesDesactivated = data.data
+    })
+
   }
 
 }
