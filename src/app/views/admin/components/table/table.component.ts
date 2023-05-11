@@ -9,7 +9,7 @@ import { Food } from 'src/app/views/shared/models/food.model';
 export class TableComponent implements OnInit {
 
   @Input() foods: Food[] = [];
-  sectionName: string = 'Recetas activas';
+  @Input() sectionName: string = "";
   @Input() currentPage: number = 1;
   @Input() pageSize: number = 4;
   @Input() totalPages: number[] = [];
