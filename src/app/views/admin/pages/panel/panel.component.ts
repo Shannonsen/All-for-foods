@@ -14,6 +14,8 @@ export class PanelComponent implements OnInit {
   currentPage: number = 1;
   pageSize: number = 4;
   totalPages: number[] = [];
+  typeSearch: string = "";
+  isPanel: string = "";
   constructor(private recipeService: RecipesService, private cookieService: CookieService) { }
 
   ngOnInit(): void {

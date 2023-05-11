@@ -13,6 +13,8 @@ export class TableComponent implements OnInit {
   @Input() currentPage: number = 1;
   @Input() pageSize: number = 4;
   @Input() totalPages: number[] = [];
+  @Input() typeSearch:string = ""
+  @Input() isPanel:string = ""
   constructor() { }
 
   ngOnInit(): void {
