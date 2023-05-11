@@ -56,14 +56,8 @@ export class UserService {
    * @param {number} id : Identificador único del usuario
    * @returns {Observable<User>} Regrese el usuario encontrado
    */
-  public getUserById(id: number): Observable<User | undefined>{
-    return this.http.get<User[]>(this.LOCAL_USERS).pipe(
-      map(users => users.find(user => user.id === id)),
-      catchError(error => {
-        console.error(error);
-        return throwError('no recipe by that id found');
-      })
-    );
+  public getUserById(id: number | undefined): Observable<any>{
+    return this.http.get("http://localhost:3001/api/v1/user/" + id)
   }
 
   public getUserId(id: number): Observable<any>{
