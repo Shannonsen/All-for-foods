@@ -67,6 +67,7 @@ export class ProfileComponent implements OnInit {
       name: new FormControl('', [Validators.required, Validators.minLength(4)]),
       description: new FormControl('', [Validators.required, Validators.minLength(4)]),
       email: new FormControl('', [Validators.required, Validators.minLength(4)]),
+      icon: new FormControl('')
     });
   }
 
