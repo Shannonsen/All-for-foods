@@ -12,7 +12,7 @@ export class RegisterService {
   private LOCAL_SUCCESS = 'http://localhost:4200/assets/success_post.json';
   /**
    * @constructor
-   * @param {HttpClient} http : Cliente http 
+   * @param {HttpClient} http : Cliente http
    */
   constructor(private http: HttpClient) { }
   /**
@@ -21,5 +21,9 @@ export class RegisterService {
    */
   public registerUser(): Observable<any>{
     return this.http.get(this.LOCAL_SUCCESS);
+  }
+
+  public postUser(body: any): Observable<any>{
+    return this.http.post("http://localhost:3001/api/v1/user/", body);
   }
 }
