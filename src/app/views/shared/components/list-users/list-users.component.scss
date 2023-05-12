@@ -1,0 +1,44 @@
+@import "../../../../../assets/scss/general.scss";
+.container-list-products{
+  font-family: $font-montserrat;
+
+  .container-products {
+    margin-top: 1rem;
+  }
+
+  .container-card {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+
+    h2{
+      font-size: $font-md;
+    }
+  }
+
+  .img-route{
+    display: contents;
+  }
+
+  .card {
+    width: 18rem;
+  }
+
+
+/* heart button */
+
+.container-icon-heart{
+  margin-top: 2%;
+  text-align: center;
+}
+
+/* links */
+a{
+  color: black;
+  text-decoration: none;
+}
+
+a:hover {
+  color: $dark-orange-color;
+}
+}

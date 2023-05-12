@@ -17,13 +17,13 @@
                 />
               </div>
               <div class="col-10">
-                <a>
+                <a [routerLink]="['/profile', user.id]">
                   {{user.username}}
                 </a></div>
             </div>
           </div>
         </div>
-        <a class="img-route"
+        <a class="img-route" [routerLink]="['/profile', user.id]"
           ><img class="img-product" [src]="user.icon"  style="width: 100%" aimg-divlt="image"
         /></a>
         <div class="card-body">
