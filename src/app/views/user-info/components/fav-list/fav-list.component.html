@@ -1,8 +1,18 @@
-<div class="container-fluid container-list-fav">
-    <app-pagination-items [items]="loadPage(currentPage)" 
-                        [pageSize]="pageSize" 
-                        [sectionName] = "sectionName"
-                        [totalPages]="totalPages"
-                        (outputCurrentPage)="currentPage = $event">
-    </app-pagination-items>
-</div>
+<app-searcher-recipe [pageSize]="pageSize"
+[currentPage]="currentPage"
+(outputTotalPages)="totalPages = $event"
+(outputRecipes)="foods = $event"
+(outputCurrentPage)="currentPage = $event"
+[typeSearch]="typeSearch">
+</app-searcher-recipe>
+<app-pagination-items
+  [items]="foods"
+  [pageSize]="pageSize"
+  [sectionName]="sectionName"
+  [totalPages]="totalPages"
+  [currentPage]="currentPage"
+  (outputCurrentPage)="currentPage = $event"
+  [isPanel]="isPanel"
+  [typeList]="typeList"
+>
+</app-pagination-items>

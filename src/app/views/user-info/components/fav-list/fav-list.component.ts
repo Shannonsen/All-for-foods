@@ -12,9 +12,13 @@ import { RecipesService } from 'src/app/services/recipes.service';
 export class FavListComponent implements OnInit {
   @Input() favorites: number[] = []
   favs: Food[] = [];
+  @Input() foods: Food[] = [];
+  @Input() typeSearch:string = "favorites"
+  @Input() isPanel:string = ""
+  @Input() typeList: string = "products";
 
   currentPage: number = 1;
-  pageSize: number = 3;
+  pageSize: number = 4;
   totalPages: number[] = [];
   sectionName: string = 'Mis Favoritos';
 
@@ -31,10 +35,10 @@ export class FavListComponent implements OnInit {
     this.recipeService.getAllFoods().subscribe(recipes => {
       this.favs = (recipes as Food[]).filter(p => this.favorites.includes(p.id));
 
-      
+
     const pageCount = Math.ceil(this.favorites.length / this.pageSize);
     this.totalPages = Array.from({ length: pageCount }, (_, i) => i + 1);
-    })    
+    })
   }
 
   /**
