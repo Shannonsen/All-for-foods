@@ -54,13 +54,7 @@ export class SearcherRecipeComponent implements OnInit {
 
     $("#title").prop('checked', true);
     this.titleRadioChecked = $("#title").is(":checked");
-    if(token){
-      this.loginService.type_auth(token).subscribe(user =>{
-        this.onEnter(undefined, user.results.id);
-      })
-    }else{
-      this.onEnter(undefined);
-    }
+    this.onEnter(undefined);
   }
   /**
    * Método lanzado cuando un objeto cambia de valor
@@ -107,9 +101,10 @@ export class SearcherRecipeComponent implements OnInit {
    * Evento lanzado al dar enter en la barra de búsqueda
    * @param {any} e : Elemento html al cual que se le dio Enter
    */
-  onEnter(e: any, id: number = 0) {
+  onEnter(e: any) {
     var token = this.cookieService.get('Token');
-      this.getAllService.getServiceRecipes(this.typeSearch,this.currentPage,4,token,id).subscribe(recipes => {
+    var idUser = Number(this.cookieService.get('idUser'));
+      this.getAllService.getServiceRecipes(this.typeSearch,this.currentPage,4,token,idUser).subscribe(recipes => {
         var recipeToSend = recipes.data
         var totalPage = recipes.totalPage
         var totalPagesToSend = this.totalPagesArray(recipeToSend, totalPage);
@@ -124,7 +119,7 @@ export class SearcherRecipeComponent implements OnInit {
             this.outputCurrentPage.emit(this.currentPage);
           }
         }
-        this.getAllService.getServiceRecipes(this.typeSearch,this.currentPage,4,token, id).subscribe(recipes => {
+        this.getAllService.getServiceRecipes(this.typeSearch,this.currentPage,4,token, idUser).subscribe(recipes => {
         this.outputRecipes.emit(recipes.data);
         });
       });

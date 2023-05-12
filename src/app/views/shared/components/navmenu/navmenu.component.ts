@@ -40,6 +40,7 @@ export class NavmenuComponent implements OnInit {
   logout(){
     this.router.navigate(['home']).then(() => {
       this.cookieService.delete('Token');
+      this.cookieService.delete('idUser');
       window.location.reload();
     });
   }

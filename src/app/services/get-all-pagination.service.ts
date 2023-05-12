@@ -25,6 +25,8 @@ export class GetAllPaginationService {
         return this.ingredientService.getAllIngredientsActivated(token, page)
       case 'favorites':
         return this.recipeService.getMyFavoritesRecipes(idUser, page)
+      case 'my-recipes':
+        return this.recipeService.getMyRecipes(idUser, page)
       default:
         return this.recipeService.getAllFoods(page)
     }

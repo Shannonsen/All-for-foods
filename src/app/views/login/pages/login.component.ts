@@ -42,6 +42,9 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     var request = this.loginForm.value;
     this.loginService.login_auth(request['email'], request['password']).subscribe(data =>{
+      this.loginService.type_auth(data.results.token).subscribe(user =>{
+        this.cookieService.set('idUser', user.results.id);
+      })
       if(data.results){
         this.cookieService.set('Token', data.results.token);
         this.router.navigate(['home']).then(() => {

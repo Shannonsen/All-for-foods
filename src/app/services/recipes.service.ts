@@ -59,6 +59,12 @@ export class RecipesService {
     return this.http.get("http://localhost:3001/api/v1/favorite/" + id, {'params': params})
   }
 
+  public getMyRecipes(id: number, page:number): Observable<any>{
+    const params = new HttpParams()
+    .set('page', page)
+    return this.http.get("http://localhost:3001/api/v1/recipe/my/" + id, {'params': params})
+  }
+
   /**
    * Método que devuelve la información de una receta por su id.
    * @param {number} id : Identificador único de la receta.

@@ -12,10 +12,16 @@ import { Food } from 'src/app/views/shared/models/food.model';
 })
 export class MyRecipesListComponent implements OnInit {
   @Input() myRecipes: number[] = []
+  @Input() foods: Food[] = [];
+  @Input() typeSearch:string = "my-recipes"
+  @Input() isPanel:string = ""
+  @Input() typeList: string = "products";
+
   myRecipesList: Food[] = [];
 
+
   currentPage: number = 1;
-  pageSize: number = 3;
+  pageSize: number = 4;
   totalPages: number[] = [];
   sectionName: string = 'Mis Recetas';
 
@@ -31,10 +37,10 @@ export class MyRecipesListComponent implements OnInit {
   ngOnInit(): void {
     this.recipeService.getAllFoods().subscribe(recipes => {
       this.myRecipesList = (recipes as Food[]).filter(p => this.myRecipes.includes(p.id));
-      
+
     const pageCount = Math.ceil(this.myRecipes.length / this.pageSize);
     this.totalPages = Array.from({ length: pageCount }, (_, i) => i + 1);
-    })    
+    })
   }
 
   /**
