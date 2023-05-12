@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/views/shared/models/user.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import { CookieService } from 'ngx-cookie-service';
+import Swal from 'sweetalert2';
 /**
  * Clase que representa la información del usuario junto con la lista de sus recetas y sus recetas favoritas.
  */
@@ -31,7 +32,7 @@ export class ProfileComponent implements OnInit {
    * @param {UserService} userService : Servicio de usuarios.
    * @param {ActivatedRoute} route : Navegador de rutas.
    */
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private userService: UserService, private loginService: LoginService, private cookieService: CookieService) {
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private userService: UserService, private loginService: LoginService, private cookieService: CookieService, private router: Router) {
     this.profileForm = this.formBuilder.group({});
   }
 
@@ -66,6 +67,7 @@ export class ProfileComponent implements OnInit {
       name: new FormControl('', [Validators.required, Validators.minLength(4)]),
       description: new FormControl('', [Validators.required, Validators.minLength(4)]),
       email: new FormControl('', [Validators.required, Validators.minLength(4)]),
+      icon: new FormControl('')
     });
   }
 
@@ -73,8 +75,53 @@ export class ProfileComponent implements OnInit {
    * Método que se lanza al editar la información del perfil del usuario
    */
   onEdit() {
-    alert("información actualizada")
+    var request = this.profileForm.value;
+    var token = this.cookieService.get('Token');
+    this.loginService.type_auth(token).subscribe(data => {
+      this.userService.getUserById(data.results.id).subscribe(user => {
+        type UserBody ={
+          email?: string,
+          username?: string,
+          icon?: string,
+          description?: string,
+        }
+        const body: UserBody = {};
+        if(user.results.username != request['name']){
+          body.username = request['name'];
+        }
+        if(user.results.email != request['email']){
+          body.email = request['email'];
+        }
+        if(user.results.icon != request['icon']){
+          body.icon = request['icon'];
+        }
+        if(user.results.description != request['description']){
+          body.description = request['description'];
+        }
+        this.removeEmptyValues(body)
+        this.userService.putUserById(data.results.id, token, body).subscribe(result =>{
+          if(result.code == 200){
+            Swal.fire("CORRECTO", 'Perfil editado', 'success').then(()=>{
+              this.router.navigate(['profile']).then(() => {
+                window.location.reload();
+              });
+            })
+          }
+        })
+      });
+    });
   }
+
+  removeEmptyValues(object: any) {
+    for (var key in object) {
+        if (object.hasOwnProperty(key)) {
+            var value = object[key];
+            if (value === null || value === undefined || value === '') {
+                delete object[key];
+            }
+        }
+    }
+}
 
   /**
    * Método que se lanza al dar click al botón de follow

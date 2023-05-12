@@ -6,6 +6,7 @@ import { Food } from '../../models/food.model';
 import { RecipesService } from 'src/app/services/recipes.service';
 import { CookieService } from 'ngx-cookie-service';
 import { GetAllPaginationService } from 'src/app/services/get-all-pagination.service';
+import { LoginService } from 'src/app/services/login.service';
 /**
  * Clase que representa el buscador de recetas
  */
@@ -25,6 +26,7 @@ export class SearcherRecipeComponent implements OnInit {
   differ: any;
   doSearch: boolean = false;
   recipeActual: Food[] = []
+  userid: any = ""
   @Input() barSearch:string = "";
   @Input() currentPage: number = 1;
   @Input() pageSize: number = 3;
@@ -38,13 +40,14 @@ export class SearcherRecipeComponent implements OnInit {
    * @param {IngredientsService} ingredientService : Servicio de ingredientes
    * @param {RecipesService} recipesService : Servicio de recetas
    */
-  constructor(private differs: KeyValueDiffers, private ingredientService: IngredientsService, private recipesService: RecipesService, private cookieService: CookieService, private getAllService: GetAllPaginationService) {
+  constructor(private differs: KeyValueDiffers, private ingredientService: IngredientsService, private recipesService: RecipesService, private cookieService: CookieService, private getAllService: GetAllPaginationService, private loginService: LoginService) {
     this.differ = this.differs.find({}).create();
   }
   /**
    * @override
    */
   ngOnInit(): void {
+    var token = this.cookieService.get('Token');
     this.ingredientService.getAllIngredients().subscribe(ingredients => {
       this.ingredients = ingredients;
     });
@@ -100,7 +103,8 @@ export class SearcherRecipeComponent implements OnInit {
    */
   onEnter(e: any) {
     var token = this.cookieService.get('Token');
-      this.getAllService.getServiceRecipes(this.typeSearch,this.currentPage,4,token).subscribe(recipes => {
+    var idUser = Number(this.cookieService.get('idUser'));
+      this.getAllService.getServiceRecipes(this.typeSearch,this.currentPage,4,token,idUser).subscribe(recipes => {
         var recipeToSend = recipes.data
         var totalPage = recipes.totalPage
         var totalPagesToSend = this.totalPagesArray(recipeToSend, totalPage);
@@ -115,8 +119,8 @@ export class SearcherRecipeComponent implements OnInit {
             this.outputCurrentPage.emit(this.currentPage);
           }
         }
-        this.getAllService.getServiceRecipes(this.typeSearch,this.currentPage,4,token).subscribe(recipes => {
-          this.outputRecipes.emit(recipes.data);
+        this.getAllService.getServiceRecipes(this.typeSearch,this.currentPage,4,token, idUser).subscribe(recipes => {
+        this.outputRecipes.emit(recipes.data);
         });
       });
     }

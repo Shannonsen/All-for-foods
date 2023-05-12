@@ -53,18 +53,18 @@ export class RecipesService {
     return this.http.put("http://localhost:3001/api/v1/recipe/reactivate/" + idRecipe, null,  {'headers': headers});
   }
 
-
-  public getServiceRecipes(typeSearch:string ="", page:number, size:number = 4, token:string = ""): Observable<any>{
-    console.log("TypeSearch: " + typeSearch);
-    switch(typeSearch){
-      case 'delete':
-        return this.getAllRecipesActivated(token, page)
-      case 'active':
-        return this.getAllRecipesDesactivated(token,page)
-      default:
-        return this.getAllFoods(page)
-    }
+  public getMyFavoritesRecipes(id:number, page: number): Observable<any>{
+    const params = new HttpParams()
+    .set('page', page)
+    return this.http.get("http://localhost:3001/api/v1/favorite/" + id, {'params': params})
   }
+
+  public getMyRecipes(id: number, page:number): Observable<any>{
+    const params = new HttpParams()
+    .set('page', page)
+    return this.http.get("http://localhost:3001/api/v1/recipe/my/" + id, {'params': params})
+  }
+
   /**
    * Método que devuelve la información de una receta por su id.
    * @param {number} id : Identificador único de la receta.
