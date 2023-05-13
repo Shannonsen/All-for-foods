@@ -7,6 +7,9 @@ import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/views/shared/models/user.model';
 import { CookieService } from 'ngx-cookie-service';
 import Swal from 'sweetalert2';
+import { Ingredient } from 'src/app/views/shared/models/ingredient.model';
+import { IngredientsService } from 'src/app/services/ingredients.service';
+
 /**
  * Clase que representa el editor de recetas.
  */
@@ -21,12 +24,12 @@ export class EditorComponent implements OnInit {
   recipeID: number = 0 ;
   title: string | undefined = '';
   author: string | undefined = '';
-  ingredients: string[] | undefined = [];
+  allingredients: Ingredient[] = [];
+  ingredients: Ingredient[]= [];
   imgURL: string | undefined = '';
   process: string | undefined = "";
   description: string | undefined = '';
   modificationDate: string | undefined;
-
   recipeForm: FormGroup;
   user: User = <User>{};
 
@@ -37,7 +40,7 @@ export class EditorComponent implements OnInit {
    * @param recipeService : Servicio de recetas.
    * @param userService : Servicio de usuarios.
    */
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private recipeService: RecipesService, private userService: UserService, private cookieService: CookieService, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private recipeService: RecipesService, private userService: UserService, private cookieService: CookieService, private router: Router, private ingredientService: IngredientsService) {
     this.recipeForm = this.formBuilder.group({});
   }
 
@@ -52,16 +55,38 @@ export class EditorComponent implements OnInit {
       } else {
         this.imgURL = "https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png";
       }
-
       this.recipeForm = new FormGroup({
         title: new FormControl('', [Validators.required, Validators.minLength(4)]),
-        ingredients: new FormControl('', [Validators.required, Validators.minLength(4)]),
         imgURL: new FormControl('', [Validators.required, Validators.minLength(4)]),
         process: new FormControl('', [Validators.required, Validators.minLength(4)]),
         description: new FormControl('', [Validators.required, Validators.minLength(4)]),
         author: new FormControl(''),
       });
     });
+
+    this.ingredientService.getAllIngredients().subscribe(ingredients =>{
+      this.allingredients = ingredients.data
+    })
+  }
+
+  saveIngredient(e: any){
+    const selectedOptionValue = e.target.value;
+    const selectedOption = e.target.selectedOptions.item(0);
+    const selectedOptionText = selectedOption.textContent;
+    let new_ingredient: Ingredient ={
+      'id': Number(selectedOptionValue),
+      'name': selectedOptionText
+    }
+
+    if(this.ingredients.find(ingredient => ingredient.id == e.target.value)){
+      Swal.fire("CORRECTO", 'YA COLOCASTE ESTE INGREDIENTE', 'question')
+    }else{
+      this.ingredients.push(new_ingredient)
+    }
+  }
+
+  deleteIngredient(id: number){
+    this.ingredients.splice(this.ingredients.findIndex(e => e.id === id),1);
   }
 
   /**
@@ -92,6 +117,10 @@ export class EditorComponent implements OnInit {
       if(recipe.results.description != request['description']){
           body.description = request['description'];
       }
+      if(!this.arraysAreEqual(this.ingredients, recipe.results.ingredients)){
+        var newIngredients:any = this.ingredients.map(function(a:any) { return a["id"]; });
+        body.ingredients = newIngredients;
+      }
       if(recipe.results.steps!= request['process']){
           body.steps = request['process'];
       }
@@ -115,6 +144,10 @@ export class EditorComponent implements OnInit {
     })
   }
 
+  arraysAreEqual(array1: any, array2: any) {
+    return JSON.stringify(array1) === JSON.stringify(array2);
+  }
+
   /**
    * Método lanzado en la inicialización de la página.
    * Asigna los valores obtenidos del servicio de recetas a las áreas de texto correspondientes.
@@ -123,7 +156,7 @@ export class EditorComponent implements OnInit {
     this.recipeService.getRecipeById(this.recipeID!).subscribe(recipe => {
       this.description = recipe?.results.description;
       this.title = recipe?.results.title;
-      this.ingredients = recipe?.resultsingredients;
+      this.ingredients = recipe?.results.ingredients;
       this.imgURL = recipe?.results.image;
       this.process = recipe?.results.steps;
       this.author = recipe?.results.user.username

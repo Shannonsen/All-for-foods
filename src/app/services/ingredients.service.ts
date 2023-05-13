@@ -22,7 +22,9 @@ export class IngredientsService {
    * @returns {Observable<any>} Lista de ingredientes
    */
   public getAllIngredients(): Observable<any>{
-    return this.http.get(this.LOCAL_INGREDIENTS);
+    const params = new HttpParams()
+    .set('size', '*')
+    return this.http.get("http://localhost:3001/api/v1/ingredient/", {'params': params});
   }
 
 

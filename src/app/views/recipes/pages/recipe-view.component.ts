@@ -6,6 +6,7 @@ import { RecipesService } from 'src/app/services/recipes.service';
 import { UserService } from 'src/app/services/user.service';
 import { CookieService } from 'ngx-cookie-service';
 import { DatePipe } from '@angular/common';
+import { Ingredient } from '../../shared/models/ingredient.model';
 
 @Component({
   selector: 'app-recipe-view',
@@ -18,7 +19,7 @@ export class RecipeViewComponent implements OnInit {
   recipeID: number = 0;
   title: string | undefined = '';
   author: number | undefined = 0;
-  ingredients: string[] | undefined = [];
+  ingredients: Ingredient[] = [];
   imgURL: string | undefined = '';
   process: string| undefined = "";
   description: string | undefined = '';
@@ -51,7 +52,7 @@ export class RecipeViewComponent implements OnInit {
       this.author = recipeResult.user.id;
       this.description = recipeResult.description
       this.title = recipeResult.title;
-      this.ingredients = recipe?.ingredients;
+      this.ingredients = recipe?.results.ingredients;
       this.imgURL = recipeResult.image;
       this.process = recipeResult.steps;
       this.rating = recipeResult.rate;
