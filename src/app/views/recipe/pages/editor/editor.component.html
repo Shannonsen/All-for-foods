@@ -92,7 +92,7 @@
   <div class="container-button">
     <button
       type="submit"
-      [disabled]="!recipeForm.touched"
+      [disabled]="recipeForm.invalid"
       class="btn btn-md"
       (click)="onSave()"
     >

@@ -96,51 +96,66 @@ export class EditorComponent implements OnInit {
     var request = this.recipeForm.value;
     var idUser = this.cookieService.get('idUser');
     var token = this.cookieService.get('Token');
-    this.recipeService.getRecipeById(this.recipeID).subscribe(recipe =>{
-      type recipeBody ={
-        userId: string,
-        image?: string,
-        title?: string,
-        description?: string,
-        ingredients?: any[],
-        steps?: string,
-      }
-      const body: recipeBody = {
-        'userId': idUser,
-      };
-      if(recipe.results.title != request['title']){
-          body.title = request['title'];
-      }
-      if(recipe.results.image  != request['imgURL']){
-          body.image = request['imgURL'];
-      }
-      if(recipe.results.description != request['description']){
-          body.description = request['description'];
-      }
-      if(!this.arraysAreEqual(this.ingredients, recipe.results.ingredients)){
+    type recipeBody ={
+      userId: string,
+      image?: string,
+      title?: string,
+      description?: string,
+      ingredients?: any[],
+      steps?: string,
+    }
+    const body: recipeBody = {
+      'userId': idUser,
+    };
+    this.route.params.subscribe(params => {
+    this.recipeID = Number(params['id']);
+      if (Number.isNaN(this.recipeID)) {
+        body.title = request['title'];
+        body.image = request['imgURL'];
+        body.description = request['description'];
         var newIngredients:any = this.ingredients.map(function(a:any) { return a["id"]; });
         body.ingredients = newIngredients;
-      }
-      if(recipe.results.steps!= request['process']){
-          body.steps = request['process'];
-      }
-      this.removeEmptyValues(body)
-      this.recipeService.putRecipeById(this.recipeID, token, body).subscribe(recipeUpdate =>{
-        if(recipeUpdate.code == 200){
-          Swal.fire("CORRECTO", 'Receta editada', 'success').then(()=>{
-            this.router.navigate(['recipes/' + this.recipeID]).then(() => {
-              window.location.reload();
-            });
+        body.steps = request['process'];
+        this.recipeService.postRecipe(token, body).subscribe(result =>{
+          console.log(result)
+        })
+      }else{
+        this.recipeService.getRecipeById(this.recipeID).subscribe(recipe =>{
+          if(recipe.results.title != request['title']){
+              body.title = request['title'];
+          }
+          if(recipe.results.image  != request['imgURL']){
+              body.image = request['imgURL'];
+          }
+          if(recipe.results.description != request['description']){
+              body.description = request['description'];
+          }
+          if(!this.arraysAreEqual(this.ingredients, recipe.results.ingredients)){
+            var newIngredients:any = this.ingredients.map(function(a:any) { return a["id"]; });
+            body.ingredients = newIngredients;
+          }
+          if(recipe.results.steps!= request['process']){
+              body.steps = request['process'];
+          }
+          this.removeEmptyValues(body)
+          this.recipeService.putRecipeById(this.recipeID, token, body).subscribe(recipeUpdate =>{
+            if(recipeUpdate.code == 200){
+              Swal.fire("CORRECTO", 'Receta editada', 'success').then(()=>{
+                this.router.navigate(['recipes/' + this.recipeID]).then(() => {
+                  window.location.reload();
+                });
+              })
+            }else{
+              Swal.fire("ERROR", recipeUpdate.message, 'error').then(()=>{
+                this.router.navigate(['recipes/' + this.recipeID]).then(() => {
+                  window.location.reload();
+                });
+              })
+            }
           })
-        }else{
-          Swal.fire("ERROR", recipeUpdate.message, 'error').then(()=>{
-            this.router.navigate(['recipes/' + this.recipeID]).then(() => {
-              window.location.reload();
-            });
-          })
-        }
-      })
 
+        })
+      }
     })
   }
 

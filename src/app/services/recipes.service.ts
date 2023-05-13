@@ -79,9 +79,12 @@ export class RecipesService {
     return this.http.put("http://localhost:3001/api/v1/recipe/" + id, body , {'headers': headers})
   }
 
+  public postRecipe(token: string, body: any){
+    const headers = new HttpHeaders({'authorization': token});
+    return this.http.post("http://localhost:3001/api/v1/recipe", body, {'headers': headers})
+  }
 
   public isFavorite(recipeId: number[], userId: number, token: string){
-
     let body ={
       "userId": userId,
       "recipeIds": recipeId,
