@@ -40,10 +40,10 @@
               <div class="col-12">
                 <small><b>creado: </b>{{ product.createdAt }} </small>
               </div>
-              <div class="col-1" style="color:gold"  *ngFor="let star of [].constructor(product.rate); let i= index">
+              <div class="col-1" style="color:gold"  *ngFor="let star of [].constructor(round(product.rate)); let i= index">
                 <i class="fa fa-star" id="star-{{i}}-{{product.id}}"></i>
               </div>
-              <div class="col-1" style="color:gray"  *ngFor="let star of [].constructor((5-product.rate)); let i= index">
+              <div class="col-1" style="color:gray"  *ngFor="let star of [].constructor((round(5-product.rate))); let i= index">
                 <i class="fa fa-star" id="star-{{i}}-{{product.id}}"></i>
               </div>
             </div>

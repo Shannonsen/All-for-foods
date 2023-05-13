@@ -25,7 +25,8 @@ export class ListProductsComponent implements OnInit {
    * @constructor
    * @param {UserService} userService : Servicio de usuarios
    */
-  constructor(private userService: UserService, private cookieService: CookieService, private recipeService: RecipesService, private router: Router, private loginService: LoginService) { }
+  constructor(private userService: UserService, private cookieService: CookieService, private recipeService: RecipesService, private router: Router, private loginService: LoginService) {
+   }
 
   /**
    * @override
@@ -41,6 +42,10 @@ export class ListProductsComponent implements OnInit {
     this.userService.getAllUsers().subscribe(users => {
       this.users = users;
     });
+  }
+
+  round(rate: any){
+    return Math.round(rate)
   }
 
   /**

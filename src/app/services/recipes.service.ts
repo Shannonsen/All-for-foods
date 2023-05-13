@@ -79,18 +79,40 @@ export class RecipesService {
     return this.http.put("http://localhost:3001/api/v1/recipe/" + id, body , {'headers': headers})
   }
 
-  public postRecipe(token: string, body: any){
+  public postRecipe(token: string, body: any): Observable<any>{
     const headers = new HttpHeaders({'authorization': token});
     return this.http.post("http://localhost:3001/api/v1/recipe", body, {'headers': headers})
   }
 
-  public isFavorite(recipeId: number[], userId: number, token: string){
+  public isFavorite(recipeId: number[], userId: number, token: string): Observable<any>{
     let body ={
       "userId": userId,
       "recipeIds": recipeId,
     }
-    const headers = new HttpHeaders({'authorization': token});
+    const headers = new HttpHeaders({'authorization': token})
     return this.http.post("http://localhost:3001/api/v1/favorite/byRecipesIds", body, {'headers': headers})
+  }
+
+
+  public getMyScore(token: string, idUser: number, idRecipe: number): Observable<any>{
+    const headers = new HttpHeaders({'authorization': token});
+    return this.http.get("http://localhost:3001/api/v1/score/"+ idUser +"/" + idRecipe, {'headers': headers})
+  }
+
+  public deleteMyScore(token: string,idUser: number, idRecipe: number ):Observable<any>{
+    const headers = new HttpHeaders({'authorization': token});
+    return this.http.delete("http://localhost:3001/api/v1/score/" + idUser + "/" + idRecipe,  {'headers': headers})
+
+  }
+
+  public postMyScore(token: string,idUser: number, idRecipe: number, score: number):Observable<any>{
+    let body ={
+      "userId": idUser,
+      "recipeId": idRecipe,
+      'score': score
+    }
+    const headers = new HttpHeaders({'authorization': token});
+    return this.http.post("http://localhost:3001/api/v1/score/", body, {'headers': headers})
   }
 
   /**
