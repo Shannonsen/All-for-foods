@@ -38,7 +38,7 @@
             </div>
             <div class="row">
               <div class="col-12">
-                <small><b>creado: </b>{{ product.creationDate }} </small>
+                <small><b>creado: </b>{{ product.createdAt }} </small>
               </div>
               <div class="col-1" style="color:gold"  *ngFor="let star of [].constructor(product.rate); let i= index">
                 <i class="fa fa-star" id="star-{{i}}-{{product.id}}"></i>

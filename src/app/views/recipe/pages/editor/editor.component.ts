@@ -1,10 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Food } from 'src/app/views/shared/models/food.model';
 import { RecipesService } from 'src/app/services/recipes.service';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/views/shared/models/user.model';
+import { CookieService } from 'ngx-cookie-service';
+import Swal from 'sweetalert2';
 /**
  * Clase que representa el editor de recetas.
  */
@@ -35,7 +37,7 @@ export class EditorComponent implements OnInit {
    * @param recipeService : Servicio de recetas.
    * @param userService : Servicio de usuarios.
    */
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private recipeService: RecipesService, private userService: UserService) {
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private recipeService: RecipesService, private userService: UserService, private cookieService: CookieService, private router: Router) {
     this.recipeForm = this.formBuilder.group({});
   }
 
@@ -43,12 +45,6 @@ export class EditorComponent implements OnInit {
    * @override
    */
   ngOnInit(): void {
-    const today = new Date();
-    const date = today.getDate();
-    const month = today.getMonth() + 1;
-    const year = today.getFullYear();
-    this.modificationDate = date + "-" + month + "-" + year;
-
     this.route.params.subscribe(params => {
       this.recipeID = Number(params['id']);
       if (!Number.isNaN(this.recipeID)) {
@@ -56,13 +52,6 @@ export class EditorComponent implements OnInit {
       } else {
         this.imgURL = "https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png";
       }
-
-      const tkn = localStorage.getItem('Token');
-      this.userService.getAllUsers().subscribe(users => {
-        var user = (users as User[]).find(p => p.token === tkn);
-        this.user = <User>user;
-        this.author = user!.username;
-      })
 
       this.recipeForm = new FormGroup({
         title: new FormControl('', [Validators.required, Validators.minLength(4)]),
@@ -79,18 +68,51 @@ export class EditorComponent implements OnInit {
    * Método lanzado cuando se oprime el botón Save.
    */
   onSave() {
-    if (Number.isNaN(this.recipeID)) {
-      this.recipeID = 0;
-      this.recipeService.getFoodCount().subscribe(count => {
-        this.recipeID = count + 1;
+    var request = this.recipeForm.value;
+    var idUser = this.cookieService.get('idUser');
+    var token = this.cookieService.get('Token');
+    this.recipeService.getRecipeById(this.recipeID).subscribe(recipe =>{
+      type recipeBody ={
+        userId: string,
+        image?: string,
+        title?: string,
+        description?: string,
+        ingredients?: any[],
+        steps?: string,
+      }
+      const body: recipeBody = {
+        'userId': idUser,
+      };
+      if(recipe.results.title != request['title']){
+          body.title = request['title'];
+      }
+      if(recipe.results.image  != request['imgURL']){
+          body.image = request['imgURL'];
+      }
+      if(recipe.results.description != request['description']){
+          body.description = request['description'];
+      }
+      if(recipe.results.steps!= request['process']){
+          body.steps = request['process'];
+      }
+      this.removeEmptyValues(body)
+      this.recipeService.putRecipeById(this.recipeID, token, body).subscribe(recipeUpdate =>{
+        if(recipeUpdate.code == 200){
+          Swal.fire("CORRECTO", 'Receta editada', 'success').then(()=>{
+            this.router.navigate(['recipes/' + this.recipeID]).then(() => {
+              window.location.reload();
+            });
+          })
+        }else{
+          Swal.fire("ERROR", recipeUpdate.message, 'error').then(()=>{
+            this.router.navigate(['recipes/' + this.recipeID]).then(() => {
+              window.location.reload();
+            });
+          })
+        }
+      })
 
-        //creation date == last modified == modification date
-        alert('receta actualizada\nid:' + this.recipeID);
-      });
-    } else {
-      //last modified == modification date
-      alert('receta actualizada\nid:' + this.recipeID);
-    }
+    })
   }
 
   /**
@@ -128,5 +150,16 @@ export class EditorComponent implements OnInit {
     }
 
   }
+
+  removeEmptyValues(object: any) {
+    for (var key in object) {
+        if (object.hasOwnProperty(key)) {
+            var value = object[key];
+            if (value === null || value === undefined || value === '') {
+                delete object[key];
+            }
+        }
+    }
+}
 
 }

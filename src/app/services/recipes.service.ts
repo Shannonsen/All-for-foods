@@ -74,6 +74,10 @@ export class RecipesService {
     return this.http.get<Food>("http://localhost:3001/api/v1/recipe/"+ id);
   }
 
+  public putRecipeById(id: number, token: string, body: any): Observable<any>{
+    const headers = new HttpHeaders({'authorization': token});
+    return this.http.put("http://localhost:3001/api/v1/recipe/" + id, body , {'headers': headers})
+  }
   /**
    * Método que devuelve las recetas atribuidas al id de un autor.
    * @param {number} author : Identificador del autor.
