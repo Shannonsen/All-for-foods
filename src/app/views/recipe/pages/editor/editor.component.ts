@@ -69,7 +69,8 @@ export class EditorComponent implements OnInit {
         ingredients: new FormControl('', [Validators.required, Validators.minLength(4)]),
         imgURL: new FormControl('', [Validators.required, Validators.minLength(4)]),
         process: new FormControl('', [Validators.required, Validators.minLength(4)]),
-        description: new FormControl('', [Validators.required, Validators.minLength(4)])
+        description: new FormControl('', [Validators.required, Validators.minLength(4)]),
+        author: new FormControl(''),
       });
     });
   }
@@ -98,11 +99,12 @@ export class EditorComponent implements OnInit {
    */
   updateRecipeInformation() {
     this.recipeService.getRecipeById(this.recipeID!).subscribe(recipe => {
-      this.description = recipe?.description;
-      this.title = recipe?.title;
-      this.ingredients = recipe?.ingredients;
-      this.imgURL = recipe?.image;
-      this.process = recipe?.steps;
+      this.description = recipe?.results.description;
+      this.title = recipe?.results.title;
+      this.ingredients = recipe?.resultsingredients;
+      this.imgURL = recipe?.results.image;
+      this.process = recipe?.results.steps;
+      this.author = recipe?.results.user.username
       if(recipe?.rate!= undefined){
         for(let i =0; i<5; i++){
           if(i<recipe?.rate){
