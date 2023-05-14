@@ -4,14 +4,15 @@ import { RecipesService } from './recipes.service';
 import { Observable } from 'rxjs';
 import { UserService } from './user.service';
 import { IngredientsService } from './ingredients.service';
+import { CommentService } from './comment.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GetAllPaginationService {
-  constructor(private http: HttpClient, private recipeService: RecipesService, private userService: UserService, private ingredientService: IngredientsService) { }
+  constructor(private http: HttpClient, private recipeService: RecipesService, private userService: UserService, private ingredientService: IngredientsService, private commentService: CommentService) { }
 
-  public getServiceRecipes(typeSearch:string ="", page:number, size:number = 4, token:string = "", idUser:number): Observable<any>{
+  public getServiceRecipes(typeSearch:string ="", page:number, size:number = 4, token:string = "", idUser:number , idRecipe: number): Observable<any>{
     switch(typeSearch){
       case 'delete':
         return this.recipeService.getAllRecipesActivated(token, page)
@@ -29,6 +30,8 @@ export class GetAllPaginationService {
         return this.recipeService.getMyRecipes(idUser, page)
       case 'follow-recipes':
         return this.recipeService.getAllFollowsRecipes(idUser, page)
+      case 'comments-recipe':
+        return this.commentService.getAllCommentsSpecificRecipe(idRecipe, page)
       default:
         return this.recipeService.getAllFoods(page)
     }

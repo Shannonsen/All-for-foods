@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Comment } from '../views/shared/models/comment.model'; 
-import { map } from 'rxjs/operators';
+import { Comment } from '../views/shared/models/comment.model';
 
 /**
  * Clase que representa el servicio para comentarios.
@@ -13,7 +12,7 @@ import { map } from 'rxjs/operators';
 })
 export class CommentService {
 
-  private LOCAL_COMMENTS = "http://localhost:4200/assets/comments.json"; 
+  private LOCAL_COMMENTS = "http://localhost:4200/assets/comments.json";
 
 /**
  * @constructor
@@ -30,6 +29,12 @@ export class CommentService {
     return this.http.get(this.LOCAL_COMMENTS);
   }
 
+  public getAllCommentsSpecificRecipe(idRecipe:number, page: number=1): Observable<any>{
+    const params = new HttpParams()
+    .set('page', page)
+    return this.http.get("http://localhost:3001/api/v1/comment/" + idRecipe, {'params': params})
+  }
+
 /**
   * Método para añadir comentarios
   * @returns {Observable<Comment>} Lista de comentarios
@@ -38,5 +43,4 @@ export class CommentService {
   addComment(comment: Comment): Observable<Comment> {
     return this.http.post<Comment>(`${this.LOCAL_COMMENTS}/comments`, comment);
   }
-  
 }

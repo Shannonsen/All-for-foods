@@ -5,6 +5,7 @@
       <app-list-products *ngIf="typeList == 'products'"  [products]="items" [isPanel]="isPanel"></app-list-products>
       <app-list-users *ngIf="typeList == 'users'"  [users]="items" [isPanel]="isPanel"></app-list-users>
       <app-list-ingredients *ngIf="typeList == 'ingredients'" [ingredients]="items" [isPanel]="isPanel" ></app-list-ingredients>
+      <app-list-comments *ngIf="typeList == 'comments'" [comments]="items"></app-list-comments>
       <div class="row gallery-bottom">
         <div class="col-sm-12 container-paginator">
           <ul class="pagination">

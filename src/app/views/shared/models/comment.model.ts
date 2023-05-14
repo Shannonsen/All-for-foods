@@ -1,6 +1,11 @@
 export interface Comment {
     id: number,
     recipeId: number,
-    author: number,
-    commentText: string,
+    user: {
+      id: number
+      username: string
+    }
+    comment: string,
+    createdAt: Date,
+    modifiedAt: Date,
 }

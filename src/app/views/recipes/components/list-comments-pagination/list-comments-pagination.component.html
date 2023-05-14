@@ -1,0 +1,19 @@
+<app-searcher-recipe [pageSize]="pageSize"
+[currentPage]="currentPage"
+(outputTotalPages)="totalPages = $event"
+(outputRecipes)="foods = $event"
+(outputCurrentPage)="currentPage = $event"
+[typeSearch]="typeSearch"
+[recipeID]="recipeID">
+</app-searcher-recipe>
+<app-pagination-items
+  [items]="foods"
+  [pageSize]="pageSize"
+  [sectionName]="sectionName"
+  [totalPages]="totalPages"
+  [currentPage]="currentPage"
+  (outputCurrentPage)="currentPage = $event"
+  [isPanel]="isPanel"
+  [typeList]="typeList"
+>
+</app-pagination-items>
