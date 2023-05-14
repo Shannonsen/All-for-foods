@@ -18,6 +18,10 @@ export class RecipesFollowsListComponent implements OnInit {
   pageSize: number = 4;
   totalPages: number[] = [];
   sectionName: string = 'Recetas de seguidores';
+  @Input() foods: Food[] = [];
+  @Input() typeSearch:string = ""
+  @Input() isPanel:string = ""
+  @Input() typeList: string = "";
 
   /**
    * @constructor

@@ -43,6 +43,12 @@ export class RecipesService {
     return this.http.get('http://localhost:3001/api/v1/recipe/admin/getAll/0', {'headers': headers, 'params': params});
   }
 
+  public getAllFollowsRecipes(id:number, page: number = 1): Observable<any> {
+    const params = new HttpParams()
+    .set('page', page)
+    return this.http.get("http://localhost:3001/api/v1/recipe/myFollows/" + id, {'params': params})
+  }
+
   public deleteRecipe(idRecipe: number, token: string): Observable<any>{
     const headers = new HttpHeaders({'authorization': token});
     return this.http.put("http://localhost:3001/api/v1/recipe/delete/" + idRecipe, null,  {'headers': headers});
