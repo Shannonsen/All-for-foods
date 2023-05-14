@@ -90,5 +90,11 @@ export class UserService {
     return this.http.post("http://localhost:3001/api/v1/follow/byUserIds", body, {'headers': headers})
   }
 
+  public getFollowings(idUser: number): Observable<any>{
+    const params = new HttpParams()
+    .set('size', '*')
+    return this.http.get("http://localhost:3001/api/v1/follow/getFollowings/" + idUser, {'params': params})
+  }
+
 }
 

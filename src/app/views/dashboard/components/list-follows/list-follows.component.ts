@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { User } from 'src/app/views/shared/models/user.model';
 import { UserService } from 'src/app/services/user.service';
+import { CookieService } from 'ngx-cookie-service';
 /**
  * Clase que representa el listado de los usuarios seguidos.
  */
@@ -11,22 +12,23 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class ListFollowsComponent implements OnInit {
 
-  @Input() follows: number[] = [];
+  follows: User[] = [];
   users: User[] = []
 
   /**
    *@constructor
    * @param {UserService} userService : Servicio de usuarios.
    */
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private cookieService: CookieService) {
   }
 
   /**
    * @override
    */
   ngOnInit(): void {
-    this.userService.getAllUsers().subscribe(users => {
-      this.users = users;
+    var idUser = this.cookieService.get('idUser');
+    this.userService.getFollowings(Number(idUser)).subscribe(followings => {
+      this.follows = followings.data
     })
   }
 
@@ -45,7 +47,7 @@ export class ListFollowsComponent implements OnInit {
    * @param {number} id: id del usuario
    * @returns {string}: link del url de la imagen del usuario
    */
-  getUserIcon(id: number): string{
+  getUserIcon(id: number): string {
     const user = this.users.find(user => user.id === id);
     return user?.icon || '';
   }
