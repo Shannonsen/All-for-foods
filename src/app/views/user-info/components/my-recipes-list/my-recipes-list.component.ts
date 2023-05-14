@@ -16,6 +16,7 @@ export class MyRecipesListComponent implements OnInit {
   @Input() typeSearch:string = "my-recipes"
   @Input() isPanel:string = ""
   @Input() typeList: string = "products";
+  @Input() profile:string = ""
 
   myRecipesList: Food[] = [];
 

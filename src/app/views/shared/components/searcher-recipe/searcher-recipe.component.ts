@@ -34,6 +34,7 @@ export class SearcherRecipeComponent implements OnInit {
   @Output() outputTotalPages = new EventEmitter<number[]>();
   @Output() outputCurrentPage = new EventEmitter<number>();
   @Input() typeSearch: string = "";
+  @Input() profile: string =""
   /**
    * @constructor
    * @param {KeyValueDiffers} differs : Detecta cambios en los objetos
@@ -104,6 +105,9 @@ export class SearcherRecipeComponent implements OnInit {
   onEnter(e: any) {
     var token = this.cookieService.get('Token');
     var idUser = Number(this.cookieService.get('idUser'));
+    if(this.typeSearch == 'my-recipes'){
+      idUser = this.profile == null ? Number(this.cookieService.get('idUser')): Number(this.profile)
+    }
       this.getAllService.getServiceRecipes(this.typeSearch,this.currentPage,4,token,idUser).subscribe(recipes => {
         var recipeToSend = recipes.data
         var totalPage = recipes.totalPage

@@ -20,6 +20,7 @@ export class ProfileComponent implements OnInit {
   email: string = '';
   description: string = '';
   profileID: number | undefined;
+  profileIDString: string = ""
   isUser: boolean = true;
 
   profileForm: FormGroup;
@@ -46,6 +47,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.profileID = Number(params['id']);
+      this.profileIDString = params['id'];
       this.token = this.cookieService.get('Token');
       this.userId = this.cookieService.get('idUser');
       this.loginService.type_auth( this.token).subscribe(data => {
