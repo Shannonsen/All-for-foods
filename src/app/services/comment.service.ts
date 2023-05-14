@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams,HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Comment } from '../views/shared/models/comment.model';
 
@@ -37,10 +37,15 @@ export class CommentService {
 
 /**
   * Método para añadir comentarios
-  * @returns {Observable<Comment>} Lista de comentarios
+  * @returns {Observable<any>} Lista de comentarios
   */
-
-  addComment(comment: Comment): Observable<Comment> {
-    return this.http.post<Comment>(`${this.LOCAL_COMMENTS}/comments`, comment);
+  postComment(recipeID:number, userId: number, comment: string, token:string): Observable<any> {
+    let body = {
+      "recipeId": recipeID ,
+      "userId": userId,
+      "comment": comment
+    }
+    const headers = new HttpHeaders({'authorization': token})
+    return this.http.post("http://localhost:3001/api/v1/comment/",body, {'headers':headers})
   }
 }
