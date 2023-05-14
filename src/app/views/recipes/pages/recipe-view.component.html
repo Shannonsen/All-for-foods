@@ -9,7 +9,7 @@
         <hr>
         <h4>Ingredientes:</h4>
         <ul>
-          <li *ngFor="let ingredient of ingredients">{{ingredient}}</li>
+          <li *ngFor="let ingredient of ingredients">{{ingredient.name}}</li>
         </ul>
         <hr>
         <h4>Procedimiento:</h4>
@@ -19,7 +19,47 @@
         <hr>
         <h4>Descripción:</h4>
         <p>{{description}}</p>
-        <p>Calificación: {{rating}}</p>
+
+        <div class="row m-1">
+          Calificación público:
+          <div class="col-1" style="color:gold"  *ngFor="let star of [].constructor(rating_round); let i= index">
+            <i class="fa fa-star" id="star-{{i}}-{{recipeID}}"></i>
+          </div>
+          <div class="col-1" style="color:gray"  *ngFor="let star of [].constructor(5-rating_round); let i= index">
+            <i class="fa fa-star" id="star-{{i}}-{{recipeID}}"></i>
+          </div>
+          [ {{rating}} ]
+        </div>
+        <div class="row m-1" *ngIf="changeScore">
+          Calificación privada:
+          <div class="col-1" style="color:gold"  *ngFor="let star of [].constructor(myScore); let i= index">
+            <i class="fa fa-star" id="star-{{i}}-{{recipeID}}"></i>
+          </div>
+          <div class="col-1" style="color:gray"  *ngFor="let star of [].constructor(5-myScore); let i= index">
+            <i class="fa fa-star" id="star-{{i}}-{{recipeID}}"></i>
+          </div>
+          [ {{myScore}} ]
+        </div>
+        <div class="row" *ngIf="changeScore">
+          <div class="col-6"><button class="btn btn-primary" (click)="changeMyScore()">Cambiar Calificación</button></div>
+        </div>
+        <div class="row m-1" *ngIf="!changeScore">
+          Calificación privada:
+          <div
+          class="col-1"
+          style="color: gray"
+          *ngFor="let star of [].constructor(5); let i = index"
+        >
+          <i
+            class="fa fa-star"
+            (click)="changeRating(i, recipeID!)"
+            id="star-{{ i }}-{{ recipeID }}-{{recipeID}}"
+          ></i>
+        </div>
+        </div>
+        <div class="row" *ngIf="!changeScore">
+          <div class="col-6"><button class="btn btn-primary" (click)="changeMyScore()">Guardar calificación</button></div>
+        </div>
         <p>Fecha de creación: {{date}}</p>
         <button *ngIf="displayButton" [routerLink]="['/recipe', recipeID]" class="btn btn-primary" >
           Editar receta

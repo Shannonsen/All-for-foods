@@ -20,27 +20,34 @@ export class ListProductsComponent implements OnInit {
   @Input() products: Food[] = [];
   users: User[] = [];
   token: any = "";
+  user: any =""
   @Input() isPanel:string = ""
   /**
    * @constructor
    * @param {UserService} userService : Servicio de usuarios
    */
-  constructor(private userService: UserService, private cookieService: CookieService, private recipeService: RecipesService, private router: Router, private loginService: LoginService) { }
+  constructor(private userService: UserService, private cookieService: CookieService, private recipeService: RecipesService, private router: Router, private loginService: LoginService) {
+
+  }
 
   /**
    * @override
    */
   ngOnInit(): void {
     this.token = this.cookieService.get('Token');
-/*     this.loginService.type_auth(this.token).subscribe(authType =>{
-      console.log(authType)
-      if(authType.results.permission == "Admin"){
-        this.isPanel = true
-      }
-    }) */
+    this.user = this.cookieService.get('idUser');
     this.userService.getAllUsers().subscribe(users => {
       this.users = users;
     });
+  }
+
+/*   verify(id:number){
+    this.recipeService.isFavorite([id],this.user, this.token).subscribe(data =>{
+      console.log(data)
+    })
+  } */
+  round(rate: any){
+    return Math.round(rate)
   }
 
   /**

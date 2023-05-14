@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { RecipeRoutingModule } from './recipe-routing.module';
 import { EditorComponent } from './pages/editor/editor.component';
 import { SharedModule } from '../shared/shared.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -13,6 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     EditorComponent,
   ],
   imports: [
+    FormsModule,
     CommonModule,
     RecipeRoutingModule,
     SharedModule,

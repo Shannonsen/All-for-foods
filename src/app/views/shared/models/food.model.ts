@@ -24,6 +24,6 @@ export interface Food{
   steps: string;
   rate: number;
   description: string;
-  creationDate: string,
+  createdAt: Date,
   lastModified: string,
 }
