@@ -8,7 +8,8 @@
           src="{{icon}}"
           alt=""
         />
-        <button (click)="follow()" id="btn-follow" class="btn mt-3" style="background-color: crimson; color:white">Seguir</button>
+        <button *ngIf="!typeFollow"(click)="follow()" id="btn btn-danger" class="btn btn-danger mt-3">Seguir</button>
+        <button *ngIf="typeFollow" (click)="unFollow()" id="btn btn-primary" class="btn btn-success mt-3">Siguiendo</button>
       </div>
       <div class="col-10">
         <div class="row">

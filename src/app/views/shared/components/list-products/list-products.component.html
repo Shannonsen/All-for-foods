@@ -32,9 +32,12 @@
               <div class="col-8">
                 <h2>{{ product.title }}</h2>
               </div>
-              <div *ngIf="token" class="col-4 container-icon-heart">
-              <i class="fa fa-heart fa-2x" (click)="changeColor(product.id) "style="color:gray" id="{{product.id}}"></i>
+              <div *ngIf="token && verifyFollowed(product.id)" class="col-4 container-icon-heart">
+              <i class="fa fa-heart fa-2x" (click)="changeColor(product.id) "style="color:red" id="{{product.id}}"></i>
               </div>
+              <div *ngIf="token && !verifyFollowed(product.id)" class="col-4 container-icon-heart">
+                <i class="fa fa-heart fa-2x" (click)="changeColor(product.id) "style="color:gray" id="{{product.id}}"></i>
+                </div>
             </div>
             <div class="row">
               <div class="col-12">

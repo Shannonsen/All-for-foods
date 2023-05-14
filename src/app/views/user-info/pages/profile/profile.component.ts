@@ -24,6 +24,10 @@ export class ProfileComponent implements OnInit {
 
   profileForm: FormGroup;
   user: User = <User>{};
+  typeFollow:string = ""
+
+  token: string =""
+  userId: string=""
 
   /**
    * @constructor
@@ -42,8 +46,9 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.profileID = Number(params['id']);
-      var token = this.cookieService.get('Token');
-      this.loginService.type_auth(token).subscribe(data => {
+      this.token = this.cookieService.get('Token');
+      this.userId = this.cookieService.get('idUser');
+      this.loginService.type_auth( this.token).subscribe(data => {
         this.userService.getUserById(data.results.id).subscribe(user => {
           if (data.results.id === this.profileID || Number.isNaN(this.profileID)) {
             this.name = user.results.username;
@@ -60,6 +65,11 @@ export class ProfileComponent implements OnInit {
             });
           }
         })
+      })
+      this.userService.isFollowing(Number(this.userId), [this.profileID], this.token).subscribe(typeFollow =>{
+        if(typeFollow.results[0].isFollow){
+          this.typeFollow = "true"
+        }
       })
     });
 
@@ -126,18 +136,41 @@ export class ProfileComponent implements OnInit {
   /**
    * Método que se lanza al dar click al botón de follow
    */
-  follow() {
-    const star = document.getElementById("btn-follow")!;
-    if (star.style.backgroundColor == "mediumaquamarine") {
-      star.style.backgroundColor = "crimson";
-      star.innerHTML = "Seguir";
-      star.style.scale = "1";
-    } else {
-      star.style.backgroundColor = "mediumaquamarine";
-      star.innerHTML = "Siguiendo";
-      star.style.scale = "1";
-    }
 
+  follow() {
+    this.userService.postFollow(Number(this.userId), Number(this.profileID), this.token).subscribe(response =>{
+      if(response.code == 201){
+        Swal.fire("CORRECTO", 'Estas siguiendo a ' + this.name, 'success').then(()=>{
+          this.router.navigate(['profile/' + this.profileID]).then(() => {
+            window.location.reload();
+          });
+        })
+      }else{
+        Swal.fire("ERROR", response.message, 'error').then(()=>{
+          this.router.navigate(['profile/' + this.profileID]).then(() => {
+            window.location.reload();
+          });
+        })
+      }
+    })
+  }
+
+  unFollow(){
+    this.userService.deleteFollow(Number(this.userId), Number(this.profileID), this.token).subscribe(response =>{
+      if(response.code == 200){
+        Swal.fire("CORRECTO", 'Has dejado de seguir a ' + this.name, 'success').then(()=>{
+          this.router.navigate(['profile/' + this.profileID]).then(() => {
+            window.location.reload();
+          });
+        })
+      }else{
+        Swal.fire("ERROR", response.message, 'error').then(()=>{
+          this.router.navigate(['profile/' + this.profileID]).then(() => {
+            window.location.reload();
+          });
+        })
+      }
+    })
   }
 
 }
