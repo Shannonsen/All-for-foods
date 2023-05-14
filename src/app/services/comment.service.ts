@@ -48,4 +48,9 @@ export class CommentService {
     const headers = new HttpHeaders({'authorization': token})
     return this.http.post("http://localhost:3001/api/v1/comment/",body, {'headers':headers})
   }
+
+  deleteComment(idComment: number, token:string): Observable<any> {
+    const headers = new HttpHeaders({'authorization': token})
+    return this.http.delete("http://localhost:3001/api/v1/comment/" + idComment, {'headers':headers})
+  }
 }
