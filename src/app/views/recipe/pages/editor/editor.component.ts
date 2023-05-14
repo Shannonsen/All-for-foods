@@ -118,6 +118,19 @@ export class EditorComponent implements OnInit {
         body.steps = request['process'];
         this.recipeService.postRecipe(token, body).subscribe(result =>{
           console.log(result)
+          if(result.code == 201){
+            Swal.fire("CORRECTO", 'Receta creada', 'success').then(()=>{
+              this.router.navigate(['recipes/' + result.results.id]).then(() => {
+                window.location.reload();
+              });
+            })
+          }else{
+            Swal.fire("ERROR", result.message, 'error').then(()=>{
+              this.router.navigate(['recipes/' + result.results.id]).then(() => {
+                window.location.reload();
+              });
+            })
+          }
         })
       }else{
         this.recipeService.getRecipeById(this.recipeID).subscribe(recipe =>{
