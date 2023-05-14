@@ -66,5 +66,29 @@ export class UserService {
   public getUserId(id: number): Observable<any>{
     return this.http.get<User>("http://localhost:3001/api/v1/user/"+ id);
   }
+
+  public postFollow(idUser: number, idFollow: number, token: string): Observable<any>{
+    let body ={
+      "userId": idUser,
+      "followId": idFollow,
+    }
+    const headers = new HttpHeaders({'authorization': token});
+    return this.http.post("http://localhost:3001/api/v1/follow", body, {'headers': headers})
+  }
+
+  public deleteFollow(idUser: number, idFollow: number, token: string): Observable<any>{
+    const headers = new HttpHeaders({'authorization': token});
+    return this.http.delete("http://localhost:3001/api/v1/follow/" + idUser + "/" + idFollow, {'headers': headers})
+  }
+
+  public isFollowing(idUser: number, idFollow: number[], token: string): Observable<any>{
+    let body ={
+      "userId": idUser,
+      "userIds": idFollow,
+    }
+    const headers = new HttpHeaders({'authorization': token});
+    return this.http.post("http://localhost:3001/api/v1/follow/byUserIds", body, {'headers': headers})
+  }
+
 }
 

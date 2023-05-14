@@ -59,6 +59,12 @@ export class RecipesService {
     return this.http.get("http://localhost:3001/api/v1/favorite/" + id, {'params': params})
   }
 
+  public getAllMyFavoritesRecipes(id: number): Observable<any>{
+    const params = new HttpParams()
+    .set('size', '*')
+    return this.http.get("http://localhost:3001/api/v1/favorite/" + id, {'params': params})
+  }
+
   public getMyRecipes(id: number, page:number): Observable<any>{
     const params = new HttpParams()
     .set('page', page)
@@ -93,6 +99,19 @@ export class RecipesService {
     return this.http.post("http://localhost:3001/api/v1/favorite/byRecipesIds", body, {'headers': headers})
   }
 
+  public deleteFavorite(recipeId: number, userId: number, token: string): Observable<any>{
+    const headers = new HttpHeaders({'authorization': token})
+    return this.http.delete("http://localhost:3001/api/v1/favorite/" + userId + "/" + recipeId, {'headers': headers})
+  }
+
+  public postFavorite(recipeId: number, userId: number, token: string): Observable<any>{
+    let body ={
+      "userId": userId,
+      "recipeId": recipeId,
+    }
+    const headers = new HttpHeaders({'authorization': token})
+    return this.http.post("http://localhost:3001/api/v1/favorite/", body, {'headers': headers})
+  }
 
   public getMyScore(token: string, idUser: number, idRecipe: number): Observable<any>{
     const headers = new HttpHeaders({'authorization': token});

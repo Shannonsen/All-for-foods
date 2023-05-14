@@ -22,6 +22,8 @@ export class ListProductsComponent implements OnInit {
   token: any = "";
   user: any =""
   @Input() isPanel:string = ""
+  favoriteRecipes: Food[] = [];
+  color: string =""
   /**
    * @constructor
    * @param {UserService} userService : Servicio de usuarios
@@ -36,16 +38,20 @@ export class ListProductsComponent implements OnInit {
   ngOnInit(): void {
     this.token = this.cookieService.get('Token');
     this.user = this.cookieService.get('idUser');
+    this.recipeService.getAllMyFavoritesRecipes(Number(this.user)).subscribe(recipesFavorites =>{
+     this.favoriteRecipes = recipesFavorites.data
+    })
+
     this.userService.getAllUsers().subscribe(users => {
       this.users = users;
     });
   }
 
-/*   verify(id:number){
-    this.recipeService.isFavorite([id],this.user, this.token).subscribe(data =>{
-      console.log(data)
-    })
-  } */
+  verifyFollowed(id:number){
+    var idRecipeFavorites:any = this.favoriteRecipes.map(function(a:any) { return a["id"]; });
+    return idRecipeFavorites.includes(id);
+  }
+
   round(rate: any){
     return Math.round(rate)
   }
@@ -70,9 +76,13 @@ export class ListProductsComponent implements OnInit {
     if (heart.style.color == "red") {
       heart.style.color = "gray";
       heart.style.scale = "1";
+      this.recipeService.deleteFavorite(id, Number(this.user), this.token).subscribe(response =>{
+      })
     } else {
       heart.style.color = "red";
       heart.style.scale = "1.2";
+      this.recipeService.postFavorite(id, Number(this.user), this.token).subscribe(response =>{
+      })
     }
   }
 
