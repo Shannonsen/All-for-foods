@@ -35,6 +35,7 @@ export class SearcherRecipeComponent implements OnInit {
   @Output() outputCurrentPage = new EventEmitter<number>();
   @Input() typeSearch: string = "";
   @Input() profile: string =""
+  @Input() recipeID:number=0
   /**
    * @constructor
    * @param {KeyValueDiffers} differs : Detecta cambios en los objetos
@@ -108,7 +109,7 @@ export class SearcherRecipeComponent implements OnInit {
     if(this.typeSearch == 'my-recipes'){
       idUser = this.profile == null ? Number(this.cookieService.get('idUser')): Number(this.profile)
     }
-      this.getAllService.getServiceRecipes(this.typeSearch,this.currentPage,4,token,idUser).subscribe(recipes => {
+      this.getAllService.getServiceRecipes(this.typeSearch,this.currentPage,4,token,idUser, this.recipeID).subscribe(recipes => {
         var recipeToSend = recipes.data
         var totalPage = recipes.totalPage
         var totalPagesToSend = this.totalPagesArray(recipeToSend, totalPage);
@@ -123,7 +124,7 @@ export class SearcherRecipeComponent implements OnInit {
             this.outputCurrentPage.emit(this.currentPage);
           }
         }
-        this.getAllService.getServiceRecipes(this.typeSearch,this.currentPage,4,token, idUser).subscribe(recipes => {
+        this.getAllService.getServiceRecipes(this.typeSearch,this.currentPage,4,token, idUser,this.recipeID).subscribe(recipes => {
         this.outputRecipes.emit(recipes.data);
         });
       });

@@ -11,6 +11,7 @@ import { TagInputModule } from 'ngx-chips';
 import { PaginationItemsComponent } from './components/pagination-items/pagination-items.component';
 import { ListUsersComponent } from './components/list-users/list-users.component';
 import { ListIngredientsComponent } from './components/list-ingredients/list-ingredients.component';
+import { ListCommentsComponent } from './components/list-comments/list-comments.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { ListIngredientsComponent } from './components/list-ingredients/list-ing
     PaginationItemsComponent,
     ListUsersComponent,
     ListIngredientsComponent,
+    ListCommentsComponent,
   ],
   imports: [
     CommonModule,

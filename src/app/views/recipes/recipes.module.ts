@@ -6,12 +6,14 @@ import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RecipeViewComponent } from './pages/recipe-view.component';
 import { CommentSectionComponent } from './components/comment-section/comment-section.component';
+import { ListCommentsPaginationComponent } from './components/list-comments-pagination/list-comments-pagination.component';
 
 
 @NgModule({
   declarations: [
     RecipeViewComponent,
-    CommentSectionComponent
+    CommentSectionComponent,
+    ListCommentsPaginationComponent
   ],
   imports: [
     CommonModule,
