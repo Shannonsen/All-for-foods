@@ -51,7 +51,7 @@ export class SearcherRecipeComponent implements OnInit {
   ngOnInit(): void {
     var token = this.cookieService.get('Token');
     this.ingredientService.getAllIngredients().subscribe(ingredients => {
-      this.ingredients = ingredients;
+      this.ingredients = ingredients.data;
     });
 
     $("#title").prop('checked', true);
@@ -69,7 +69,7 @@ export class SearcherRecipeComponent implements OnInit {
           this.onEnter(undefined);
         }
         if (item.key == 'elementsSelected') {
-          console.log("change selected");
+          this.doSearchTrigger();
         }
         if (item.key == 'doSearch') {
           this.doSearchTrigger();
@@ -109,10 +109,11 @@ export class SearcherRecipeComponent implements OnInit {
     }
     var token = this.cookieService.get('Token');
     var idUser = Number(this.cookieService.get('idUser'));
+    var ingredients:any =  this.elementsSelected.map(function(a:any) { return a["id"]; });
     if(this.typeSearch == 'my-recipes'){
       idUser = this.profile == null ? Number(this.cookieService.get('idUser')): Number(this.profile)
     }
-      this.getAllService.getServiceRecipes(this.typeSearch,this.currentPage,4,token,idUser, this.recipeID, this.keyword).subscribe(recipes => {
+      this.getAllService.getServiceRecipes(this.typeSearch,this.currentPage,4,token,idUser, this.recipeID, this.keyword, ingredients).subscribe(recipes => {
         var recipeToSend = recipes.data
         var totalPage = recipes.totalPage
         var totalPagesToSend = this.totalPagesArray(recipeToSend, totalPage);
@@ -127,7 +128,7 @@ export class SearcherRecipeComponent implements OnInit {
             this.outputCurrentPage.emit(this.currentPage);
           }
         }
-        this.getAllService.getServiceRecipes(this.typeSearch,this.currentPage,4,token, idUser,this.recipeID, this.keyword).subscribe(recipes => {
+        this.getAllService.getServiceRecipes(this.typeSearch,this.currentPage,4,token, idUser,this.recipeID, this.keyword, ingredients).subscribe(recipes => {
         this.outputRecipes.emit(recipes.data);
         });
       });
@@ -139,54 +140,29 @@ export class SearcherRecipeComponent implements OnInit {
   doSearchTrigger() {
     if (this.doSearch) {
       this.doSearch = false;
-      this.recipesService.getAllFoods().subscribe(recipes => {
-        var recipeToSend = [];
-        if (this.elementsSelected.length == 0) {
-          recipeToSend = recipes.data;
-        } else {
-          recipeToSend = this.getRecipesByIngredients(recipes as Food[])
-        }
+      var token = this.cookieService.get('Token');
+      var idUser = Number(this.cookieService.get('idUser'));
+      var ingredients:any =  this.elementsSelected.map(function(a:any) { return a["id"]; });
+      this.getAllService.getServiceRecipes('ingredient-search',this.currentPage,4,token,idUser, this.recipeID, this.keyword, ingredients).subscribe(recipes => {
+        var recipeToSend = recipes.data
         var totalPage = recipes.totalPage
         var totalPagesToSend = this.totalPagesArray(recipeToSend, totalPage);
+        this.outputTotalPages.emit(totalPagesToSend);
         if (this.currentPage > totalPagesToSend.length) {
           this.currentPage = 1;
+          this.outputCurrentPage.emit(this.currentPage);
+        } else {
+          if (this.keyword != this.keywordBefore) {
+            this.keywordBefore = this.keyword
+            this.currentPage = 1;
+            this.outputCurrentPage.emit(this.currentPage);
+          }
         }
-        this.outputTotalPages.emit(totalPagesToSend);
-        this.outputCurrentPage.emit(this.currentPage);
-        this.recipesService.getAllFoods(this.currentPage,4).subscribe(recipes => {
-          this.outputRecipes.emit(recipes.data);
+        this.getAllService.getServiceRecipes('ingredient-search',this.currentPage,4,token, idUser,this.recipeID, this.keyword, ingredients).subscribe(recipes => {
+        this.outputRecipes.emit(recipes.data);
         });
       });
     }
-  }
-  /**
-   * Método que obtiene las recetas de acuerdo a los ingredientes de this.elementsSelected
-   * @param {Food[]} recipes : Lista de recetas obtenidas del servico
-   * @returns {Food[]} Recetas que coincidieron con los ingredietes
-   */
-  getRecipesByIngredients(recipes: Food[]) : Food[]{
-    var ingredientStr: string[] = [];
-    var recipeResponse: Food[] = [];
-    this.elementsSelected.forEach(element => {
-      ingredientStr.push(element.name);
-    });
-    recipes.forEach(recipe => {
-      if (this.checkSubset(recipe.ingredients, ingredientStr)) {
-        recipeResponse.push(recipe);
-      }
-    });
-    return recipeResponse;
-  }
-  /**
-   * Método encargado de validar si un conjunto contiene un subconjunto
-   * @param parentArray : Arreglo al cual se le va a revisar si contiene un subconjunto
-   * @param subsetArray : Subarreglo el cual se utilizará para revisar si está dentro de otro arreglo
-   * @returns {boolean} Verdadero si el subsetArray se encuentra en el parentArray, de otra manera será falso
-   */
-  checkSubset = (parentArray: any, subsetArray: any) => {
-    return subsetArray.every((el: any) => {
-      return parentArray.includes(el)
-    })
   }
 
   /**

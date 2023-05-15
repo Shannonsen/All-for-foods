@@ -149,6 +149,15 @@ export class RecipesService {
     return this.http.post("http://localhost:3001/api/v1/recipe/title", body, {'params':params})
   }
 
+  public searchByIngredientsRecipes(ingredients: number[], page: number=1){
+    const params = new HttpParams()
+    .set('page', page)
+    let body ={
+      "ingredients": ingredients,
+    }
+    return this.http.post("http://localhost:3001/api/v1/recipe/ingredients", body, {'params':params})
+  }
+
   /**
    * Método que devuelve las recetas atribuidas al id de un autor.
    * @param {number} author : Identificador del autor.
