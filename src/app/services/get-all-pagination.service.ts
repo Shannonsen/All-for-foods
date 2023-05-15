@@ -12,7 +12,7 @@ import { CommentService } from './comment.service';
 export class GetAllPaginationService {
   constructor(private http: HttpClient, private recipeService: RecipesService, private userService: UserService, private ingredientService: IngredientsService, private commentService: CommentService) { }
 
-  public getServiceRecipes(typeSearch:string ="", page:number, size:number = 4, token:string = "", idUser:number , idRecipe: number): Observable<any>{
+  public getServiceRecipes(typeSearch:string ="", page:number, size:number = 4, token:string = "", idUser:number , idRecipe: number, title: string): Observable<any>{
     switch(typeSearch){
       case 'delete':
         return this.recipeService.getAllRecipesActivated(token, page)
@@ -32,6 +32,8 @@ export class GetAllPaginationService {
         return this.recipeService.getAllFollowsRecipes(idUser, page)
       case 'comments-recipe':
         return this.commentService.getAllCommentsSpecificRecipe(idRecipe, page)
+      case 'title-search':
+        return this.recipeService.searchByTitleRecipes(title, page)
       default:
         return this.recipeService.getAllFoods(page)
     }

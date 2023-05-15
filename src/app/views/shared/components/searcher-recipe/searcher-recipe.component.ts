@@ -104,12 +104,15 @@ export class SearcherRecipeComponent implements OnInit {
    * @param {any} e : Elemento html al cual que se le dio Enter
    */
   onEnter(e: any) {
+    if(this.keyword){
+      this.typeSearch = "title-search"
+    }
     var token = this.cookieService.get('Token');
     var idUser = Number(this.cookieService.get('idUser'));
     if(this.typeSearch == 'my-recipes'){
       idUser = this.profile == null ? Number(this.cookieService.get('idUser')): Number(this.profile)
     }
-      this.getAllService.getServiceRecipes(this.typeSearch,this.currentPage,4,token,idUser, this.recipeID).subscribe(recipes => {
+      this.getAllService.getServiceRecipes(this.typeSearch,this.currentPage,4,token,idUser, this.recipeID, this.keyword).subscribe(recipes => {
         var recipeToSend = recipes.data
         var totalPage = recipes.totalPage
         var totalPagesToSend = this.totalPagesArray(recipeToSend, totalPage);
@@ -124,7 +127,7 @@ export class SearcherRecipeComponent implements OnInit {
             this.outputCurrentPage.emit(this.currentPage);
           }
         }
-        this.getAllService.getServiceRecipes(this.typeSearch,this.currentPage,4,token, idUser,this.recipeID).subscribe(recipes => {
+        this.getAllService.getServiceRecipes(this.typeSearch,this.currentPage,4,token, idUser,this.recipeID, this.keyword).subscribe(recipes => {
         this.outputRecipes.emit(recipes.data);
         });
       });
