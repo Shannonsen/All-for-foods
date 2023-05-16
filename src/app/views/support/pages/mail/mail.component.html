@@ -1,6 +1,18 @@
 <div class="container-fluid container-form">
-  <form [formGroup]="FormData" (ngSubmit)="onSubmit(FormData.value)">
+  <form [formGroup]="FormData" (ngSubmit)="onSubmit()">
     <div class="row">
+      <div class="col-6">
+        <div class="form-group">
+          <label>Asunto</label>
+          <input
+            type="text"
+            class="form-control"
+            id="support-subject"
+            placeholder="Ingresa tu asunto"
+            formControlName="subject"
+          />
+        </div>
+      </div>
       <div class="col-6">
         <div class="form-group">
           <label>Nombre</label>
@@ -14,7 +26,6 @@
           <small id="emailHelp" class="form-text text-muted">Solo letras</small>
         </div>
       </div>
-
       <div class="col-6">
         <div class="form-group">
           <label>Correo electrónico</label>
@@ -41,7 +52,7 @@
             id="exampleFormControlTextarea1"
             rows="5"
             placeholder="Describe tu problema"
-            formControlName="textarea"
+            formControlName="message"
           ></textarea>
           <small id="emailHelp" class="form-text text-muted"
           >Min.30 caracteres</small
