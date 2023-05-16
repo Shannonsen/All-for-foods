@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { RecipesService } from 'src/app/services/recipes.service';
 /**
  * Clase que representa la imagen del home.
  */
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class FrontImageComponent implements OnInit {
 
-  constructor(private Router: Router ) { }
+  constructor(private router: Router, private recipeService: RecipesService) { }
 
   /**
    * @override
@@ -19,21 +20,13 @@ export class FrontImageComponent implements OnInit {
   }
 
   /**
-   * Metodo para retornar un numero random del 1  al 6
-   * @returns numero del 1 al 6
-   */
-
-  getRandomRecipeId(): number {
-    return Math.floor(Math.random() * 6) + 1;
-  }
-
-  /**
    * Metodo para enviar al usuario a una receta random
    */
 
-  goToRandomRecipe(): void {
-    const randomId = this.getRandomRecipeId();
-    this.Router.navigate(['/recipes', randomId]);
+  goToRandomRecipe() {
+    this.recipeService.randomRecipe().subscribe(recipe =>{
+      this.router.navigate(['recipes/' + recipe.results.id]);
+    })
   }
 
 }

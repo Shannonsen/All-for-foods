@@ -158,6 +158,10 @@ export class RecipesService {
     return this.http.post("http://localhost:3001/api/v1/recipe/ingredients", body, {'params':params})
   }
 
+  public randomRecipe():Observable<any>{
+    return this.http.get("http://localhost:3001/api/v1/recipe/search/random");
+  }
+
   /**
    * Método que devuelve las recetas atribuidas al id de un autor.
    * @param {number} author : Identificador del autor.

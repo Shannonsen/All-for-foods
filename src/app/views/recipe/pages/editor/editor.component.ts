@@ -188,28 +188,14 @@ export class EditorComponent implements OnInit {
       this.imgURL = recipe?.results.image;
       this.process = recipe?.results.steps;
       this.author = recipe?.results.user.username
-      if(recipe?.rate!= undefined){
-        for(let i =0; i<5; i++){
-          if(i<recipe?.rate){
-            const star = document.getElementById(String("star-" + i + "-" + this.recipeID))!;
-            star.style.color = "gold";
-          }
-        }
-      }
+      this.recipeForm.setValue({
+        title: recipe?.results.title,
+        imgURL: recipe?.results.image,
+        process: recipe?.results.steps,
+        description: recipe?.results.description,
+        author: recipe?.results.user.username
+      });
     });
-  }
-
-  changeRating(idStar: number, idProduct: number | undefined) {
-
-    const star = document.getElementById(String("star-" + idStar + "-" + idProduct))!;
-    if (star.style.color == "gold") {
-      star.style.color = "gray";
-      star.style.scale = "1";
-    } else {
-      star.style.color = "gold";
-      star.style.scale = "1.2";
-    }
-
   }
 
   removeEmptyValues(object: any) {

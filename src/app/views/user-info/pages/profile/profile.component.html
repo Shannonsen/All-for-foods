@@ -68,7 +68,7 @@
       </div>
     </div>
     <div class="container-button" *ngIf="isUser">
-      <button type="submit" [disabled]="!profileForm.touched" class="btn btn-md" (click)="onEdit()">
+      <button type="submit" [disabled]="profileForm.invalid" class="btn btn-md" (click)="onEdit()">
         Editar
       </button>
     </div>
