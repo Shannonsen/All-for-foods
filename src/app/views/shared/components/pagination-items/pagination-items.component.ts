@@ -27,28 +27,13 @@ export class PaginationItemsComponent implements OnInit {
    * @param {KeyValueDiffers} differsm : Detecta cambios en los objetos
    * @param {UserService} userService : Servicio de usuarios
    */
-  constructor(private differs: KeyValueDiffers, private userService: UserService) {
+  constructor(private differs: KeyValueDiffers) {
     this.differ = this.differs.find({}).create();
   }
   /**
    * @override
    */
-  ngOnInit() {
-      this.userService.getAllUsers().subscribe(users => {
-      this.users = users as User[];
-    });
-  }
-  /**
-   * Método lanzado cuando un objeto cambia de valor
-   */
-  ngDoCheck() {
-    const change = this.differ.diff(this);
-    if (change) {
-      change.forEachChangedItem((item: any) => {
-
-      });
-    }
-  }
+  ngOnInit() {}
 
   /**
    * Método que se encarga de manejar la lógica de la clase al realizar un cambio de página
