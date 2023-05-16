@@ -18,6 +18,7 @@ export interface Food{
   user: {
     id: number
     username: string,
+    icon: string,
   },
   ingredients: string[],
   image?: string,
