@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { LoginService } from 'src/app/services/login.service';
-import { User } from '../../shared/models/user.model';
 import { Route, Router } from '@angular/router';
 import {CookieService} from 'ngx-cookie-service';
-
+import Swal from 'sweetalert2';
 /**
  * Clase que representa al inicio de sesión
  */
@@ -42,18 +41,21 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     var request = this.loginForm.value;
     this.loginService.login_auth(request['email'], request['password']).subscribe(data =>{
-      this.loginService.type_auth(data.results.token).subscribe(user =>{
-        this.cookieService.set('idUser', user.results.id);
-      })
-      if(data.results){
-        this.cookieService.set('Token', data.results.token);
-        this.router.navigate(['home']).then(() => {
-          window.location.reload();
-        });
+      if(data.code == 404){
+        Swal.fire("ERROR", "Usuario no encontrado", 'error').then(()=>{
+          this.router.navigate(['login']).then(() => {
+            window.location.reload();
+          });
+        })
       }else{
-        alert("Usuario o contraseña incorrecta");
+        this.loginService.type_auth(data.results.token).subscribe(user =>{
+          this.cookieService.set('idUser', user.results.id);
+        })
+          this.cookieService.set('Token', data.results.token);
+          this.router.navigate(['home']).then(() => {
+            window.location.reload();
+          });
       }
     })
   }
-
 }

@@ -14,35 +14,15 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class BoardComponent implements OnInit {
 
-  products: number[] = []
-  user: User = <User>{};
-
   /**
    *@constructor
-   * @param {RecipesService} recipeService : Servicio de recetas
-   * @param {UserService} userService : Servicio de usuarios
    */
-  constructor(private recipeService: RecipesService, private userService: UserService) {
+  constructor() {
 
   }
 /**
  * @override
  */
-  ngOnInit(): void {
-    const tkn = localStorage.getItem('Token');
-    this.userService.getAllUsers().subscribe(users => {
-      var user = (users as User[]).find(p => p.token == tkn)
-      this.user = <User>user;
-    })
-
-    this.recipeService.getAllFoods().subscribe(recipe => {
-      var recipes = (recipe as Food[]).filter(p => this.user.follows.includes(p.user.id));
-
-      recipes.forEach(element => {
-        this.products.push(element.id);
-      });
-
-    });
-  }
+  ngOnInit(): void {}
 
 }

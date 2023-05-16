@@ -18,7 +18,7 @@ export class RecipeViewComponent implements OnInit {
 
   recipeID: number = 0;
   title: string | undefined = '';
-  author: number | undefined = 0;
+  author: string = "";
   ingredients: Ingredient[] = [];
   imgURL: string | undefined = '';
   process: string| undefined = "";
@@ -88,7 +88,7 @@ export class RecipeViewComponent implements OnInit {
   updateRecipeInformation() {
     this.recipeService.getRecipeById(this.recipeID).subscribe((recipe) => {
       var recipeResult = recipe?.results as Food
-      this.author = recipeResult.user.id;
+      this.author = recipeResult.user.username;
       this.description = recipeResult.description
       this.title = recipeResult.title;
       this.ingredients = recipe?.results.ingredients;

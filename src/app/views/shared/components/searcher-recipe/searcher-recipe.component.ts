@@ -49,7 +49,6 @@ export class SearcherRecipeComponent implements OnInit {
    * @override
    */
   ngOnInit(): void {
-    var token = this.cookieService.get('Token');
     this.ingredientService.getAllIngredients().subscribe(ingredients => {
       this.ingredients = ingredients.data;
     });
