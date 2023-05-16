@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 /**
  * Clase que representa el servicio para emails.
  */
@@ -18,8 +19,14 @@ export class EmailService {
    * Método para enviar email.
    * @param {any} form : form email
    */
-  public SendEmail(form: any) {
-    alert("Email enviado");
+  public sendEmail(subject:string, message: string, name: string, emailFrom: string): Observable<any>{
+    let body ={
+      "subject": subject,
+      "message": message,
+      "name": name,
+      "from": emailFrom
+    }
+    return this.http.post("http://localhost:3001/api/v1/email/toService", body)
   }
 
 }
