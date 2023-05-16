@@ -5,18 +5,6 @@
   </div>
   <div class="row container-header">
     <div class="row container-stars mt-3 mb-3">
-      <div class="col-3" style="margin-left: 4%"></div>
-      <div
-        class="col-1"
-        style="color: gray"
-        *ngFor="let star of [].constructor(5); let i = index"
-      >
-        <i
-          class="fa fa-star"
-          (click)="changeRating(i, recipeID!)"
-          id="star-{{ i }}-{{ recipeID }}"
-        ></i>
-      </div>
       <div class="col-3"></div>
     </div>
     <div class="row container-url mb-3">
