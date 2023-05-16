@@ -57,6 +57,12 @@ export class ProfileComponent implements OnInit {
             this.email = user.results.email;
             this.icon = user.results.icon;
             this.description = user.results.description;
+            this.profileForm.setValue({
+              name: user.results.username,
+              email: user.results.email,
+              icon: user.results.icon,
+              description: user.results.description
+            });
           }else{
             this.userService.getUserById(this.profileID).subscribe(user => {
               this.isUser = false;
@@ -77,8 +83,8 @@ export class ProfileComponent implements OnInit {
 
     this.profileForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(4)]),
-      description: new FormControl('', [Validators.required, Validators.minLength(4)]),
-      email: new FormControl('', [Validators.required, Validators.minLength(4)]),
+      description: new FormControl('', [Validators.minLength(4)]),
+      email: new FormControl('', [Validators.required, Validators.email]),
       icon: new FormControl('')
     });
   }
