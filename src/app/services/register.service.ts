@@ -15,14 +15,21 @@ export class RegisterService {
    * @param {HttpClient} http : Cliente http
    */
   constructor(private http: HttpClient) { }
+
   /**
-   * Método para el registro de un usuario
+   * Método para el registro local de un usuario
+   * 
    * @returns {Observable<ay>} Lista de usuarios
    */
   public registerUser(): Observable<any>{
     return this.http.get(this.LOCAL_SUCCESS);
   }
 
+  /**
+   * Método que crea un usuario en la DB
+   * @param body : La información del usuario
+   * @returns El usuario creado
+   */
   public postUser(body: any): Observable<any>{
     return this.http.post("http://localhost:3001/api/v1/user/", body);
   }
