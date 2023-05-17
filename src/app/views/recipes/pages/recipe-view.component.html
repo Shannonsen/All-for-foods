@@ -45,7 +45,7 @@
         <div class="row" *ngIf="changeScore">
           <div class="col-6"><button class="btn btn-primary" (click)="changeMyScore()">Cambiar Calificación</button></div>
         </div>
-        <div class="row m-1" *ngIf="!changeScore">
+        <div class="row m-1" *ngIf="!changeScore && token">
           Calificación privada:
           <div
           class="col-1"
@@ -59,7 +59,7 @@
           ></i>
         </div>
         </div>
-        <div class="row" *ngIf="!changeScore">
+        <div class="row" *ngIf="!changeScore && token">
           <div class="col-6"><button class="btn btn-primary" (click)="changeMyScore()">Guardar calificación</button></div>
         </div>
         <p>Fecha de creación: {{date}}</p>
@@ -68,7 +68,7 @@
         </button>
       </div>
     </div>
-   <app-comment-section [recipeID]="recipeID"></app-comment-section>
+   <app-comment-section [recipeID]="recipeID" *ngIf="token"></app-comment-section>
    <app-list-comments-pagination [typeList]="'comments'" [typeSearch]="'comments-recipe'" [recipeID]="recipeID"></app-list-comments-pagination>
 
 

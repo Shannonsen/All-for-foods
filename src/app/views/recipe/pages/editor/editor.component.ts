@@ -117,7 +117,6 @@ export class EditorComponent implements OnInit {
         body.ingredients = newIngredients;
         body.steps = request['process'];
         this.recipeService.postRecipe(token, body).subscribe(result =>{
-          console.log(result)
           if(result.code == 201){
             Swal.fire("CORRECTO", 'Receta creada', 'success').then(()=>{
               this.router.navigate(['recipes/' + result.results.id]).then(() => {

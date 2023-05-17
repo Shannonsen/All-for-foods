@@ -29,6 +29,7 @@ export class RecipeViewComponent implements OnInit {
   myScore: number = 0;
   changeScore: string =""
   newScoreCount: number = 0;
+  token: string =""
 
   recipeForm: FormGroup;
 
@@ -40,6 +41,7 @@ export class RecipeViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.token = this.cookieService.get('Token');
     var token = this.cookieService.get('Token');
     var idUser = this.cookieService.get('idUser');
     this.route.params.subscribe(params => {

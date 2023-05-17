@@ -49,9 +49,11 @@ export class LoginComponent implements OnInit {
         })
       }else{
         this.loginService.type_auth(data.results.token).subscribe(user =>{
+          while(!this.cookieService.get('Token') && !this.cookieService.get('idUser')){
           this.cookieService.set('idUser', user.results.id);
-        })
           this.cookieService.set('Token', data.results.token);
+          }
+        })
           this.router.navigate(['home']).then(() => {
             window.location.reload();
           });
