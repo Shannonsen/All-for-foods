@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuardGuard } from './guards/auth-guard.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -7,7 +8,8 @@ const routes: Routes = [
     path: 'home', loadChildren: () => import('./views/welcome/welcome.module').then(m => m.WelcomeModule)
   },
   {
-    path: 'panel', loadChildren: () => import('./views/admin/admin.module').then(m => m.AdminModule)
+    path: 'panel', loadChildren: () => import('./views/admin/admin.module').then(m => m.AdminModule),
+    canActivate: [AuthGuardGuard]
   },
   {
     path: 'profile', loadChildren: () => import('./views/user-info/user-info.module').then(m => m.UserInfoModule)
