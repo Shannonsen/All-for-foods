@@ -23,12 +23,12 @@ export class LoginAuthGuard implements CanActivate {
             if (token.code == 200 && (token.results.permission == "Admin" || token.results.permission == "User" )) {
               resolve(true)
             }else{
-              resolve(false)
+              this.router.navigate(['notfound/']);
             }
           })
         })
       }else{
-        return false
+        return this.router.navigate(['notfound/']);
       }
   }
 
