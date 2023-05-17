@@ -112,7 +112,7 @@ export class SearcherRecipeComponent implements OnInit {
     if(this.typeSearch == 'my-recipes'){
       idUser = this.profile == null ? Number(this.cookieService.get('idUser')): Number(this.profile)
     }
-      this.getAllService.getServiceRecipes(this.typeSearch,this.currentPage,4,token,idUser, this.recipeID, this.keyword, ingredients).subscribe(recipes => {
+      this.getAllService.getServiceRecipes(this.typeSearch,this.currentPage,token,idUser, this.recipeID, this.keyword, ingredients).subscribe(recipes => {
         var recipeToSend = recipes.data
         var totalPage = recipes.totalPage
         var totalPagesToSend = this.totalPagesArray(recipeToSend, totalPage);
@@ -127,7 +127,7 @@ export class SearcherRecipeComponent implements OnInit {
             this.outputCurrentPage.emit(this.currentPage);
           }
         }
-        this.getAllService.getServiceRecipes(this.typeSearch,this.currentPage,4,token, idUser,this.recipeID, this.keyword, ingredients).subscribe(recipes => {
+        this.getAllService.getServiceRecipes(this.typeSearch,this.currentPage,token, idUser,this.recipeID, this.keyword, ingredients).subscribe(recipes => {
         this.outputRecipes.emit(recipes.data);
         });
       });
@@ -142,7 +142,7 @@ export class SearcherRecipeComponent implements OnInit {
       var token = this.cookieService.get('Token');
       var idUser = Number(this.cookieService.get('idUser'));
       var ingredients:any =  this.elementsSelected.map(function(a:any) { return a["id"]; });
-      this.getAllService.getServiceRecipes('ingredient-search',this.currentPage,4,token,idUser, this.recipeID, this.keyword, ingredients).subscribe(recipes => {
+      this.getAllService.getServiceRecipes('ingredient-search',this.currentPage,token,idUser, this.recipeID, this.keyword, ingredients).subscribe(recipes => {
         var recipeToSend = recipes.data
         var totalPage = recipes.totalPage
         var totalPagesToSend = this.totalPagesArray(recipeToSend, totalPage);
@@ -157,7 +157,7 @@ export class SearcherRecipeComponent implements OnInit {
             this.outputCurrentPage.emit(this.currentPage);
           }
         }
-        this.getAllService.getServiceRecipes('ingredient-search',this.currentPage,4,token, idUser,this.recipeID, this.keyword, ingredients).subscribe(recipes => {
+        this.getAllService.getServiceRecipes('ingredient-search',this.currentPage, token, idUser,this.recipeID, this.keyword, ingredients).subscribe(recipes => {
         this.outputRecipes.emit(recipes.data);
         });
       });
