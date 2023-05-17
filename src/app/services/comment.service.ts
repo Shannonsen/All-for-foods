@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams,HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 /**
  * Clase que representa el servicio para comentarios.
@@ -8,10 +8,10 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CommentService {
-/**
- * @constructor
- * @param {HttpClient} http : Cliente http.
- */
+  /**
+   * @constructor
+   * @param {HttpClient} http : Cliente http.
+   */
   constructor(private http: HttpClient) { }
 
   /**
@@ -20,10 +20,10 @@ export class CommentService {
    * @param {number} page : página para obtener lista de comentarios.
    * @returns {Observable<any>} Respuesta que incluye lista de comentarios.
    */
-  public getAllCommentsSpecificRecipe(idRecipe:number, page: number=1): Observable<any>{
+  public getAllCommentsSpecificRecipe(idRecipe: number, page: number = 1): Observable<any> {
     const params = new HttpParams()
-    .set('page', page)
-    return this.http.get("http://localhost:3001/api/v1/comment/" + idRecipe, {'params': params})
+      .set('page', page)
+    return this.http.get("http://localhost:3001/api/v1/comment/" + idRecipe, { 'params': params })
   }
 
   /**
@@ -34,24 +34,24 @@ export class CommentService {
    * @param  {string} token : token de acceso.
    * @returns {Observable<any>} Respuesta que incluye el codigo de respuesta del servidor.
    */
-  postComment(idRecipe:number, idUser: number, comment: string, token:string): Observable<any> {
+  postComment(idRecipe: number, idUser: number, comment: string, token: string): Observable<any> {
     let body = {
-      "recipeId": idRecipe ,
+      "recipeId": idRecipe,
       "userId": idUser,
       "comment": comment
     }
-    const headers = new HttpHeaders({'authorization': token})
-    return this.http.post("http://localhost:3001/api/v1/comment/",body, {'headers':headers})
+    const headers = new HttpHeaders({ 'authorization': token })
+    return this.http.post("http://localhost:3001/api/v1/comment/", body, { 'headers': headers })
   }
 
   /**
    * Método para eliminar un comentario existente.
-   * @param {number} idComment: id del comentario a eliminar
-   * @param {string} token: token de accesso
+   * @param {number} idComment: id del comentario a eliminar.
+   * @param {string} token: token de accesso.
    * @returns {Observable<any>} Respuesta que incluye el codigo de respuesta del servidor.
    */
-  deleteComment(idComment: number, token:string): Observable<any> {
-    const headers = new HttpHeaders({'authorization': token})
-    return this.http.delete("http://localhost:3001/api/v1/comment/" + idComment, {'headers':headers})
+  deleteComment(idComment: number, token: string): Observable<any> {
+    const headers = new HttpHeaders({ 'authorization': token })
+    return this.http.delete("http://localhost:3001/api/v1/comment/" + idComment, { 'headers': headers })
   }
 }
