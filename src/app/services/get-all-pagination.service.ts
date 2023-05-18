@@ -25,13 +25,13 @@ export class GetAllPaginationService {
   /**
    * Método que sirve para obtener el listado que utilizará la paginación.
    * @param {string} typeSearch: tipo de busqueda para el tipo de listado.
-   * @param {number} page : página para obtener lista de comentarios.
+   * @param {number} page : página actual para obtener el listado correspondiente al tipo de busqueda.
    * @param {string} token : token de acceso.
    * @param {number} idUser : id del usuario.
    * @param {number} idRecipe : id de receta.
    * @param {string} title : titulo para el caso del listado de busqueda por titulo.
    * @param {number[]} ingredients : id de ingredientes para el caso del listado de busqueda por ingrediente.
-   * @returns { Observable<any> } Listado correspondiente al tipo de busqueda para la paginación.
+   * @returns { Observable<any> } Listado paginado correspondiente al tipo de busqueda para el componente de paginación.
    */
   public getServiceRecipes(typeSearch: string = "", page: number, token: string = "", idUser: number, idRecipe: number, title: string, ingredients: number[]): Observable<any> {
     switch (typeSearch) {
