@@ -25,17 +25,18 @@ export class ProfileComponent implements OnInit {
 
   profileForm: FormGroup;
   user: User = <User>{};
-  typeFollow:string = ""
+  typeFollow: string = ""
 
-  token: string =""
-  userId: string=""
+  token: string = ""
+  userId: string = ""
 
   /**
-   * @constructor
    * @param {FormBuilder} formBuilder : Creador del formulario.
    * @param {LoginService} loginService : Servicio de inicio de sesión.
    * @param {UserService} userService : Servicio de usuarios.
-   * @param {ActivatedRoute} route : Navegador de rutas.
+   * @param {ActivatedRoute} route : Información de rutas.
+   * @param {CookieService} cookieService : Servicio de cookies
+   * @param {Router} router : Navegación de rutas
    */
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private userService: UserService, private loginService: LoginService, private cookieService: CookieService, private router: Router) {
     this.profileForm = this.formBuilder.group({});
@@ -50,7 +51,7 @@ export class ProfileComponent implements OnInit {
       this.profileIDString = params['id'];
       this.token = this.cookieService.get('Token');
       this.userId = this.cookieService.get('idUser');
-      this.loginService.typeAuth( this.token).subscribe(data => {
+      this.loginService.typeAuth(this.token).subscribe(data => {
         this.userService.getUserById(data.results.id).subscribe(user => {
           if (data.results.id === this.profileID || Number.isNaN(this.profileID)) {
             this.name = user.results.username;
@@ -63,7 +64,7 @@ export class ProfileComponent implements OnInit {
               icon: user.results.icon,
               description: user.results.description
             });
-          }else{
+          } else {
             this.userService.getUserById(this.profileID).subscribe(user => {
               this.isUser = false;
               this.name = user.results.username;
@@ -74,8 +75,8 @@ export class ProfileComponent implements OnInit {
           }
         })
       })
-      this.userService.isFollowing(Number(this.userId), [this.profileID], this.token).subscribe(typeFollow =>{
-        if(typeFollow.results[0].isFollow){
+      this.userService.isFollowing(Number(this.userId), [this.profileID], this.token).subscribe(typeFollow => {
+        if (typeFollow.results[0].isFollow) {
           this.typeFollow = "true"
         }
       })
@@ -97,29 +98,29 @@ export class ProfileComponent implements OnInit {
     var token = this.cookieService.get('Token');
     this.loginService.typeAuth(token).subscribe(data => {
       this.userService.getUserById(data.results.id).subscribe(user => {
-        type UserBody ={
+        type UserBody = {
           email?: string,
           username?: string,
           icon?: string,
           description?: string,
         }
         const body: UserBody = {};
-        if(user.results.username != request['name']){
+        if (user.results.username != request['name']) {
           body.username = request['name'];
         }
-        if(user.results.email != request['email']){
+        if (user.results.email != request['email']) {
           body.email = request['email'];
         }
-        if(user.results.icon != request['icon']){
+        if (user.results.icon != request['icon']) {
           body.icon = request['icon'];
         }
-        if(user.results.description != request['description']){
+        if (user.results.description != request['description']) {
           body.description = request['description'];
         }
         this.removeEmptyValues(body)
-        this.userService.putUserById(data.results.id, token, body).subscribe(result =>{
-          if(result.code == 200){
-            Swal.fire("CORRECTO", 'Perfil editado', 'success').then(()=>{
+        this.userService.putUserById(data.results.id, token, body).subscribe(result => {
+          if (result.code == 200) {
+            Swal.fire("CORRECTO", 'Perfil editado', 'success').then(() => {
               this.router.navigate(['profile']).then(() => {
                 window.location.reload();
               });
@@ -130,31 +131,34 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  /**
+   * Método para remover las propiedades vacias de un objeto.
+   * @param {any} object : objeto.
+   */
   removeEmptyValues(object: any) {
     for (var key in object) {
-        if (object.hasOwnProperty(key)) {
-            var value = object[key];
-            if (value === null || value === undefined || value === '') {
-                delete object[key];
-            }
+      if (object.hasOwnProperty(key)) {
+        var value = object[key];
+        if (value === null || value === undefined || value === '') {
+          delete object[key];
         }
+      }
     }
-}
+  }
 
   /**
-   * Método que se lanza al dar click al botón de follow
+   * Método que se lanza al dar click al botón de follow, para seguir a un perfil
    */
-
   follow() {
-    this.userService.postFollow(Number(this.userId), Number(this.profileID), this.token).subscribe(response =>{
-      if(response.code == 201){
-        Swal.fire("CORRECTO", 'Estas siguiendo a ' + this.name, 'success').then(()=>{
+    this.userService.postFollow(Number(this.userId), Number(this.profileID), this.token).subscribe(response => {
+      if (response.code == 201) {
+        Swal.fire("CORRECTO", 'Estas siguiendo a ' + this.name, 'success').then(() => {
           this.router.navigate(['profile/' + this.profileID]).then(() => {
             window.location.reload();
           });
         })
-      }else{
-        Swal.fire("ERROR", response.message, 'error').then(()=>{
+      } else {
+        Swal.fire("ERROR", response.message, 'error').then(() => {
           this.router.navigate(['profile/' + this.profileID]).then(() => {
             window.location.reload();
           });
@@ -163,16 +167,19 @@ export class ProfileComponent implements OnInit {
     })
   }
 
-  unFollow(){
-    this.userService.deleteFollow(Number(this.userId), Number(this.profileID), this.token).subscribe(response =>{
-      if(response.code == 200){
-        Swal.fire("CORRECTO", 'Has dejado de seguir a ' + this.name, 'success').then(()=>{
+  /**
+   * Método que se lanza al dar click al botón de unfollow, para dejar de seguir a un perfil
+   */
+  unFollow() {
+    this.userService.deleteFollow(Number(this.userId), Number(this.profileID), this.token).subscribe(response => {
+      if (response.code == 200) {
+        Swal.fire("CORRECTO", 'Has dejado de seguir a ' + this.name, 'success').then(() => {
           this.router.navigate(['profile/' + this.profileID]).then(() => {
             window.location.reload();
           });
         })
-      }else{
-        Swal.fire("ERROR", response.message, 'error').then(()=>{
+      } else {
+        Swal.fire("ERROR", response.message, 'error').then(() => {
           this.router.navigate(['profile/' + this.profileID]).then(() => {
             window.location.reload();
           });
