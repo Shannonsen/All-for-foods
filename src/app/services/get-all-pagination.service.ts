@@ -25,7 +25,7 @@ export class GetAllPaginationService {
   /**
    * Método que sirve para obtener el listado que utilizará la paginación.
    * @param {string} typeSearch: tipo de busqueda para el tipo de listado.
-   * @param {number} page : página actual para obtener el listado correspondiente al tipo de busqueda.
+   * @param {number} page : página actual del paginado.
    * @param {string} token : token de acceso.
    * @param {number} idUser : id del usuario.
    * @param {number} idRecipe : id de receta.

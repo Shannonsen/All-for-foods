@@ -17,8 +17,8 @@ export class CommentService {
   /**
    * Método para obtener todos los comentarios de una receta especifica.
    * @param {number} idRecipe : id de la receta.
-   * @param {number} page : página actual para obtener lista de comentarios.
-   * @returns {Observable<any>} Respuesta que incluye lista de comentarios paginados.
+   * @param {number} page : página actual del paginado.
+   * @returns {Observable<any>} Listado de comentarios paginados.
    */
   public getAllCommentsSpecificRecipe(idRecipe: number, page: number = 1): Observable<any> {
     const params = new HttpParams()

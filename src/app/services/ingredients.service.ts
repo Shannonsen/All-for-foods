@@ -16,7 +16,7 @@ export class IngredientsService {
 
   /**
    * Método que obtiene todos los ingredientes sin paginar.
-   * @returns {Observable<any>} Lista de ingredientes.
+   * @returns {Observable<any>} Listado de ingredientes no paginados.
    */
   public getAllIngredients(): Observable<any> {
     const params = new HttpParams()
@@ -27,8 +27,8 @@ export class IngredientsService {
   /**
    * Método para obtener todos los ingredientes paginados.
    * @param {string} token : token de acceso.
-   * @param {number} page : página actual para obtener lista de ingredientes.
-   * @returns {Observable<any>} Lista de ingredientes.
+   * @param {number} page : página actual del paginado..
+   * @returns {Observable<any>} Listado de ingredientes paginados.
    */
   public getAllIngredientsActivated(token: string, page: number): Observable<any> {
     const params = new HttpParams()
