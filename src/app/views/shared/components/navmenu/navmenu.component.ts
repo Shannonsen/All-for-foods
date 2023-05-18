@@ -17,8 +17,10 @@ export class NavmenuComponent implements OnInit {
   tokenType: any = "";
 
   /**
-   * @constructor
-   * @param {Router} router : Servicio de navegación entre rutas
+   *
+  * @param {Router} router : Servicio de navegación entre rutas
+   * @param {CookieService} cookieService : Servicio de cookies
+   * @param {LoginService} loginService : Servicio de login
    */
   constructor(private router: Router, private cookieService: CookieService, private loginService: LoginService) { }
 

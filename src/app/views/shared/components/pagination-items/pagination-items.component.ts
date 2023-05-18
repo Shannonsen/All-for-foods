@@ -24,8 +24,7 @@ export class PaginationItemsComponent implements OnInit {
   differ: any;
   /**
    * @constructor
-   * @param {KeyValueDiffers} differsm : Detecta cambios en los objetos
-   * @param {UserService} userService : Servicio de usuarios
+   * @param {KeyValueDiffers} differs : Detecta cambios en los objetos
    */
   constructor(private differs: KeyValueDiffers) {
     this.differ = this.differs.find({}).create();

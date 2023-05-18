@@ -25,11 +25,13 @@ export class TagInputComponent implements OnInit {
   @Input() itemsAsObjects: Ingredient[] = [];
   @Output() outputItems = new EventEmitter<Ingredient[]>();
   @Output() outputTagSearch = new EventEmitter<boolean>();
+
   /**
    * @override
    */
   ngOnInit(): void {
   }
+
   /**
    * Método encargado de limpiar las etiquetas seleccionadas
    */
@@ -38,13 +40,15 @@ export class TagInputComponent implements OnInit {
     this.outputItems.emit(this.itemsAsObjects);
     this.outputTagSearch.emit(true);
   }
+
   /**
    * Método lanzado al eliminar una etiqueta
-   * @param {any} event : Elemento que está siendo eliminado de la entrada de etiqueta 
+   * @param {any} event : Elemento que está siendo eliminado de la entrada de etiqueta
    */
   onRemove(event: any){
     this.outputItems.emit(this.itemsAsObjects);
   }
+
   /**
    * Método invocado cuando se da clic en el botón de búsqueda del componente de entrada de etiquetas
    */

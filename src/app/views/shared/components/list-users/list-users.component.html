@@ -33,9 +33,6 @@
                 <h4>{{ user.username }}</h4>
                 <h6>{{user.description}}</h6>
               </div>
-              <div *ngIf="token" class="col-4 container-icon-heart">
-              <i class="fa fa-heart fa-2x" (click)="changeColor(user.id) "style="color:gray" id="{{user.id}}"></i>
-              </div>
             </div>
             <div class="row">
               <div class="col-12">
