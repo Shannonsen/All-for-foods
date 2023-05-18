@@ -4,6 +4,7 @@ import { LoginService } from 'src/app/services/login.service';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import Swal from 'sweetalert2';
+import { KeyValueDiffers } from '@angular/core';
 /**
  * Clase que representa al inicio de sesión
  */
@@ -54,10 +55,10 @@ export class LoginComponent implements OnInit {
             this.cookieService.set('idUser', user.results.id);
             this.cookieService.set('Token', data.results.token);
           }
+          this.router.navigate(['home']).then(() => {
+            window.location.reload();
+          });
         })
-        this.router.navigate(['home']).then(() => {
-          window.location.reload();
-        });
       }
     })
   }
