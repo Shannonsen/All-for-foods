@@ -13,9 +13,11 @@ import Swal from 'sweetalert2';
 })
 export class MailComponent implements OnInit {
   FormData: FormGroup = new FormGroup('');
+
   /**
-   *
+   * @constructor
    * @param {EmailService} contact: Servicio de email
+   * @param {Router} router : Navegación de rutas
    */
   constructor(private contact: EmailService, private router: Router) {
   }
@@ -34,7 +36,6 @@ export class MailComponent implements OnInit {
 
   /**
    * Método encargado de llamar la funcion SendEmail para mandar el correo electronico
-   * @param {FormGroup} FormData: Formato de email con sus inputs.
    */
   onSubmit() {
     var request = this.FormData.value;
