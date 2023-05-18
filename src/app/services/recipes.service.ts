@@ -147,7 +147,7 @@ export class RecipesService {
   /**
    * Método para crear una receta.
    * @param {string} token : token de acceso.
-   * @param {any} body : body con los parametros que serán agregados a la.
+   * @param {any} body : body con los parametros que serán agregados a la receta.
    * @returns {Observable<any>} : Respuesta que incluye el codigo de respuesta del servidor.
    */
   public postRecipe(token: string, body: any): Observable<any> {
