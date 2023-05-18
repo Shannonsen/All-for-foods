@@ -27,7 +27,7 @@ export class ListFollowsComponent implements OnInit {
   ngOnInit(): void {
     var idUser = this.cookieService.get('idUser');
     this.userService.getFollowings(Number(idUser)).subscribe(followings => {
-      this.follows = followings.data
+      this.follows = followings.data as User[]
     })
   }
 }
