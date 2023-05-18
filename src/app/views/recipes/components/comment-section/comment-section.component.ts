@@ -8,6 +8,9 @@ import { CookieService } from 'ngx-cookie-service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 
+/**
+ * Clase para agregar comentarios
+ */
 @Component({
   selector: 'app-comment-section',
   templateUrl: './comment-section.component.html',
@@ -24,10 +27,10 @@ export class CommentSectionComponent implements OnInit {
 
    /**
    * @constructor
-   * @param formBuilder : Creador del formulario.
-   * @param commentService : Servicio de comentarios.
+   * @param {FormBuilder} fb : Creador del formulario.
+   * @param {CommentService} commentService : Servicio de comentarios.
+   * @param {Router} router : Navegador de rutas.
    */
-
   constructor(private fb: FormBuilder, private commentService: CommentService, private cookieService: CookieService, private router: Router) {
     this.commentForm = this.fb.group({
       comment: ['']
@@ -37,7 +40,6 @@ export class CommentSectionComponent implements OnInit {
   /**
    * @override
    */
-
   ngOnInit(): void {
     this.idUser = Number(this.cookieService.get('idUser'));
     this.token = this.cookieService.get('Token');
@@ -47,9 +49,8 @@ export class CommentSectionComponent implements OnInit {
   }
 
   /**
-   * Metodo para añadir comentatios con el servicio de comentarios
+   * Metodo para añadir comentarios con el servicio de comentarios
    */
-
   addComment() {
     var request = this.commentForm.value;
     this.commentService.postComment(this.recipeID, this.idUser, request['comment'],this.token).subscribe(response =>{
