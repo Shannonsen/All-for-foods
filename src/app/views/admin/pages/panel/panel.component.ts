@@ -3,7 +3,9 @@ import { CookieService } from 'ngx-cookie-service';
 import { IngredientsService } from 'src/app/services/ingredients.service';
 import { RecipesService } from 'src/app/services/recipes.service';
 import { Food } from 'src/app/views/shared/models/food.model';
-
+/**
+ * Clase para las funcionalidades del administrador.
+ */
 @Component({
   selector: 'app-panel',
   templateUrl: './panel.component.html',
@@ -18,8 +20,17 @@ export class PanelComponent implements OnInit {
   totalPages: number[] = [];
   typeSearch: string = "";
   isPanel: string = "";
+
+  /**
+   * @constructor
+   * @param recipeService : Servicio de recetas
+   * @param cookieService : Servicio de cookies
+   */
   constructor(private recipeService: RecipesService, private cookieService: CookieService) { }
 
+  /**
+   * @override
+   */
   ngOnInit(): void {
     var token = this.cookieService.get('Token');
     this.recipeService.getAllRecipesActivated(token, 1).subscribe(data =>{

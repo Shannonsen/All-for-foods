@@ -1,6 +1,8 @@
 import { Component, OnInit, Input} from '@angular/core';
 import { Food } from 'src/app/views/shared/models/food.model';
-
+/**
+ * Clase para reciclar la paginacion en la seccion de administracion.
+ */
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -16,8 +18,15 @@ export class TableComponent implements OnInit {
   @Input() typeSearch:string = ""
   @Input() isPanel:string = ""
   @Input() typeList: string = "";
+
+  /**
+   * @constructor
+   */
   constructor() { }
 
+  /**
+   * @override
+   */
   ngOnInit(): void {
   }
 
