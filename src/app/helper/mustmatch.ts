@@ -1,6 +1,11 @@
 import { AbstractControl } from '@angular/forms';
 
-// custom validator to check that two fields match
+/**
+ * Método para validar que dos campos sean iguales
+ * @param {string} controlName : nombre del primer campo
+ * @param {string} matchingControlName : nombre del segundo campo
+ * @returns {AbstractControl || null} : retorna AbstractControl si son matchables y null si no lo son.
+ */
 export function MustMatch(controlName: string, matchingControlName: string) {
     return (group: AbstractControl) => {
         const control = group.get(controlName);

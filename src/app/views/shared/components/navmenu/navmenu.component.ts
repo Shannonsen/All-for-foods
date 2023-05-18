@@ -17,8 +17,10 @@ export class NavmenuComponent implements OnInit {
   tokenType: any = "";
 
   /**
-   * @constructor
-   * @param {Router} router : Servicio de navegación entre rutas
+   *
+  * @param {Router} router : Servicio de navegación entre rutas
+   * @param {CookieService} cookieService : Servicio de cookies
+   * @param {LoginService} loginService : Servicio de login
    */
   constructor(private router: Router, private cookieService: CookieService, private loginService: LoginService) { }
 
@@ -28,7 +30,7 @@ export class NavmenuComponent implements OnInit {
   ngOnInit(): void {
     this.token = this.cookieService.get('Token');
     if(this.token){
-      this.loginService.type_auth(this.token).subscribe(typetoken =>{
+      this.loginService.typeAuth(this.token).subscribe(typetoken =>{
         if(typetoken.results.permission == "Admin"){
           this.tokenType = typetoken
         }

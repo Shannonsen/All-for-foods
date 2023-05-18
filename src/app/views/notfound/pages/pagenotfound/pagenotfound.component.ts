@@ -9,8 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PagenotfoundComponent implements OnInit {
 
+  /**
+   * @constructor
+   */
   constructor() { }
 
+  /**
+   * @override
+   */
   ngOnInit(): void {
   }
 

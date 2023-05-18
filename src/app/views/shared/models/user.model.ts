@@ -1,14 +1,13 @@
 /**
  * @interface Food
- * @property {number} id : Identificador único del usuario
- * @property {string} email : Correo electrónico del usuario
- * @property {string} user : Alias del usuario
+ * @property {number} id : identificador único del usuario
+ * @property {string} email : correo electrónico del usuario
+ * @property {string} username : alias del usuario
+ * @property {string} icon : icono del usuario
+ * @property {description} : descripción del usuario
  * @property {string} password : Contraseña del usuario
+ * @property {number} status: estatus del usuario: activado o desactivado.
  * @property {string} token : Token del usuario
- * @property {number[]} follows : Arreglo con los id de los autores a los que sigue el usuario
- * @property {number[]} favorites : Arreglo con los id de las recetas guardadas como favoritas por el usuario
- * @property {number[]} myRecipes : Arreglo con los id de las recetas creadas por el usuario
- * @property {number[]} myFollowRecipes: Arreglo con los id de las recetas de usuarios seguidos
  */
 export interface User {
     id: number,
@@ -19,8 +18,4 @@ export interface User {
     password: string,
     status: number,
     token: string,
-    follows: number[],
-    favorites: number[],
-    myRecipes: number[],
-    myFollowRecipes: number[],
 }

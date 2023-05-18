@@ -21,11 +21,11 @@ import { IngredientsService } from 'src/app/services/ingredients.service';
 export class EditorComponent implements OnInit {
   @Input() recipes: Food[] = [];
 
-  recipeID: number = 0 ;
+  recipeID: number = 0;
   title: string | undefined = '';
   author: string | undefined = '';
   allingredients: Ingredient[] = [];
-  ingredients: Ingredient[]= [];
+  ingredients: Ingredient[] = [];
   imgURL: string | undefined = '';
   process: string | undefined = "";
   description: string | undefined = '';
@@ -34,13 +34,15 @@ export class EditorComponent implements OnInit {
   user: User = <User>{};
 
   /**
-   * @constructor
-   * @param formBuilder : Creador del formulario.
-   * @param route : Navegador de rutas.
-   * @param recipeService : Servicio de recetas.
-   * @param userService : Servicio de usuarios.
-   */
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private recipeService: RecipesService, private userService: UserService, private cookieService: CookieService, private router: Router, private ingredientService: IngredientsService) {
+     * @constructor
+     * @param formBuilder : Creador del formulario.
+     * @param route : Información de rutas.
+     * @param recipeService : Servicio de recetas
+     * @param cookieService : Servicio de cookies
+     * @param router : Navegador de rutas
+     * @param ingredientService : Servicio de ingredientes
+     */
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private recipeService: RecipesService, private cookieService: CookieService, private router: Router, private ingredientService: IngredientsService) {
     this.recipeForm = this.formBuilder.group({});
   }
 
@@ -64,39 +66,47 @@ export class EditorComponent implements OnInit {
       });
     });
 
-    this.ingredientService.getAllIngredients().subscribe(ingredients =>{
+    this.ingredientService.getAllIngredients().subscribe(ingredients => {
       this.allingredients = ingredients.data
     })
   }
 
-  saveIngredient(e: any){
+  /**
+   * Método para guardar un ingrediente en el array.
+   * @param {any} e : evento de selección para obtener los atributos del valor seleccionado.
+   */
+  saveIngredient(e: any) {
     const selectedOptionValue = e.target.value;
     const selectedOption = e.target.selectedOptions.item(0);
     const selectedOptionText = selectedOption.textContent;
-    let new_ingredient: Ingredient ={
+    let new_ingredient: Ingredient = {
       'id': Number(selectedOptionValue),
       'name': selectedOptionText
     }
 
-    if(this.ingredients.find(ingredient => ingredient.id == e.target.value)){
+    if (this.ingredients.find(ingredient => ingredient.id == e.target.value)) {
       Swal.fire("CORRECTO", 'YA COLOCASTE ESTE INGREDIENTE', 'question')
-    }else{
+    } else {
       this.ingredients.push(new_ingredient)
     }
   }
 
-  deleteIngredient(id: number){
-    this.ingredients.splice(this.ingredients.findIndex(e => e.id === id),1);
+  /**
+   * Método para eliminar un ingrediente del array.
+   * @param {number} id : id del ingrediente
+   */
+  deleteIngredient(id: number) {
+    this.ingredients.splice(this.ingredients.findIndex(e => e.id === id), 1);
   }
 
   /**
-   * Método lanzado cuando se oprime el botón Save.
+   * Método lanzado cuando se oprime el botón Save para guardar la receta.
    */
   onSave() {
     var request = this.recipeForm.value;
     var idUser = this.cookieService.get('idUser');
     var token = this.cookieService.get('Token');
-    type recipeBody ={
+    type recipeBody = {
       userId: string,
       image?: string,
       title?: string,
@@ -108,57 +118,57 @@ export class EditorComponent implements OnInit {
       'userId': idUser,
     };
     this.route.params.subscribe(params => {
-    this.recipeID = Number(params['id']);
+      this.recipeID = Number(params['id']);
       if (Number.isNaN(this.recipeID)) {
         body.title = request['title'];
         body.image = request['imgURL'];
         body.description = request['description'];
-        var newIngredients:any = this.ingredients.map(function(a:any) { return a["id"]; });
+        var newIngredients: any = this.ingredients.map(function (a: any) { return a["id"]; });
         body.ingredients = newIngredients;
         body.steps = request['process'];
-        this.recipeService.postRecipe(token, body).subscribe(result =>{
-          if(result.code == 201){
-            Swal.fire("CORRECTO", 'Receta creada', 'success').then(()=>{
+        this.recipeService.postRecipe(token, body).subscribe(result => {
+          if (result.code == 201) {
+            Swal.fire("CORRECTO", 'Receta creada', 'success').then(() => {
               this.router.navigate(['recipes/' + result.results.id]).then(() => {
                 window.location.reload();
               });
             })
-          }else{
-            Swal.fire("ERROR", result.message, 'error').then(()=>{
+          } else {
+            Swal.fire("ERROR", result.message, 'error').then(() => {
               this.router.navigate(['recipes/' + result.results.id]).then(() => {
                 window.location.reload();
               });
             })
           }
         })
-      }else{
-        this.recipeService.getRecipeById(this.recipeID).subscribe(recipe =>{
-          if(recipe.results.title != request['title']){
-              body.title = request['title'];
+      } else {
+        this.recipeService.getRecipeById(this.recipeID).subscribe(recipe => {
+          if (recipe.results.title != request['title']) {
+            body.title = request['title'];
           }
-          if(recipe.results.image  != request['imgURL']){
-              body.image = request['imgURL'];
+          if (recipe.results.image != request['imgURL']) {
+            body.image = request['imgURL'];
           }
-          if(recipe.results.description != request['description']){
-              body.description = request['description'];
+          if (recipe.results.description != request['description']) {
+            body.description = request['description'];
           }
-          if(!this.arraysAreEqual(this.ingredients, recipe.results.ingredients)){
-            var newIngredients:any = this.ingredients.map(function(a:any) { return a["id"]; });
+          if (!this.arraysAreEqual(this.ingredients, recipe.results.ingredients)) {
+            var newIngredients: any = this.ingredients.map(function (a: any) { return a["id"]; });
             body.ingredients = newIngredients;
           }
-          if(recipe.results.steps!= request['process']){
-              body.steps = request['process'];
+          if (recipe.results.steps != request['process']) {
+            body.steps = request['process'];
           }
           this.removeEmptyValues(body)
-          this.recipeService.putRecipeById(this.recipeID, token, body).subscribe(recipeUpdate =>{
-            if(recipeUpdate.code == 200){
-              Swal.fire("CORRECTO", 'Receta editada', 'success').then(()=>{
+          this.recipeService.putRecipeById(this.recipeID, token, body).subscribe(recipeUpdate => {
+            if (recipeUpdate.code == 200) {
+              Swal.fire("CORRECTO", 'Receta editada', 'success').then(() => {
                 this.router.navigate(['recipes/' + this.recipeID]).then(() => {
                   window.location.reload();
                 });
               })
-            }else{
-              Swal.fire("ERROR", recipeUpdate.message, 'error').then(()=>{
+            } else {
+              Swal.fire("ERROR", recipeUpdate.message, 'error').then(() => {
                 this.router.navigate(['recipes/' + this.recipeID]).then(() => {
                   window.location.reload();
                 });
@@ -171,6 +181,12 @@ export class EditorComponent implements OnInit {
     })
   }
 
+  /**
+   * Método para verificar que tienen los mismos datos.
+   * @param array1 : array 1
+   * @param array2 : array 2
+   * @returns True o false.
+   */
   arraysAreEqual(array1: any, array2: any) {
     return JSON.stringify(array1) === JSON.stringify(array2);
   }
@@ -197,15 +213,19 @@ export class EditorComponent implements OnInit {
     });
   }
 
+  /**
+   * Método para remover las propiedades vacias de un objeto.
+   * @param {any} object : objeto.
+   */
   removeEmptyValues(object: any) {
     for (var key in object) {
-        if (object.hasOwnProperty(key)) {
-            var value = object[key];
-            if (value === null || value === undefined || value === '') {
-                delete object[key];
-            }
+      if (object.hasOwnProperty(key)) {
+        var value = object[key];
+        if (value === null || value === undefined || value === '') {
+          delete object[key];
         }
+      }
     }
-}
+  }
 
 }

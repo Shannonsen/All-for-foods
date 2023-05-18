@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Food } from 'src/app/views/shared/models/food.model';
-import { RecipesService } from 'src/app/services/recipes.service';
 /**
  * Clase encargada de mostrar la lista de recetas favoritas.
  */

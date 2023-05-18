@@ -8,7 +8,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { GetAllPaginationService } from 'src/app/services/get-all-pagination.service';
 import { LoginService } from 'src/app/services/login.service';
 /**
- * Clase que representa el buscador de recetas
+ * Clase que representa el buscador de recetas.
  */
 @Component({
   selector: 'app-searcher-recipe',
@@ -36,13 +36,15 @@ export class SearcherRecipeComponent implements OnInit {
   @Input() typeSearch: string = "";
   @Input() profile: string =""
   @Input() recipeID:number=0
+
   /**
-   * @constructor
-   * @param {KeyValueDiffers} differs : Detecta cambios en los objetos
-   * @param {IngredientsService} ingredientService : Servicio de ingredientes
-   * @param {RecipesService} recipesService : Servicio de recetas
+   *
+   * @param {KeyValueDiffers} differs : Detecta cambios en los objetos.
+   * @param {IngredientsService} ingredientService : Servicio de ingredientes.
+   * @param {CookieService} cookieService : Servicio de cookies
+   * @param {GetAllPaginationService} getAllService : Servicio de obtención listados para el reciclaje de la paginación.
    */
-  constructor(private differs: KeyValueDiffers, private ingredientService: IngredientsService, private recipesService: RecipesService, private cookieService: CookieService, private getAllService: GetAllPaginationService, private loginService: LoginService) {
+  constructor(private differs: KeyValueDiffers, private ingredientService: IngredientsService, private cookieService: CookieService, private getAllService: GetAllPaginationService) {
     this.differ = this.differs.find({}).create();
   }
   /**
@@ -57,6 +59,7 @@ export class SearcherRecipeComponent implements OnInit {
     this.titleRadioChecked = $("#title").is(":checked");
     this.onEnter(undefined);
   }
+
   /**
    * Método lanzado cuando un objeto cambia de valor
    */
@@ -76,12 +79,14 @@ export class SearcherRecipeComponent implements OnInit {
       });
     }
   }
+
   /**
    * Método para controlar el comportamiento del componente al cambiar de radio button
    */
   onClick() {
     this.titleRadioChecked = $("#title").is(":checked");
   }
+
   /**
    * Método que maneja el comportamiento al seleccionar una opción
    * @param {any} item : Elemento de la lista de opciones del autocomplete
@@ -91,6 +96,7 @@ export class SearcherRecipeComponent implements OnInit {
       this.elementsSelected.push(item);
     }
   }
+
   /**
    * Método lanzado cuando ocurre un cambio en la barra de búsqueda
    * @param {string} val : Valor de texto de la barra de búsqueda
@@ -98,6 +104,7 @@ export class SearcherRecipeComponent implements OnInit {
   onChangeSearch(val: string) {
     this.keyword = val;
   }
+
   /**
    * Evento lanzado al dar enter en la barra de búsqueda
    * @param {any} e : Elemento html al cual que se le dio Enter
@@ -112,10 +119,10 @@ export class SearcherRecipeComponent implements OnInit {
     if(this.typeSearch == 'my-recipes'){
       idUser = this.profile == null ? Number(this.cookieService.get('idUser')): Number(this.profile)
     }
-      this.getAllService.getServiceRecipes(this.typeSearch,this.currentPage,4,token,idUser, this.recipeID, this.keyword, ingredients).subscribe(recipes => {
+      this.getAllService.getServiceRecipes(this.typeSearch,this.currentPage,token,idUser, this.recipeID, this.keyword, ingredients).subscribe(recipes => {
         var recipeToSend = recipes.data
         var totalPage = recipes.totalPage
-        var totalPagesToSend = this.totalPagesArray(recipeToSend, totalPage);
+        var totalPagesToSend = this.totalPagesArray(totalPage);
         this.outputTotalPages.emit(totalPagesToSend);
         if (this.currentPage > totalPagesToSend.length) {
           this.currentPage = 1;
@@ -127,7 +134,7 @@ export class SearcherRecipeComponent implements OnInit {
             this.outputCurrentPage.emit(this.currentPage);
           }
         }
-        this.getAllService.getServiceRecipes(this.typeSearch,this.currentPage,4,token, idUser,this.recipeID, this.keyword, ingredients).subscribe(recipes => {
+        this.getAllService.getServiceRecipes(this.typeSearch,this.currentPage,token, idUser,this.recipeID, this.keyword, ingredients).subscribe(recipes => {
         this.outputRecipes.emit(recipes.data);
         });
       });
@@ -142,10 +149,10 @@ export class SearcherRecipeComponent implements OnInit {
       var token = this.cookieService.get('Token');
       var idUser = Number(this.cookieService.get('idUser'));
       var ingredients:any =  this.elementsSelected.map(function(a:any) { return a["id"]; });
-      this.getAllService.getServiceRecipes('ingredient-search',this.currentPage,4,token,idUser, this.recipeID, this.keyword, ingredients).subscribe(recipes => {
+      this.getAllService.getServiceRecipes('ingredient-search',this.currentPage,token,idUser, this.recipeID, this.keyword, ingredients).subscribe(recipes => {
         var recipeToSend = recipes.data
         var totalPage = recipes.totalPage
-        var totalPagesToSend = this.totalPagesArray(recipeToSend, totalPage);
+        var totalPagesToSend = this.totalPagesArray(totalPage);
         this.outputTotalPages.emit(totalPagesToSend);
         if (this.currentPage > totalPagesToSend.length) {
           this.currentPage = 1;
@@ -157,7 +164,7 @@ export class SearcherRecipeComponent implements OnInit {
             this.outputCurrentPage.emit(this.currentPage);
           }
         }
-        this.getAllService.getServiceRecipes('ingredient-search',this.currentPage,4,token, idUser,this.recipeID, this.keyword, ingredients).subscribe(recipes => {
+        this.getAllService.getServiceRecipes('ingredient-search',this.currentPage, token, idUser,this.recipeID, this.keyword, ingredients).subscribe(recipes => {
         this.outputRecipes.emit(recipes.data);
         });
       });
@@ -166,11 +173,10 @@ export class SearcherRecipeComponent implements OnInit {
 
   /**
    * Método que se encarga de crear una lista numérica para la paginación
-   * @param {Food[]} recipes : Lista de recetas de la solicitud original antes de convertirla a paginación
    * @returns {number} Arreglo de números de tal forma [1, 2, ..., n]
    */
-  totalPagesArray(recipes: Food[], totalPage: number): number[] {
-    const pageCount = Math.ceil(totalPage); // total number of pages
-    return Array.from({ length: pageCount }, (_, i) => i + 1); // create an array of page numbers
+  totalPagesArray(totalPage: number): number[] {
+    const pageCount = Math.ceil(totalPage); // total numero de paginas
+    return Array.from({ length: pageCount }, (_, i) => i + 1); // crea un array del numero de paginas
   }
 }
