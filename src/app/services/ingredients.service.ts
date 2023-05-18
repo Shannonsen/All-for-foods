@@ -27,7 +27,7 @@ export class IngredientsService {
   /**
    * Método para obtener todos los ingredientes paginados.
    * @param {string} token : token de acceso.
-   * @param {number} page : página actual del paginado..
+   * @param {number} page : página actual del paginado.
    * @returns {Observable<any>} Listado de ingredientes paginados.
    */
   public getAllIngredientsActivated(token: string, page: number): Observable<any> {

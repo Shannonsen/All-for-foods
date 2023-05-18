@@ -18,7 +18,6 @@ import { LoginService } from 'src/app/services/login.service';
 export class ListProductsComponent implements OnInit {
 
   @Input() products: Food[] = [];
-  users: User[] = [];
   token: any = "";
   user: any =""
   @Input() isPanel:string = ""
@@ -41,10 +40,6 @@ export class ListProductsComponent implements OnInit {
     this.recipeService.getAllMyFavoritesRecipes(Number(this.user)).subscribe(recipesFavorites =>{
      this.favoriteRecipes = recipesFavorites.data
     })
-
-    this.userService.getAllUsers().subscribe(users => {
-      this.users = users;
-    });
   }
 
   verifyFollowed(id:number){
@@ -54,16 +49,6 @@ export class ListProductsComponent implements OnInit {
 
   round(rate: any){
     return Math.round(rate)
-  }
-
-  /**
-   * Método que se encarga de buscar el nombre del autor con el id proporcionado.
-   * @param {number} authorId : Id del autor
-   * @returns {string} nombre del autor.
-   */
-  getAuthorName(authorId: number): string {
-    const author = this.users.find(user => user.id === authorId);
-    return author?.username || '';
   }
 
   /**
