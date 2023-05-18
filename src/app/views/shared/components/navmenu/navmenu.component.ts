@@ -28,7 +28,7 @@ export class NavmenuComponent implements OnInit {
   ngOnInit(): void {
     this.token = this.cookieService.get('Token');
     if(this.token){
-      this.loginService.type_auth(this.token).subscribe(typetoken =>{
+      this.loginService.typeAuth(this.token).subscribe(typetoken =>{
         if(typetoken.results.permission == "Admin"){
           this.tokenType = typetoken
         }

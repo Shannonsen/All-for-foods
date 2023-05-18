@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
    */
   onSubmit() {
     var request = this.loginForm.value;
-    this.loginService.login_auth(request['email'], request['password']).subscribe(data =>{
+    this.loginService.loginAuth(request['email'], request['password']).subscribe(data =>{
       if(data.code == 404){
         Swal.fire("ERROR", "Usuario no encontrado", 'error').then(()=>{
           this.router.navigate(['login']).then(() => {
@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
           });
         })
       }else{
-        this.loginService.type_auth(data.results.token).subscribe(user =>{
+        this.loginService.typeAuth(data.results.token).subscribe(user =>{
           while(!this.cookieService.get('Token') && !this.cookieService.get('idUser')){
           this.cookieService.set('idUser', user.results.id);
           this.cookieService.set('Token', data.results.token);

@@ -32,7 +32,7 @@ export class LoginAuthGuard implements CanActivate {
     var token = this.cookieService.get('Token');
     if (token) {
       return new Promise<boolean>((resolve) => {
-        this.loginService.type_auth(token).subscribe(token => {
+        this.loginService.typeAuth(token).subscribe(token => {
           if (token.code == 200 && (token.results.permission == "Admin" || token.results.permission == "User")) {
             resolve(true)
           } else {

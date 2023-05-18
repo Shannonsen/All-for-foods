@@ -50,7 +50,7 @@ export class ProfileComponent implements OnInit {
       this.profileIDString = params['id'];
       this.token = this.cookieService.get('Token');
       this.userId = this.cookieService.get('idUser');
-      this.loginService.type_auth( this.token).subscribe(data => {
+      this.loginService.typeAuth( this.token).subscribe(data => {
         this.userService.getUserById(data.results.id).subscribe(user => {
           if (data.results.id === this.profileID || Number.isNaN(this.profileID)) {
             this.name = user.results.username;
@@ -95,7 +95,7 @@ export class ProfileComponent implements OnInit {
   onEdit() {
     var request = this.profileForm.value;
     var token = this.cookieService.get('Token');
-    this.loginService.type_auth(token).subscribe(data => {
+    this.loginService.typeAuth(token).subscribe(data => {
       this.userService.getUserById(data.results.id).subscribe(user => {
         type UserBody ={
           email?: string,
