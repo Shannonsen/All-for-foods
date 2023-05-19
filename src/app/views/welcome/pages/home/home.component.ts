@@ -24,18 +24,7 @@ export class HomeComponent implements OnInit {
    */
   ngOnInit(): void {
     this.recipeService.getAllFoods().subscribe((recipe) => {
-      var allFoods: Food[] = []
-      var lenght = 0;
-      if (recipe.data.length < 4) {
-        lenght = recipe.data.length;
-      } else {
-        lenght = 4
-      }
-
-      for (let i = 1; i <= lenght; i++) {
-        allFoods.push(recipe.data[recipe.data.length - i])
-      }
-      this.products = allFoods;
+      this.products = recipe.data as Food[];
     });
   }
 }
